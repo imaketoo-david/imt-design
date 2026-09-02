@@ -13,10 +13,19 @@ echo "▸ 1. 대비 검증"
 python3 check_contrast.py | tail -2
 
 echo "▸ 2. CSS 버전 스탬프"
+# sed 를 안 쓴다: macOS 의 -i 는 빈 인자를 요구하고 GNU 는 그걸 파일명으로 읽는다.
+# 두 곳 다 도는 한 줄이 없어서, 이미 쓰고 있는 python3 에 맡긴다.
+# (stock-sim/build.sh 가 같은 이유로 같은 선택을 했다)
 V="$(date +%Y%m%d-%H%M)"
-for f in index.html language.html; do
-  /usr/bin/sed -i '' -E "s#href=\"(tokens|components|patterns)\.css(\?v=[^\"]*)?\"#href=\"\1.css?v=${V}\"#g" "$f"
-done
+V="$V" python3 - <<'PYX'
+import os, re
+v = os.environ["V"]
+for f in ("index.html", "language.html"):
+    s = open(f, encoding="utf-8").read()
+    s = re.sub(r'href="(tokens|components|patterns)\.css(\?v=[^"]*)?"',
+               lambda m: f'href="{m.group(1)}.css?v={v}"', s)
+    open(f, "w", encoding="utf-8").write(s)
+PYX
 echo "  v=${V}"
 
 echo "▸ 3. 커밋·푸시"
