@@ -1,0 +1,13 @@
+<!-- IMT Design 파비콘 (2026-09-03).
+     그림은 우리 아이콘 세트의 `layers` 글리프 그대로다 — 워드마크와 같은 그림이라
+     따로 그릴 이유가 없다. 타일 코너는 우리 토큰 --r-app(22.4%)을 그대로 쓴다:
+     파비콘도 이 시스템의 규칙 안에 있다. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14.34" fill="#1d1d1f"/>
+  <g transform="translate(11.2 11.2) scale(1.7333)" fill="none" stroke="#fff"
+     stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.8l8 4.2-8 4.2-8-4.2z"/>
+    <path d="M4.4 12.6L12 16.6l7.6-4"/>
+    <path d="M4.4 16.8L12 20.8l7.6-4"/>
+  </g>
+</svg>

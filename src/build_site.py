@@ -40,22 +40,26 @@ def shell(title, body, sprite, lnav_on="개요", extra_css=""):
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
+<link rel="icon" href="favicon.svg?v={VER}" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png?v={VER}" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v={VER}">
+<meta name="theme-color" content="#1d1d1f">
 <link rel="stylesheet" href="tokens.css?v={VER}">
 <link rel="stylesheet" href="components.css?v={VER}">
 <link rel="stylesheet" href="patterns.css?v={VER}">
 <link rel="stylesheet" href="site.css?v={VER}">
 <link rel="stylesheet" href="guide.css?v={VER}">
 {extra_css}</head><body>
+<!-- 내비는 **한 줄**이다 (2026-09-03 David: "지금은 너무 개발자 사이트 같음").
+     전에는 48px 검은 띠 + 48px 흰 띠로 96px 을 먹었고, 위아래에 '아이콘 334' 와
+     '아이콘' 이 같은 곳을 두 번 가리켰다. 검은 띠 + 흰 띠는 문서 사이트의
+     전형적인 신호다 — 한 줄, 반투명, 화면에 얹히는 재질로 바꾼다. -->
 <nav class="gnav">
   <a class="gnav__b" href="index.html">{ic("layers")}IMT Design</a>
+  <div class="gnav__i">{nav}</div>
   <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html">아이콘 334</a>
-  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+  <a class="gnav__x" href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
-</nav>
-<nav class="lnav">
-  <a class="lnav__t" href="index.html">디자인 시스템</a>
-  <div class="lnav__i">{nav}</div>
 </nav>
 {sprite}
 {body}
@@ -213,41 +217,41 @@ def build():
      자기 원칙과 자기 산출물이 있는데도. 순서를 바꾼다. -->
 <section class="band" id="what">
   <div class="wrap">
-    <h2>고요한 정밀</h2>
+    <h2>값으로 말한다</h2>
     <p class="lead">조용하되 흐리지 않은 화면. 눈에 띄려고 애쓰는 요소가 없고,
        그 대신 모든 자리가 정확한 값 위에 있다. 말로 하면 사람마다 달라지므로
        다섯 문장으로 못박아 둔다.</p>
-    <div class="links">
-      <a href="language.html"><b>말이 아니라 값으로</b>
-        <span>"이게 더 나아 보인다" 대신 토큰 이름으로 말한다</span></a>
-      <a href="index-full.html"><b>문서와 코드가 어긋나지 않는다</b>
-        <span>이 사이트가 그리는 색·크기는 전부 실제 토큰을 읽은 값이다</span></a>
-      <a href="language.html"><b>판정은 눈이 아니라 표로</b>
-        <span>규칙마다 번호가 있고, 대비는 배포마다 수치로 검증한다</span></a>
-      <a href="language.html#diverge"><b>받은 것과 정한 것을 구분해 적는다</b>
-        <span>HIG 에서 온 수치와 우리가 채운 자리를 나눠 표시한다</span></a>
-      <a href="guide/index.html"><b>없는 것은 그리지 않는다</b>
-        <span>모르는 값을 그럴듯하게 채우지 않는다 — 빈 것은 비어 있다고 말한다</span></a>
-    </div>
+    <ol class="creed">
+      <li><b>형용사를 쓰지 않는다</b>
+        <span>"깔끔하게" 는 지시가 아니다. 취향은 토큰 이름으로 말한다.</span></li>
+      <li><b>문서가 코드를 읽는다</b>
+        <span>이 사이트가 그리는 색과 크기는 전부 <code>tokens.css</code> 를 실제로 읽은 값이다.</span></li>
+      <li><b>다투지 않고 잰다</b>
+        <span>규칙마다 번호가 있고, 대비는 배포할 때마다 수치로 검증한다.</span></li>
+      <li><b>빌린 자리에는 이름표를 붙인다</b>
+        <span>HIG 에서 온 수치와 우리가 채운 자리를 나눠 적는다.</span></li>
+      <li><b>없음은 0이 아니다</b>
+        <span>모르는 값을 그럴듯하게 채우지 않는다. 빈 것은 비어 있다고 말한다.</span></li>
+    </ol>
   </div>
 </section>
 
 <section class="band band--tint" id="ours">
   <div class="wrap">
-    <h2>우리가 다시 만든 것</h2>
+    <h2>규격은 받고, 그림은 그렸다</h2>
     <p class="lead">HIG 에서 받은 것은 <b>수치와 방법</b>이고, 아래는 그 위에서
        우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.
        근거는 전부 랭귀지 17절에 번호로 남아 있다.</p>
-    <div class="links">
-      <a href="/icons/catalog.html"><b>아이콘 334종을 직접 그렸다</b>
-        <span>그림은 받지 않고 규격만 읽었다 — 24 격자 위에 좌표로</span></a>
-      <a href="language.html#icons"><b>굵기 9단을 한 벌로</b>
-        <span>원전이 아홉 벌을 그려 넣는 자리를 획 하나로 푼다</span></a>
-      <a href="language.html#type"><b>한글 본문 행간 1.55</b>
-        <span>라틴 기준 1.29 는 받침이 있는 글에 답답하다</span></a>
-      <a href="language.html#diverge"><b>등락은 상승이 빨강</b>
-        <span>색의 뜻은 문화가 정한다 — 원전도 그렇게 적어 두었다</span></a>
-    </div>
+    <ol class="creed creed--link">
+      <li><a href="/icons/catalog.html"><b>그림은 받지 않고 규격만 읽었다</b>
+        <span>아이콘 334종을 24 격자 위에 좌표로 다시 그렸다</span></a></li>
+      <li><a href="guide/icons.html"><b>굵기는 그리는 게 아니라 계산한다</b>
+        <span>원전이 아홉 벌을 그려 넣는 자리를 획 하나로 푼다</span></a></li>
+      <li><a href="guide/typography.html"><b>받침이 있는 글은 더 눕는다</b>
+        <span>라틴 기준 행간 1.29 는 한글 본문에 답답하다 — 1.55</span></a></li>
+      <li><a href="language.html#diverge"><b>여기서는 빨강이 오른다</b>
+        <span>색의 뜻은 문화가 정한다 — 원전도 그렇게 적어 두었다</span></a></li>
+    </ol>
   </div>
 </section>
 

@@ -63,6 +63,10 @@ SHELL = """<!doctype html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} — IMT Design Guide</title>
+<link rel="icon" href="../favicon.svg?v={v}" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png?v={v}" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v={v}">
+<meta name="theme-color" content="#1d1d1f">
 <link rel="stylesheet" href="../tokens.css?v={v}">
 <link rel="stylesheet" href="../components.css?v={v}">
 <link rel="stylesheet" href="../patterns.css?v={v}">
@@ -87,14 +91,7 @@ SHELL = """<!doctype html>
 </style></head><body>
 <nav class="gnav">
   <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
-  <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html">아이콘 334</a>
-  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
-  <button class="gnav__t" id="theme">다크</button>
-</nav>
-<nav class="lnav">
-  <a class="lnav__t" href="../index.html">디자인 시스템</a>
-  <div class="lnav__i">
+  <div class="gnav__i">
     <a href="../index.html">개요</a>
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
@@ -102,6 +99,9 @@ SHELL = """<!doctype html>
     <a href="/icons/catalog.html">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
+  <span class="gnav__sp"></span>
+  <a class="gnav__x" href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+  <button class="gnav__t" id="theme">다크</button>
 </nav>
 {sprite}
 <div class="wrap">
