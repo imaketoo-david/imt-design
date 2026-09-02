@@ -19,13 +19,21 @@ echo "▸ 2. 가이드 빌드 · CSS 버전 스탬프"
 V="$(date +%Y%m%d-%H%M)"
 IMT_V="$V" ./build.sh
 V="$V" python3 - <<'PYX'
-import os, re
+"""모든 HTML 의 모든 CSS 링크에 버전을 찍는다 (L-0.5).
+   하나라도 빠뜨리면 그 파일만 CDN 캐시에 얼어붙는다 — 실제로 site.css 가 그랬다."""
+import os, re, glob
 v = os.environ["V"]
-for f in ("index.html", "language.html"):
+files = ["index.html", "resources.html", "language.html", "index-full.html"] \
+        + sorted(glob.glob("guide/*.html"))
+n = 0
+for f in files:
+    if not os.path.exists(f): continue
     s = open(f, encoding="utf-8").read()
-    s = re.sub(r'href="(tokens|components|patterns)\.css(\?v=[^"]*)?"',
-               lambda m: f'href="{m.group(1)}.css?v={v}"', s)
-    open(f, "w", encoding="utf-8").write(s)
+    s2 = re.sub(r'href="((?:\.\./)?)(tokens|components|patterns|site|guide)\.css(?:\?v=[^"]*)?"',
+                lambda m: f'href="{m.group(1)}{m.group(2)}.css?v={v}"', s)
+    if s2 != s:
+        open(f, "w", encoding="utf-8").write(s2); n += 1
+print(f"  CSS 버전 스탬프 {n}개 파일")
 PYX
 echo "  v=${V}"
 
@@ -34,7 +42,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
   git add -A
   git commit -q -m "${1:-배포 $(date '+%Y-%m-%d %H:%M')}"
 fi
-git push -q origin main
+git push -q origin main 2>/dev/null || echo "  (푸시 건너뜀 — 인증 없음)"
 echo "  $(git log --oneline -1)"
 
 echo "▸ 4. 맥미니 전송 (${HOST})"
