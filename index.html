@@ -12,6 +12,8 @@
   .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
   .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
   @media(max-width:860px){.ds{grid-template-columns:1fr}.ds__nav{display:none}}
+  .ds > main{min-width:0}
+  pre{max-width:100%}
 
   .sw{display:grid;gap:var(--sp-2);grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
   .sw button{display:flex;flex-direction:column;gap:0;border:0;padding:0;background:transparent;cursor:pointer;text-align:left;font:inherit}
@@ -153,11 +155,11 @@
 
     <div class="imt-card" style="margin-top:var(--sp-4)">
       <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">시스템 설정을 이긴다고 생각하지 않는다</h3>
-      <table class="imt-table"><tbody>
+      <div class="imt-tablewrap"><table class="imt-table"><tbody>
         <tr><td><code>prefers-reduced-transparency</code></td><td style="color:var(--sub)">머티리얼·글래스가 전부 <code>--card</code> 불투명 면으로 바뀐다</td></tr>
         <tr><td><code>prefers-contrast: more</code></td><td style="color:var(--sub)">글자·선·상태색이 고대비 변형으로 교체된다</td></tr>
         <tr><td><code>prefers-reduced-motion</code></td><td style="color:var(--sub)">모든 전환이 0.01ms 로 눌린다</td></tr>
-      </tbody></table>
+      </tbody></table></div>
     </div>
   </section>
 
@@ -194,41 +196,41 @@
 
     <div class="imt-card">
       <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">최소 명도대비</h3>
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>글자 크기</th><th>굵기</th><th>최소 대비</th></tr></thead>
         <tbody>
           <tr><td>17pt 이하</td><td>전부</td><td><b>4.5:1</b></td></tr>
           <tr><td>18pt</td><td>전부</td><td><b>3:1</b></td></tr>
           <tr><td>전부</td><td>Bold</td><td><b>3:1</b></td></tr>
         </tbody>
-      </table>
+      </table></div>
       <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">기본값이 이를 못 맞추면 <b>최소한 Increase Contrast 가 켜졌을 때</b> 더 높은 대비를 제공해야 한다 — 애플 자신도 systemRed 에 별도 accessible 변형을 둔다. 이 시스템의 고대비 변형은 <code>@media (prefers-contrast: more)</code> 에 있다. 전 항목 통과 여부는 <code>python3 check_contrast.py</code> 로 확인한다.</p>
     </div>
 
     <div class="imt-card" style="margin-top:var(--sp-4)">
       <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">컨트롤 크기</h3>
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th><th>토큰</th></tr></thead>
         <tbody>
           <tr><td>iOS · iPadOS · watchOS</td><td>44 × 44 pt</td><td>28 × 28 pt</td><td><code>--tap</code> / <code>--tap-min</code></td></tr>
           <tr><td>macOS</td><td>28 × 28 pt</td><td>20 × 20 pt</td><td><code>--ctl</code> / <code>--ctl-min</code></td></tr>
           <tr><td>visionOS</td><td>60 × 60 pt</td><td>28 × 28 pt</td><td><code>--tap-vision</code></td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="rule" style="margin-top:var(--sp-4)"><span class="rule__n">!</span><div><div class="rule__t">기준은 '보이는 크기' 가 아니라 '히트영역' 이다</div><div class="rule__s">38px 버튼이라도 눌리는 범위가 44px 면 규격을 만족한다. 이 시스템은 <code>@media (pointer: coarse)</code> 에서만 <code>min-height:var(--tap)</code> 를 걸어, 마우스 환경의 밀도를 해치지 않는다.</div></div></div>
       <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">간격도 크기만큼 중요하다 — 베젤 있는 요소 주위 <code>--gap-ctl</code>(12px), 베젤 없는 요소 주위 <code>--gap-ctl-plain</code>(24px).</p>
     </div>
 
     <div class="imt-card" style="margin-top:var(--sp-4)">
       <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">글자 최소 크기</h3>
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th></tr></thead>
         <tbody>
           <tr><td>iOS · iPadOS</td><td>17 pt</td><td>11 pt</td></tr>
           <tr><td>macOS</td><td>13 pt</td><td>10 pt</td></tr>
           <tr><td>visionOS</td><td>17 pt</td><td>12 pt</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">Ultralight · Thin · Light 는 쓰지 않는다 — 토큰에 아예 없다(<code>--fw-r</code> 400 / <code>--fw-m</code> 500 / <code>--fw-sb</code> 600). <code>--fs-tag</code>(10px)는 macOS 최소치에는 맞지만 iOS 최소치보다 작다. 모바일에서 뜻이 있는 글자에는 <code>--fs-xs</code>(11px) 이상을 쓴다.</p>
     </div>
   </section>
@@ -317,14 +319,14 @@
           <svg class="imt-i imt-row__chev"><use href="#i-chevron-right"/></svg></a>
       </div>
       <div class="imt-card" style="padding:var(--sp-3) var(--sp-4)">
-        <table class="imt-table">
+        <div class="imt-tablewrap"><table class="imt-table">
           <thead><tr><th>종목</th><th class="num">현재가</th><th class="num">등락</th></tr></thead>
           <tbody>
             <tr><td>SK하이닉스</td><td class="num">1,633,000</td><td class="num" style="color:var(--down)">−3.54%</td></tr>
             <tr><td>TIGER 200</td><td class="num">108,170</td><td class="num" style="color:var(--up)">+2.64%</td></tr>
             <tr><td>삼성전자</td><td class="num">96,400</td><td class="num" style="color:var(--flat)">0.00%</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </div>
     </div>
     <p style="color:var(--sub);margin-top:var(--sp-3)">표에 세로선을 긋지 않는다. 숫자는 <code>tabular-nums</code> 로 자릿수를 고정한다.</p>

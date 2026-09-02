@@ -12,6 +12,8 @@
   .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
   .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
   @media(max-width:860px){.ds{grid-template-columns:1fr}.ds__nav{display:none}}
+  .ds > main{min-width:0}
+  pre{max-width:100%}
 
   .r{display:flex;gap:var(--sp-3);padding:var(--sp-4) 0;border-bottom:var(--hairline) solid var(--line-soft)}
   .r:last-child{border-bottom:0}
@@ -93,7 +95,7 @@
     <h2 class="imt-section__title">1. 무엇을 배우고, 무엇을 받지 않는가</h2>
     <p class="lede">애플 디자인 사이트에는 읽는 문서와 내려받는 에셋이 같이 있다. 둘의 성격이 완전히 다르다. 이 구분이 우리 아이콘 324개가 legally clean 한 이유다.</p>
     <div class="imt-card">
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>대상</th><th>성격</th><th>우리 방침</th></tr></thead>
         <tbody>
           <tr><td>HIG 문서(텍스트)</td><td>공개 규격·수치·의미 체계. 44pt, 4.5:1, 라벨 4단계 같은 것은 사실이자 업계 관행이다</td><td><b>읽는다.</b> 157개 전부 읽었다</td></tr>
@@ -101,7 +103,7 @@
           <tr><td>SF Pro · New York 폰트</td><td>애플 플랫폼 앱 디자인 용도로 라이선스. 웹폰트 재배포는 범위 밖</td><td><b>배포하지 않는다.</b> <code>-apple-system</code>으로 기기에 있는 것만 쓰고, 없으면 Pretendard로 떨어진다</td></tr>
           <tr><td>Figma · Sketch 템플릿</td><td>같은 라이선스 범위</td><td><b>받지 않는다.</b> 필요한 수치는 문서에 이미 다 있다</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="note">애플이 보호하는 것은 <b>그림과 폰트 파일</b>이지 <b>격자·획 굵기·코너 곡률·분류 체계</b>가 아니다. 우리는 후자만 가져왔다. 24×24 격자, 1.6 획, 연속곡률 코너(K=0.909), 37개 분류 — 전부 우리가 좌표로 다시 그린 것이다.</div>
     </div>
   </section>
@@ -157,6 +159,7 @@
       <div class="r"><span class="r__n">L-5.2</span><div><div class="r__t">컨트롤 주위 여백은 크기만큼 중요하다</div><div class="r__s">테두리 있는 요소 주위 <code>--gap-ctl</code>(12px), 테두리 없는 요소 주위 <code>--gap-ctl-plain</code>(24px). 붙어 있으면 오조작이 난다.</div></div></div>
       <div class="r"><span class="r__n">L-5.3</span><div><div class="r__t">정렬은 조직도다</div><div class="r__s">왼쪽 모서리가 맞지 않는 요소는 다른 그룹으로 읽힌다. 반대로, 다른 그룹이면 일부러 어긋나게 둔다.</div></div></div>
       <div class="r"><span class="r__n">L-5.4</span><div><div class="r__t">반응형은 미디어 쿼리가 아니라 <code>auto-fill</code>로 만든다</div><div class="r__s"><code>repeat(auto-fill, minmax(…, 1fr))</code>. 중단점을 늘리는 대신 격자가 스스로 접히게 한다. 유지 비용이 다르다.</div></div></div>
+      <div class="r"><span class="r__n">L-5.6</span><div><div class="r__t">페이지 본문은 절대 가로로 스크롤되지 않는다</div><div class="r__s">넘치는 것은 페이지가 아니라 <b>그 요소 자신</b>이다. 표·코드블록·넓은 차트는 각자 <code>.imt-tablewrap</code> 같은 자기 컨테이너 안에서 스크롤한다. 격자 칸 안에 넓은 요소를 넣을 때는 칸에 <code>min-width:0</code>을 줘야 한다 — 기본값 <code>auto</code>는 내용보다 작아지지 않는다. 좁은 화면 깨짐의 가장 흔한 원인이다.</div></div></div>
       <div class="r"><span class="r__n">L-5.5</span><div><div class="r__t">글자가 커져도 위계는 유지한다</div><div class="r__s">사용자가 글자를 키우면 본문은 커지되 탭 제목은 안 커지는 게 맞다. 전부 같은 비율로 키우면 화면이 깨진다.</div></div></div>
     </div>
   </section>
@@ -179,7 +182,7 @@
     <h2 class="imt-section__title">7. 글자</h2>
     <p class="lede">애플 텍스트 스타일은 크기·굵기·행간이 한 세트로 정해져 있다. 우리는 그 단계를 그대로 가져오되, 한글 본문의 행간만 넓혔다.</p>
     <div class="imt-card">
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>토큰</th><th>px</th><th>대응하는 애플 스타일</th><th>쓰는 곳</th></tr></thead>
         <tbody>
           <tr><td><code>--fs-3xl</code></td><td>34</td><td>Large Title</td><td>히어로</td></tr>
@@ -195,7 +198,7 @@
           <tr><td><code>--fs-xs</code></td><td>11</td><td>Caption 2 (iOS 최소)</td><td>보조 설명</td></tr>
           <tr><td><code>--fs-tag</code></td><td>10</td><td>macOS 최소</td><td>배지</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="r" style="margin-top:var(--sp-4)"><span class="r__n">L-7.1</span><div><div class="r__t">정해진 단계만 쓴다</div><div class="r__s">11.5px 같은 중간값을 허용하면 눈은 그 차이를 위계로 읽지 못한다. 그냥 지저분해질 뿐이다.</div></div></div>
       <div class="r"><span class="r__n">L-7.2</span><div><div class="r__t">가는 굵기를 쓰지 않는다</div><div class="r__s">400 · 500 · 600 셋뿐이다. Thin·Light 는 토큰에 아예 없다 — 작은 글자에서 읽히지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-7.3</span><div><div class="r__t">큰 글자일수록 자간을 좁힌다</div><div class="r__s">34px에 <code>-.024em</code>, 13px에 <code>-.008em</code>. 이 하나가 "애플처럼 보이는가"를 가장 크게 좌우한다. 시스템 폰트는 실제로 크기마다 자간을 자동 조정하는데, 웹에서는 우리가 대신해줘야 한다.</div></div></div>
@@ -304,7 +307,7 @@
     <h2 class="imt-section__title">14. 겹침 — 무엇을 띄울 것인가</h2>
     <p class="lede">이 선택을 매번 즉흥으로 하면 앱이 산만해진다. 표로 고정한다.</p>
     <div class="imt-card">
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>상황</th><th>쓸 것</th><th>이유</th></tr></thead>
         <tbody>
           <tr><td>사용자가 의도한 동작의 선택지</td><td>액션시트 · 메뉴</td><td>중단이 아니라 이어짐이다</td></tr>
@@ -314,7 +317,7 @@
           <tr><td>결과 알림 (되돌리기 포함)</td><td>토스트</td><td>3~5초, 조작을 막지 않는다</td></tr>
           <tr><td>단순 정보 전달</td><td>화면 안에 인라인</td><td>띄우지 않는다</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="r" style="margin-top:var(--sp-4)"><span class="r__n">L-14.1</span><div><div class="r__t">한 번에 하나만</div><div class="r__s">모달 위에 모달, 팝오버 위에 팝오버를 올리지 않는다. 먼저 닫고 다음을 연다.</div></div></div>
       <div class="r"><span class="r__n">L-14.2</span><div><div class="r__t">닫는 방법이 항상 명확해야 한다</div><div class="r__s">Esc·바깥 클릭·닫기 버튼. 스와이프로만 닫히는 시트를 만들지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-14.3</span><div><div class="r__t">경고는 아껴 쓴다</div><div class="r__s">앱을 켜자마자 뜨는 경고, 정보 전달용 경고는 만들지 않는다. 사람들은 세 번째부터 읽지 않는다.</div></div></div>
@@ -343,7 +346,7 @@
     <h2 class="imt-section__title">16. 접근성</h2>
     <p class="lede">배려가 아니라 규격이다. 수치가 있으니 눈으로 다투지 않는다.</p>
     <div class="imt-card">
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>항목</th><th>기준</th><th>토큰 · 검사</th></tr></thead>
         <tbody>
           <tr><td>글자 대비</td><td>17pt 이하 4.5:1 · 18pt 3:1 · Bold 3:1</td><td><code>check_contrast.py</code></td></tr>
@@ -352,7 +355,7 @@
           <tr><td>글자 최소</td><td>모바일 11px · 데스크톱 10px</td><td><code>--fs-xs</code> / <code>--fs-tag</code></td></tr>
           <tr><td>컨트롤 간 여백</td><td>테두리 O 12px · 테두리 X 24px</td><td><code>--gap-ctl</code></td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="r" style="margin-top:var(--sp-4)"><span class="r__n">L-16.1</span><div><div class="r__t">기본값이 못 맞추면, 최소한 고대비 모드에서는 맞춘다</div><div class="r__s">애플이 명시한 방식이고 애플 자신도 시스템 색에 별도 accessible 변형을 둔다. 우리 <code>@media (prefers-contrast: more)</code> 블록이 그 역할이다.</div></div></div>
       <div class="r"><span class="r__n">L-16.2</span><div><div class="r__t">히트영역은 보이는 크기가 아니다</div><div class="r__s">38px 버튼이라도 눌리는 범위가 44px면 규격을 만족한다. 마우스 환경까지 44px로 키우면 대시보드 밀도가 무너지므로, <code>@media (pointer: coarse)</code>에서만 확장한다.</div></div></div>
       <div class="r"><span class="r__n">L-16.3</span><div><div class="r__t">라이트·다크 양쪽에서 검사한다</div><div class="r__s">한쪽만 통과하는 색은 통과가 아니다.</div></div></div>
@@ -382,7 +385,7 @@
     <h2 class="imt-section__title">18. 배포 전 체크리스트</h2>
     <p class="lede">새 화면이나 새 사이트를 올리기 전에 이것만 본다. 열두 개다.</p>
     <div class="imt-card">
-      <table class="imt-table">
+      <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th style="width:44px">□</th><th>확인</th><th>어긴 규칙</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>이 화면의 목적을 한 문장으로 말할 수 있는가</td><td>L-2.1</td></tr>
@@ -398,7 +401,7 @@
           <tr><td>11</td><td>빈 상태·로딩 상태·오류 상태를 그렸는가</td><td>L-11.1 · 11.5 · 11.7</td></tr>
           <tr><td>12</td><td>아이콘 버튼에 <code>aria-label</code> 이 있는가</td><td>L-9.8</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="note">이 목록에 없는 것으로 트집 잡지 않는다. 열두 개를 통과하면 배포한다. 새로 배운 게 생기면 규칙을 늘리되, 늘릴 때마다 하나를 지울 수 있는지 먼저 본다.</div>
     </div>
 
