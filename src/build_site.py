@@ -25,11 +25,16 @@ def ic(n, cls=""):
 
 # 표지 목차 — 번호는 각 섹션 표지(.phead--top)의 번호와 같아야 한다.
 # 설명문은 그 표지의 h1 을 그대로 쓴다. 두 곳이 어긋나면 같은 사이트로 안 읽힌다.
-CATS = [("layers",   "01", "가이드",  "만들 때 펼치는 문서",  "guide/index.html"),
-        ("doc",      "02", "랭귀지",  "고요한 정밀",          "language.html"),
-        ("brush",    "03", "토큰",    "말이 아니라 값",       "index-full.html"),
-        ("sparkle",  "04", "아이콘",  "좌표로 그린 334종",    "/icons/catalog.html"),
-        ("download", "05", "리소스",  "쓰는 파일 그대로",     "resources.html")]
+CATS = [("layers",   "01", "가이드",  "만들 때 펼치는 문서",  "guide/index.html",
+         "linear-gradient(140deg,#0a84ff,#5e5ce6)"),
+        ("doc",      "02", "랭귀지",  "고요한 정밀",          "language.html",
+         "linear-gradient(140deg,#5e5ce6,#bf5af2)"),
+        ("brush",    "03", "토큰",    "말이 아니라 값",       "index-full.html",
+         "linear-gradient(140deg,#30d158,#0a84ff)"),
+        ("sparkle",  "04", "아이콘",  "좌표로 그린 334종",    "/icons/catalog.html",
+         "linear-gradient(140deg,#ff9f0a,#ff375f)"),
+        ("download", "05", "리소스",  "쓰는 파일 그대로",     "resources.html",
+         "linear-gradient(140deg,#64d2ff,#0a84ff)")]
 
 LNAV = [("개요", "index.html", True), ("가이드", "guide/index.html", False),
         ("랭귀지", "language.html", False), ("토큰", "index-full.html", False),
@@ -135,6 +140,75 @@ def art_lang():
 ART = {"기초": art_layers, "패턴": art_grid, "컴포넌트": art_btn}
 
 
+# ── 표지 작업물 ────────────────────────────────────────────────
+# 디자인 사이트의 표지에는 작업물이 있어야 한다. 이 시스템에서 눈으로 볼 수 있는
+# 작업물은 손으로 그린 아이콘과 그것을 칠하는 8색이다. 둘을 한 장으로 합쳐
+# 화면 폭 전체에 깐다 — 설명 카드가 아니라 그림이다.
+GLYPHS = ["bell","star","search","chart-bar","lock","camera","trend-up","check-circle",
+          "download","doc","sparkle","layers","edit","filter","person","wallet",
+          "box","brush","ruler","link","book-open","repeat","chart-line","contrast",
+          "plus","more","info","warning","arrow-right","rounded-square","trash",
+          "stethoscope","dots-grid","close","check","x-circle","arrow-up","trend-down",
+          "arrow-down","arrow-left"]
+
+def icon_wall(n=132):
+    out = []
+    for k in range(n):
+        g = GLYPHS[k % len(GLYPHS)]
+        c = (k * 3 + k // 7) % 8 + 1
+        out.append(f'<span style="color:var(--c{c})">{ic(g)}</span>')
+    return "".join(out)
+
+def color_field():
+    names = ["파랑", "주황", "청록", "황토", "자홍", "하늘", "보라", "초록"]
+    return "".join(
+        f'<div class="fld" style="background:var(--c{i})">'
+        f'<b>--c{i}</b><span>{names[i-1]}</span></div>' for i in range(1, 9))
+
+def type_wall():
+    rows = [("34", "히어로"), ("28", "제목"), ("22", "부제"), ("17", "본문"), ("13", "보조")]
+    return "".join(
+        f'<div class="tw"><span style="font-size:{px}px">고요한 정밀</span>'
+        f'<b>{px}px · {lab}</b></div>' for px, lab in rows)
+
+
+# ── 기기 목업 ───────────────────────────────────────────────────
+# 남의 제품 사진을 빌려오지 않는다. 프레임도 화면 속 UI도 전부 우리 토큰으로
+# 그린다 — 그래서 이 그림은 예시가 아니라 시스템이 실제로 만드는 결과다.
+def phone(screen, cap):
+    return (f'<figure class="dev"><div class="dev__f"><span class="dev__n"></span>'
+            f'<div class="dev__s">{screen}</div></div>'
+            f'<figcaption>{cap}</figcaption></figure>')
+
+def scr_dash():
+    bars = "".join(
+        f'<i style="height:{h}%;background:var(--c1);opacity:{o}"></i>'
+        for h, o in [(34,.35),(52,.5),(44,.65),(70,.8),(88,1),(62,.8),(76,.9)])
+    return ('<div class="ux ux--dash">'
+      '<div class="ux__t">오늘</div>'
+      '<div class="ux__card"><span class="ux__lab">평가금액</span>'
+      '<b class="ux__big">12,480,900</b>'
+      '<span class="ux__chip ux__chip--up">▲ 1.24%</span></div>'
+      f'<div class="ux__chart">{bars}</div>'
+      '<div class="ux__row"><span>삼성전자</span><b class="up">+2.1%</b></div>'
+      '<div class="ux__row"><span>SK하이닉스</span><b class="dn">−0.8%</b></div>'
+      '</div>')
+
+def scr_list():
+    rows = [("알림", "켜짐"), ("다크 모드", "자동"), ("글자 크기", "기본"), ("데이터", "Wi-Fi")]
+    return ('<div class="ux"><div class="ux__t">설정</div>'
+      + "".join(f'<div class="ux__row"><span>{a}</span><em>{b}</em></div>' for a, b in rows)
+      + '<div class="ux__seg"><i class="on">전체</i><i>즐겨찾기</i></div></div>')
+
+def scr_form():
+    return ('<div class="ux"><div class="ux__t">주문</div>'
+      '<div class="ux__fld"><span>수량</span><b>10</b></div>'
+      '<div class="ux__fld"><span>단가</span><b>72,400</b></div>'
+      '<div class="ux__note">체결가는 호가에 따라 달라진다.</div>'
+      '<div class="ux__btn">매수</div>'
+      '<div class="ux__btn ux__btn--soft">취소</div></div>')
+
+
 # ── 리소스 카드 ──────────────────────────────────────────────────
 def rcard(grad, glyph, title, meta, desc, dl, dl_label, more, more_label):
     return f"""<article class="rcard">
@@ -188,12 +262,6 @@ def build():
     sp = os.path.join(ROOT, "guide", "_sprite.svg")
     sprite = open(sp, encoding="utf-8").read() if os.path.exists(sp) else ""
 
-    cats = "".join(
-        f'<a href="{h}"><span class="ic">{ic(n)}</span><span class="n">{num}</span>'
-        f'<span class="t"><b>{t}</b><span>{d}</span></span>'
-        f'<span class="go" aria-hidden="true">›</span></a>'
-        for n, num, t, d, h in CATS)
-
     groups = {}
     for p in pages:
         if p["slug"] == "index": continue
@@ -207,26 +275,32 @@ def build():
         for g, ps in groups.items())
 
     ndoc = len(pages) - 1
+    wall = icon_wall()
+    wall2 = icon_wall(96)
+    field, tywall = color_field(), type_wall()
+    dev1 = phone(scr_dash(), "대시보드 — 카드·차트 8슬롯·등락 배지")
+    dev2 = phone(scr_list(), "목록과 설정 — 행 높이 44 · 세그먼트")
+    dev3 = phone(scr_form(), "입력과 동작 — 기본/보조 버튼")
     body = f"""
-<header class="hero">
-  <p class="hero__k">IMT Design System · v1</p>
+<header class="cover">
+  <p class="cover__k">IMT Design System · v1</p>
   <h1>고요한 정밀을,<br>값으로 고정한다</h1>
-  <p>말로 전하던 기준을 토큰·규칙·도해로 바꿨다. 이 사이트가 그리는 모든 색과 크기는
-     <code>tokens.css</code> 를 실제로 읽은 값이다.</p>
-  <ul class="stat">
-    <li><b>334</b><span>직접 그린 아이콘</span></li>
-    <li><b>121</b><span>번호 붙은 규칙</span></li>
-    <li><b>{ndoc}</b><span>가이드 문서</span></li>
-    <li><b>1</b><span>값이 사는 파일</span></li>
-  </ul>
+  <p class="cover__p">말로 전하던 기준을 토큰·규칙·도해로 바꿨다.
+     아래 보이는 것은 설명이 아니라 이 사이트가 실제로 쓰는 값이다.</p>
 </header>
 
-<nav class="toc" aria-label="섹션">{cats}</nav>
+<div class="wall" aria-hidden="true"><div class="wall__g">{wall}</div></div>
 
-<!-- 표지에서 **먼저** 말해야 하는 것 (2026-09-03).
-     전에는 원칙이 랭귀지 문서 안쪽에, 우리가 다시 만든 것이 17절에 묻혀 있었다.
-     그러면 읽는 사람에게 이 시스템은 '따라 만든 것' 으로 읽힌다 — 실제로는
-     자기 원칙과 자기 산출물이 있는데도. 순서를 바꾼다. -->
+<ul class="stat">
+  <li><b>334</b><span>직접 그린 아이콘</span></li>
+  <li><b>121</b><span>번호 붙은 규칙</span></li>
+  <li><b>{ndoc}</b><span>가이드 문서</span></li>
+  <li><b>1</b><span>값이 사는 파일</span></li>
+</ul>
+
+<!-- 짜임을 섹션마다 바꾼다 (2026-09-03).
+     같은 폭·같은 정렬이 여덟 번 반복되면 아무리 내용이 달라도 한 장으로 읽힌다.
+     좌측 정렬 · 가운데 정렬 · 검은 면 · 화면 폭 도판을 번갈아 쓴다. -->
 <section class="band" id="what">
   <div class="wrap">
     <p class="band__k">원칙</p>
@@ -250,22 +324,31 @@ def build():
 </section>
 
 <section class="band band--tint" id="ours">
-  <div class="wrap">
-    <p class="band__k">차이</p>
+  <div class="wrap wrap--center">
+    <p class="band__k band__k--c">차이</p>
     <h2>규격은 받고, 그림은 그렸다</h2>
     <p class="lead">HIG 에서 받은 것은 <b>수치와 방법</b>이고, 아래는 그 위에서
-       우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.
-       근거는 전부 랭귀지 17절에 번호로 남아 있다.</p>
-    <ol class="creed creed--link">
-      <li><a href="/icons/catalog.html"><b>그림은 받지 않고 규격만 읽었다</b>
-        <span>아이콘 334종을 24 격자 위에 좌표로 다시 그렸다</span></a></li>
-      <li><a href="guide/icons.html"><b>굵기는 그리는 게 아니라 계산한다</b>
-        <span>원전이 아홉 벌을 그려 넣는 자리를 획 하나로 푼다</span></a></li>
-      <li><a href="guide/typography.html"><b>받침이 있는 글은 더 눕는다</b>
-        <span>라틴 기준 행간 1.29 는 한글 본문에 답답하다 — 1.55</span></a></li>
-      <li><a href="language.html#diverge"><b>여기서는 빨강이 오른다</b>
-        <span>색의 뜻은 문화가 정한다 — 원전도 그렇게 적어 두었다</span></a></li>
-    </ol>
+       우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.</p>
+  </div>
+  <div class="wrap">
+    <div class="figs">
+      <a class="fig" href="/icons/catalog.html">
+        <p class="fig__k">아이콘</p><h3>그림은 받지 않고<br>규격만 읽었다</h3>
+        <p class="fig__d">334종을 24 격자 위에 좌표로 다시 그렸다</p>
+        <div class="fig__n">334</div></a>
+      <a class="fig" href="guide/icons.html">
+        <p class="fig__k">굵기</p><h3>그리는 게 아니라<br>계산한다</h3>
+        <p class="fig__d">원전이 아홉 벌을 그려 넣는 자리를 획 하나로 푼다</p>
+        <div class="fig__n">9<i>단</i></div></a>
+      <a class="fig" href="guide/typography.html">
+        <p class="fig__k">한글</p><h3>받침이 있는 글은<br>더 눕는다</h3>
+        <p class="fig__d">라틴 기준 행간 1.29 는 한글 본문에 답답하다</p>
+        <div class="fig__n">1.55</div></a>
+      <a class="fig" href="language.html#diverge">
+        <p class="fig__k">색</p><h3>여기서는<br>빨강이 오른다</h3>
+        <p class="fig__d">색의 뜻은 문화가 정한다 — 원전도 그렇게 적어 두었다</p>
+        <div class="fig__n fig__n--up">▲</div></a>
+    </div>
   </div>
 </section>
 
@@ -277,27 +360,41 @@ def build():
        모든 지침에 도해가 붙는다 — 잘된 예와 잘못된 예를 나란히 놓는 방식이다.</p>
     <div class="tiles">{tiles}</div>
     <p class="lead" style="margin:var(--sp-6) 0 0">
-      <a class="more" href="guide/index.html">가이드 {len(pages)-1}쪽 전체 보기 →</a></p>
+      <a class="more" href="guide/index.html">가이드 {ndoc}쪽 전체 보기 →</a></p>
   </div>
 </section>
 
-<section class="band band--tint" id="language">
+<section class="band band--dark" id="screens">
+  <div class="wrap wrap--center">
+    <p class="band__k band__k--c">화면</p>
+    <h2>규칙이 화면이 되면<br>이렇게 생겼다</h2>
+    <p class="lead">아래 세 화면은 그려 넣은 그림이 아니라 이 시스템의 토큰과 컴포넌트로
+       실제로 조립한 것이다. 기기 테두리까지 우리가 그렸다 — 남의 사진은 한 장도 없다.</p>
+  </div>
   <div class="wrap">
-    <p class="band__k"><span class="n">02</span>랭귀지</p>
+    <div class="devs">
+      {dev1}{dev2}{dev3}
+    </div>
+  </div>
+</section>
+
+<section class="band band--dark" id="language">
+  <div class="wrap wrap--center">
+    <p class="band__k band__k--c"><span class="n">02</span>랭귀지</p>
     <h2>고요한 정밀</h2>
     <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>다.
-       19개 절 121개 규칙이 한 문서에 있고, HIG 에서 그대로 받은 것과 우리가 정한 것을
-       구분해 적어둔다.</p>
-    <div class="links">
-      <a href="language.html"><b>디자인 랭귀지 전문</b>
-        <span>19절 121규칙 — 결정과 근거를 한 곳에</span></a>
-      <a href="language.html#legal"><b>무엇을 배우고 무엇을 받지 않는가</b>
-        <span>HIG 문서는 읽고, 배포 에셋은 받지 않는다</span></a>
-      <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
-        <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
+       HIG 에서 그대로 받은 것과 우리가 정한 것을 한 문서 안에서 구분해 적어둔다.</p>
+    <ul class="nums">
+      <li><b>19</b><span>절</span></li>
+      <li><b>121</b><span>번호 붙은 규칙</span></li>
+      <li><b>157</b><span>열람한 원전 문서</span></li>
+      <li><b>0</b><span>원전과의 이견</span></li>
+    </ul>
+    <div class="chips">
+      <a href="language.html">전문 읽기</a>
+      <a href="language.html#legal">무엇을 배우고 무엇을 받지 않는가</a>
+      <a href="language.html#diverge">겉보기에 달라 보이는 것들</a>
     </div>
-    <p class="lead" style="margin:var(--sp-6) 0 0">
-      <a class="more" href="language.html">랭귀지 19절 전체 보기 →</a></p>
   </div>
 </section>
 
@@ -307,33 +404,28 @@ def build():
     <h2>말이 아니라 값</h2>
     <p class="lead">값은 이 한 파일 안에만 있다. 코드에서는 <code>--sub</code>·<code>--warn</code>
        같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</p>
-    <div class="tiles">
-      <a class="tile" href="guide/color.html"><div class="tile__art">{art_color()}</div>
-        <div class="tile__t">색</div><div class="tile__d">면 3단 · 글자 4단 · 상태 4색 · 차트 8슬롯</div></a>
-      <a class="tile" href="guide/typography.html"><div class="tile__art">{art_type()}</div>
-        <div class="tile__t">타이포그래피</div><div class="tile__d">12단계 · HIG 텍스트 스타일 대응</div></a>
-      <a class="tile" href="guide/layout.html"><div class="tile__art">{art_space()}</div>
-        <div class="tile__t">간격과 라운드</div><div class="tile__d">4의 배수 · 손끝 44pt · 포인터 28pt</div></a>
-    </div>
-    <p class="lead" style="margin:var(--sp-6) 0 0">
+  </div>
+  <div class="field">{field}</div>
+  <div class="wrap">
+    <div class="tywall">{tywall}</div>
+    <p class="lead" style="margin:var(--sp-8) 0 0">
       <a class="more" href="index-full.html">토큰 값 전체와 컴포넌트 보기 →</a></p>
   </div>
 </section>
 
-<section class="band band--tint" id="icons">
-  <div class="wrap">
-    <p class="band__k"><span class="n">04</span>아이콘</p>
+<section class="band band--dark" id="icons">
+  <div class="wrap wrap--center">
+    <p class="band__k band__k--c"><span class="n">04</span>아이콘</p>
     <h2>좌표로 그린 334종</h2>
     <p class="lead">24 격자 위에 하나씩 올렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
        원전이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
-    <div class="tiles">
-      <a class="tile" href="/icons/catalog.html"><div class="tile__art">{art_icons()}</div>
-        <div class="tile__t">아이콘 카탈로그</div><div class="tile__d">334개 · 이름으로 검색 · 클릭하면 코드 복사</div></a>
-      <a class="tile" href="guide/icons.html"><div class="tile__art">{art_lang()}</div>
-        <div class="tile__t">아이콘 지침</div><div class="tile__d">굵기를 옆 글자에 맞춘다 · 뜻이 겹치면 하나만 쓴다</div></a>
+  </div>
+  <div class="wall wall--full" aria-hidden="true"><div class="wall__g">{wall2}</div></div>
+  <div class="wrap wrap--center">
+    <div class="chips">
+      <a href="/icons/catalog.html">334종 전체 보기</a>
+      <a href="guide/icons.html">아이콘 지침</a>
     </div>
-    <p class="lead" style="margin:var(--sp-6) 0 0">
-      <a class="more" href="/icons/catalog.html">아이콘 334종 전체 보기 →</a></p>
   </div>
 </section>
 
