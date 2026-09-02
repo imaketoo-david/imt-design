@@ -2,9 +2,9 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>IMT Design Language</title>
-<link rel="stylesheet" href="tokens.css">
-<link rel="stylesheet" href="components.css">
-<link rel="stylesheet" href="patterns.css">
+<link rel="stylesheet" href="tokens.css?v=20260902b">
+<link rel="stylesheet" href="components.css?v=20260902b">
+<link rel="stylesheet" href="patterns.css?v=20260902b">
 <style>
   .ds{display:grid;grid-template-columns:230px 1fr;gap:var(--sp-8);max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
   .ds__nav{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto}
@@ -86,6 +86,7 @@
       <div class="r"><span class="r__n">L-0.1</span><div><div class="r__t">값이 아니라 의미가 진실이다</div><div class="r__s">애플은 문서에 색 값을 적어두고도 "앱에 하드코딩하지 말라, 값은 릴리스마다 달라진다"고 못 박는다. 웹에는 시스템 색 API가 없어 우리는 값을 고정할 수밖에 없다. 그래서 값은 <code>tokens.css</code> 안에만 두고, 코드에서는 <code>--sub</code>·<code>--warn</code> 같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.2</span><div><div class="r__t">의미를 바꿔 쓰지 않는다</div><div class="r__s">구분선 색을 글자색으로, 보조 라벨색을 배경색으로 돌려쓰는 순간 시스템은 무너진다. 필요한 의미가 없으면 새 토큰을 만든다 — 있는 걸 비틀지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.3</span><div><div class="r__t">규칙은 기계가 검사할 수 있어야 한다</div><div class="r__s">대비는 <code>check_contrast.py</code>, 미정의 토큰 참조는 빌드 스크립트가 잡는다. 사람 눈으로만 지키는 규칙은 6개월 뒤에 반드시 깨진다.</div></div></div>
+      <div class="r"><span class="r__n">L-0.5</span><div><div class="r__t">CSS 링크에 버전을 붙인다</div><div class="r__s">CDN은 CSS를 몇 시간씩 캐시한다. 파일을 올려도 사용자에게는 옛날 것이 간다. <code>tokens.css?v=20260902b</code> 처럼 배포마다 값을 바꾼다 — URL이 달라지면 캐시가 비켜간다. 잊기 쉬우니 서버가 짧은 <code>Cache-Control</code>을 함께 내려주는 편이 낫다.</div></div></div>
       <div class="r"><span class="r__n">L-0.4</span><div><div class="r__t">기존 이름은 지우지 않는다</div><div class="r__s">토큰은 추가하고 값만 조정한다. 이름을 지우면 sim·plan·marketing·speak·chess 다섯 사이트를 동시에 고쳐야 한다. 시스템의 수명은 하위 호환이 결정한다.</div></div></div>
     </div>
   </section>
