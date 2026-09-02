@@ -88,7 +88,7 @@ SHELL = """<!doctype html>
 <nav class="gnav">
   <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="https://icons.imaketoo.com">아이콘 334</a>
+  <a href="/icons/catalog.html">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -99,7 +99,7 @@ SHELL = """<!doctype html>
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="https://icons.imaketoo.com">아이콘</a>
+    <a href="/icons/catalog.html">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
 </nav>

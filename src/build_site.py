@@ -26,12 +26,12 @@ def ic(n, cls=""):
 CATS = [("layers",     "가이드",  "guide/index.html"),
         ("doc",        "랭귀지",  "language.html"),
         ("brush",      "토큰",    "index-full.html"),
-        ("sparkle",    "아이콘",  "https://icons.imaketoo.com"),
+        ("sparkle",    "아이콘",  "/icons/catalog.html"),
         ("download",   "리소스",  "resources.html")]
 
 LNAV = [("개요", "index.html", True), ("가이드", "guide/index.html", False),
         ("랭귀지", "language.html", False), ("토큰", "index-full.html", False),
-        ("아이콘", "https://icons.imaketoo.com", False),
+        ("아이콘", "/icons/catalog.html", False),
         ("리소스", "resources.html", False)]
 
 def shell(title, body, sprite, lnav_on="개요", extra_css=""):
@@ -49,7 +49,7 @@ def shell(title, body, sprite, lnav_on="개요", extra_css=""):
 <nav class="gnav">
   <a class="gnav__b" href="index.html">{ic("layers")}IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="https://icons.imaketoo.com">아이콘 334</a>
+  <a href="/icons/catalog.html">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -162,7 +162,7 @@ def res_cards():
             f"ZIP · {kb(z.get('icons',0))} · SVG {z.get('n_svg',334)}개",
             "낱개 SVG와 스프라이트, 웹폰트까지. 굵기 9단·크기 3단이 CSS 변수 두 개로 "
             "움직인다 — 그림을 아홉 벌 그려두지 않았다.",
-            "dl/imt-icons.zip", "다운로드", "https://icons.imaketoo.com", "카탈로그 보기"),
+            "dl/imt-icons.zip", "다운로드", "/icons/catalog.html", "카탈로그 보기"),
       rcard(g3, "rounded-square", "앱 아이콘 템플릿",
             f"SVG · {kb(z.get('appicon',0))} · 1024pt",
             "1024 캔버스에 배경·중간·전경 세 겹, 안전 원 지름 512. 레이어를 위아래 "
@@ -259,7 +259,7 @@ def build():
     <p class="lead">334개를 좌표로 직접 그렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
        애플이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
     <div class="tiles">
-      <a class="tile" href="https://icons.imaketoo.com"><div class="tile__art">{art_icons()}</div>
+      <a class="tile" href="/icons/catalog.html"><div class="tile__art">{art_icons()}</div>
         <div class="tile__t">아이콘 카탈로그</div><div class="tile__d">334개 · 이름으로 검색 · 클릭하면 코드 복사</div></a>
       <a class="tile" href="guide/icons.html"><div class="tile__art">{art_lang()}</div>
         <div class="tile__t">아이콘 지침</div><div class="tile__d">굵기를 옆 글자에 맞춘다 · 뜻이 겹치면 하나만 쓴다</div></a>
@@ -281,7 +281,7 @@ def build():
 <footer class="foot"><div class="wrap">
   IMT Design System · 가이드 {len(pages)-1}쪽 · 아이콘 334 ·
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a> ·
-  <a href="https://icons.imaketoo.com">icons.imaketoo.com</a>
+  <a href="/icons/catalog.html">design.imaketoo.com/icons</a>
 </div></footer>
 """
     open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(

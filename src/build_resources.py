@@ -98,7 +98,7 @@ README = """IMT Design — 토큰 꾸러미
   3. 다크 모드는 :root[data-theme=dark] 에서 저절로 바뀐다. 따로 쓸 것이 없다.
 
 문서  https://design.imaketoo.com
-아이콘 https://icons.imaketoo.com
+아이콘 https://design.imaketoo.com/icons
 """
 
 
