@@ -2,9 +2,12 @@
 from figures import fig, spec
 
 PAGE = {
- "slug": "index", "group": "시작", "kicker": "IMT Design Guide",
+ "slug": "index", "group": "시작", "top": True,
+ "kicker": '<span class="n">01</span>가이드',
  "title": "가이드",
- "abstract": "화면을 만들 때 열어보는 문서다. 주제 하나가 문서 하나이고, 각 문서는 지침과 그 지침이 왜 그런지를 보여주는 도해로 이루어진다.",
+ "head": "만들 때 펼치는 문서",
+ "abstract": "주제 하나가 문서 하나다. 각 문서는 지침과, 그 지침이 왜 그런지를 눈으로 보여주는 도해로 이루어진다.",
+ "meta": "<span>주제별 지침</span><span>도해 포함</span><span>규칙 번호로 인용</span>",
  "blocks": [
   ("h2", "세 문서의 역할", "roles"),
   ("raw", spec(["문서", "무엇을 담는가", "언제 여는가"], [

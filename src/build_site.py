@@ -338,11 +338,12 @@ def build():
     # ── 리소스 페이지 ────────────────────────────────────────────
     rbody = f"""
 <div class="wrap">
-  <header class="phead">
-    <p class="phead__k">리소스</p>
-    <h1>다운로드</h1>
+  <header class="phead phead--top">
+    <p class="phead__k"><span class="n">05</span>리소스</p>
+    <h1>쓰는 파일 그대로</h1>
     <p>토큰·아이콘·템플릿을 파일로 받는다. 이 사이트가 실제로 쓰는 파일과 같은 것이라,
        문서에 적힌 값과 내려받은 값이 어긋나지 않는다.</p>
+    <p class="phead__m"><span>CSS · SVG · 스프라이트</span><span>사이트와 동일 빌드</span><span>남의 에셋 없음</span></p>
   </header>
   <div class="res">{res_cards()}</div>
 

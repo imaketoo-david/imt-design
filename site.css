@@ -141,12 +141,31 @@
    구조가 다르면 같은 사이트로 안 읽힌다.
    ══════════════════════════════════════════════════════════════ */
 .phead{padding:var(--sp-10) 0 var(--sp-6);max-width:74ch}
-.phead__k{margin:0 0 var(--sp-2);font:var(--fw-sb) var(--fs-tag)/1 var(--font);
-  letter-spacing:.1em;text-transform:uppercase;color:var(--sub2)}
+/* 머리표(kicker) — 다섯 섹션은 번호를, 가이드 하위 문서는 갈래 이름을 단다.
+   한글이 섞이므로 uppercase 는 쓰지 않는다. 대문자 변환이 라틴에만 걸려
+   `IMT ICONS` 와 `기초` 가 서로 다른 활자처럼 보이던 것이 어긋남의 원인이었다. */
+.phead .phead__k{display:flex;align-items:center;gap:var(--sp-2);
+  margin:0 0 var(--sp-3);font:var(--fw-sb) var(--fs-sm)/1 var(--font);
+  letter-spacing:.04em;color:var(--sub2);text-transform:none}
+.phead .phead__k .n{font-variant-numeric:tabular-nums;letter-spacing:.1em}
+.phead .phead__k .n::after{content:"";display:inline-block;vertical-align:middle;
+  width:20px;height:1px;margin:0 var(--sp-1) 0 var(--sp-2);background:var(--line)}
 .phead h1{margin:0 0 var(--sp-3);font:var(--fw-sb) var(--fs-3xl)/1.12 var(--font);
   letter-spacing:var(--tr-3xl);color:var(--ink)}
 .phead p{margin:0;font-size:var(--fs-lg);line-height:var(--lh-base);
   letter-spacing:var(--tr-base);color:var(--ink2)}
+
+/* 다섯 섹션의 표지 — 가이드·랭귀지·토큰·아이콘·리소스.
+   문서 첫 장이 아니라 '장(章)의 표지' 로 읽히도록 폭을 풀고 활자를 키운다. */
+.phead--top{max-width:none;padding:var(--sp-16) 0 var(--sp-8);
+  border-bottom:var(--hairline) solid var(--line-soft)}
+.phead--top h1{margin-bottom:var(--sp-5);font-size:var(--fs-hero);line-height:1.06;
+  letter-spacing:var(--tr-3xl)}
+.phead--top>p:not(.phead__k):not(.phead__m){max-width:60ch;font-size:var(--fs-xl);
+  line-height:1.5;color:var(--sub)}
+.phead--top .phead__m{margin:var(--sp-6) 0 0;display:flex;flex-wrap:wrap;
+  gap:var(--sp-1) var(--sp-4);font:var(--fw-m) var(--fs-sm)/1.4 var(--font);
+  letter-spacing:.02em;color:var(--sub2)}
 
 .cols{display:grid;grid-template-columns:212px 1fr;gap:var(--sp-8);align-items:start;
   padding-bottom:var(--sp-16)}
@@ -170,6 +189,8 @@
   .side a{background:var(--card);box-shadow:var(--edge);border-radius:var(--r-cap);
     padding:var(--sp-2) var(--sp-3);font-size:var(--fs-sm)}
   .phead{padding:var(--sp-8) 0 var(--sp-5)}
+  .phead--top{padding:var(--sp-10) 0 var(--sp-6)}
+  .phead--top>p:not(.phead__k):not(.phead__m){font-size:var(--fs-lg)}
 }
 
 /* ══════════════════════════════════════════════════════════════

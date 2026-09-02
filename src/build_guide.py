@@ -105,10 +105,11 @@ SHELL = """<!doctype html>
 </nav>
 {sprite}
 <div class="wrap">
-  <header class="phead">
+  <header class="phead{pcls}">
     <p class="phead__k">{kicker}</p>
-    <h1>{title}</h1>
+    <h1>{head}</h1>
     <p>{abstract}</p>
+    {meta}
   </header>
   <div class="cols">
     <aside class="side">{side}</aside>
@@ -165,7 +166,10 @@ def main():
                     f'{items}</div>')
             body = body.replace("@@TOC@@", "".join(cards))
         html = SHELL.format(
-            title=p["title"], kicker=p["kicker"], abstract=p["abstract"],
+            title=p["title"], head=p.get("head") or p["title"],
+            kicker=p["kicker"], abstract=p["abstract"],
+            pcls=(" phead--top" if p.get("top") else ""),
+            meta=('<p class="phead__m">%s</p>' % p["meta"]) if p.get("meta") else "",
             body=body, toc=toc(p),
             side=sidebar(pages, p["slug"]), next=nxt, sprite=sprite, v=VER)
         open(os.path.join(OUT, p["slug"] + ".html"), "w", encoding="utf-8").write(html)
