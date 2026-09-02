@@ -190,7 +190,7 @@ def phone(screen, cap):
         return (f'<figure class="dev dev--shot">'
                 f'<div class="shot">'
                 f'<img class="shot__b" src="img/iphone-bezel.png?v={VER}" alt="iPhone" '
-                f'width="1000" height="2040" loading="lazy">'
+                f'width="1350" height="2760" loading="lazy">'
                 f'<div class="shot__s">{screen}</div></div>'
                 f'<figcaption>{cap}</figcaption></figure>')
     return (f'<figure class="dev"><div class="dev__f"><span class="dev__n"></span>'
@@ -215,29 +215,52 @@ def scr_dash():
     bars = "".join(
         f'<i style="height:{h}%;background:var(--c1);opacity:{o}"></i>'
         for h, o in [(34,.35),(52,.5),(44,.65),(70,.8),(88,1),(62,.8),(76,.9)])
-    return ('<div class="ux ux--dash">' + statusbar() +
-      '<div class="ux__t">오늘</div>'
+    rows = [("삼성전자", "72,400", "+2.1%", "up"), ("SK하이닉스", "241,000", "−0.8%", "dn"),
+            ("네이버", "198,500", "+0.4%", "up")]
+    return ('<div class="ux">' + statusbar() +
+      '<div class="ux__nav">오늘</div>'
       '<div class="ux__card"><span class="ux__lab">평가금액</span>'
       '<b class="ux__big">12,480,900</b>'
-      '<span class="ux__chip ux__chip--up">▲ 1.24%</span></div>'
-      f'<div class="ux__chart">{bars}</div>'
-      '<div class="ux__row"><span>삼성전자</span><b class="up">+2.1%</b></div>'
-      '<div class="ux__row"><span>SK하이닉스</span><b class="dn">−0.8%</b></div>'
-      '</div>')
+      '<span class="ux__chip ux__chip--up">▲ 152,900 · 1.24%</span></div>'
+      '<div class="ux__card ux__card--tight"><span class="ux__lab">최근 7일</span>'
+      f'<div class="ux__chart">{bars}</div></div>'
+      '<div class="ux__sec">보유</div>'
+      + "".join(f'<div class="ux__row"><span>{n}</span>'
+                f'<em>{p}</em><b class="{c}">{d}</b></div>' for n, p, d, c in rows)
+      + tabbar() + '</div>')
 
 def scr_list():
-    rows = [("알림", "켜짐"), ("다크 모드", "자동"), ("글자 크기", "기본"), ("데이터", "Wi-Fi")]
-    return ('<div class="ux">' + statusbar() + '<div class="ux__t">설정</div>'
-      + "".join(f'<div class="ux__row"><span>{a}</span><em>{b}</em></div>' for a, b in rows)
-      + '<div class="ux__seg"><i class="on">전체</i><i>즐겨찾기</i></div></div>')
+    g1 = [("알림", "켜짐"), ("다크 모드", "자동"), ("글자 크기", "기본")]
+    g2 = [("데이터", "Wi-Fi"), ("배지", "끔"), ("소리", "기본")]
+    g3 = [("버전", "1.0.0"), ("오픈소스 라이선스", "")]
+    r = lambda a, b: f'<div class="ux__row"><span>{a}</span><em>{b}</em><i class="ux__go"></i></div>'
+    return ('<div class="ux">' + statusbar() +
+      '<div class="ux__nav">설정</div>'
+      '<div class="ux__sec">일반</div>' + "".join(r(a, b) for a, b in g1) +
+      '<div class="ux__sec">알림과 데이터</div>' + "".join(r(a, b) for a, b in g2) +
+      '<div class="ux__sec">정보</div>' + "".join(r(a, b) for a, b in g3) +
+      '<div class="ux__note">값은 기기에만 저장된다. 서버로 보내지 않는다.</div>'
+      '</div>')
 
 def scr_form():
-    return ('<div class="ux">' + statusbar() + '<div class="ux__t">주문</div>'
+    return ('<div class="ux">' + statusbar() +
+      '<div class="ux__nav">주문</div>'
+      '<div class="ux__seg"><i class="on">매수</i><i>매도</i></div>'
+      '<div class="ux__fld"><span>종목</span><b>삼성전자</b></div>'
       '<div class="ux__fld"><span>수량</span><b>10</b></div>'
       '<div class="ux__fld"><span>단가</span><b>72,400</b></div>'
+      '<div class="ux__fld"><span>주문 유형</span><b>지정가</b></div>'
+      '<div class="ux__fld"><span>유효 기간</span><b>당일</b></div>'
+      '<div class="ux__sum"><span>주문 금액</span><b>724,000</b></div>'
       '<div class="ux__note">체결가는 호가에 따라 달라진다.</div>'
-      '<div class="ux__btn">매수</div>'
-      '<div class="ux__btn ux__btn--soft">취소</div></div>')
+      '<div class="ux__btn">매수 주문</div>'
+      '<div class="ux__btn ux__btn--soft">취소</div>'
+      '</div>')
+
+def tabbar():
+    return ('<div class="ux__tab">' +
+      "".join(f'<i class="{c}">{ic(n)}</i>' for n, c in
+              [("chart-line", "on"), ("layers", ""), ("person", "")]) + '</div>')
 
 
 # ── 리소스 카드 ──────────────────────────────────────────────────
@@ -312,15 +335,14 @@ def build():
     tm = ('<p class="foot__tm">iPhone 은 미국 및 기타 국가에서 등록된 Apple Inc. 의 상표입니다. '
           'IMT Design 은 Apple Inc. 와 제휴·후원 관계가 없습니다.</p>'
           if os.path.exists(BEZEL) else "")
-    devlead = ("화면 안은 전부 이 시스템의 토큰과 컴포넌트로 조립했다. 기기 이미지는 Apple 이 "
-               "개발자에게 공개한 공식 베젤을 <b>수정 없이</b> 쓴다 — 우리 것과 받은 것을 "
-               "여기서도 나눠 적는다."
+    devlead = ("화면 안은 전부 이 시스템의 토큰과 컴포넌트로 조립했다. "
+               "기기는 Apple 이 개발자에게 공개한 공식 베젤을 <b>수정 없이</b> 썼다."
                if os.path.exists(BEZEL) else
                "아래 세 화면은 그려 넣은 그림이 아니라 이 시스템의 토큰과 컴포넌트로 실제로 "
                "조립한 것이다. 기기 테두리까지 우리가 그렸다 — 남의 사진은 한 장도 없다.")
-    dev1 = phone(scr_dash(), "대시보드 — 카드·차트 8슬롯·등락 배지")
-    dev2 = phone(scr_list(), "목록과 설정 — 행 높이 44 · 세그먼트")
-    dev3 = phone(scr_form(), "입력과 동작 — 기본/보조 버튼")
+    dev1 = phone(scr_dash(), "대시보드 · 카드와 차트")
+    dev2 = phone(scr_list(), "목록 · 행 높이 44")
+    dev3 = phone(scr_form(), "입력 · 기본과 보조 버튼")
     body = f"""
 <header class="cover">
   <p class="cover__k">IMT Design System · v1</p>
@@ -367,8 +389,8 @@ def build():
   <div class="wrap wrap--center">
     <p class="band__k band__k--c">차이</p>
     <h2>규격은 받고, 그림은 그렸다</h2>
-    <p class="lead">HIG 에서 받은 것은 <b>수치와 방법</b>이고, 아래는 그 위에서
-       우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.</p>
+    <p class="lead">받은 것은 <b>수치와 방법</b>이다. 아래 넷은 웹·한글·대시보드라는
+       우리 조건에 맞춰 <b>다르게 푼</b> 자리다.</p>
   </div>
   <div class="wrap">
     <div class="figs">
@@ -422,7 +444,7 @@ def build():
     <p class="band__k band__k--c"><span class="n">02</span>랭귀지</p>
     <h2>고요한 정밀</h2>
     <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>다.
-       HIG 에서 그대로 받은 것과 우리가 정한 것을 한 문서 안에서 구분해 적어둔다.</p>
+       받은 것과 정한 것을 한 문서 안에서 구분해 적어둔다.</p>
     <ul class="nums">
       <li><b>19</b><span>절</span></li>
       <li><b>121</b><span>번호 붙은 규칙</span></li>
@@ -472,8 +494,8 @@ def build():
   <div class="wrap">
     <p class="band__k"><span class="n">05</span>리소스</p>
     <h2>쓰는 파일 그대로</h2>
-    <p class="lead">문서에 그려둔 값과 내려받은 파일의 값이 같다 — 빌드할 때
-       사이트가 쓰는 파일을 그대로 담기 때문이다.</p>
+    <p class="lead">빌드할 때 사이트가 쓰는 파일을 그대로 담는다.
+       문서에 그려둔 값과 내려받은 값이 어긋날 수 없다.</p>
     <div class="res">{res_cards()}</div>
     <p class="lead" style="margin:var(--sp-8) 0 0">
       <a class="more" href="resources.html">리소스 전체 보기 →</a></p>
