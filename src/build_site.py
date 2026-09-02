@@ -23,11 +23,13 @@ def ic(n, cls=""):
     c = f" {cls}" if cls else ""
     return f'<svg class="imt-i{c}" aria-hidden="true"><use href="#i-{n}"/></svg>'
 
-CATS = [("layers",     "가이드",  "guide/index.html"),
-        ("doc",        "랭귀지",  "language.html"),
-        ("brush",      "토큰",    "index-full.html"),
-        ("sparkle",    "아이콘",  "/icons/catalog.html"),
-        ("download",   "리소스",  "resources.html")]
+# 표지 목차 — 번호는 각 섹션 표지(.phead--top)의 번호와 같아야 한다.
+# 설명문은 그 표지의 h1 을 그대로 쓴다. 두 곳이 어긋나면 같은 사이트로 안 읽힌다.
+CATS = [("layers",   "01", "가이드",  "만들 때 펼치는 문서",  "guide/index.html"),
+        ("doc",      "02", "랭귀지",  "고요한 정밀",          "language.html"),
+        ("brush",    "03", "토큰",    "말이 아니라 값",       "index-full.html"),
+        ("sparkle",  "04", "아이콘",  "좌표로 그린 334종",    "/icons/catalog.html"),
+        ("download", "05", "리소스",  "쓰는 파일 그대로",     "resources.html")]
 
 LNAV = [("개요", "index.html", True), ("가이드", "guide/index.html", False),
         ("랭귀지", "language.html", False), ("토큰", "index-full.html", False),
@@ -187,8 +189,10 @@ def build():
     sprite = open(sp, encoding="utf-8").read() if os.path.exists(sp) else ""
 
     cats = "".join(
-        f'<a href="{h}"><span class="cats__i">{ic(n)}</span><span>{t}</span></a>'
-        for n, t, h in CATS)
+        f'<a href="{h}"><span class="ic">{ic(n)}</span><span class="n">{num}</span>'
+        f'<span class="t"><b>{t}</b><span>{d}</span></span>'
+        f'<span class="go" aria-hidden="true">›</span></a>'
+        for n, num, t, d, h in CATS)
 
     groups = {}
     for p in pages:
@@ -202,14 +206,22 @@ def build():
         f'<div class="tile__d">{" · ".join(q["title"] for q in ps)}</div></a>'
         for g, ps in groups.items())
 
+    ndoc = len(pages) - 1
     body = f"""
 <header class="hero">
+  <p class="hero__k">IMT Design System · v1</p>
   <h1>고요한 정밀을,<br>값으로 고정한다</h1>
-  <p>말로 전하던 기준을 토큰·규칙·도해로 바꿨다. 이 사이트의 모든 색과 크기는
-     <code>tokens.css</code> 를 실제로 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
+  <p>말로 전하던 기준을 토큰·규칙·도해로 바꿨다. 이 사이트가 그리는 모든 색과 크기는
+     <code>tokens.css</code> 를 실제로 읽은 값이다.</p>
+  <ul class="stat">
+    <li><b>334</b><span>직접 그린 아이콘</span></li>
+    <li><b>121</b><span>번호 붙은 규칙</span></li>
+    <li><b>{ndoc}</b><span>가이드 문서</span></li>
+    <li><b>1</b><span>값이 사는 파일</span></li>
+  </ul>
 </header>
 
-<nav class="cats">{cats}</nav>
+<nav class="toc" aria-label="섹션">{cats}</nav>
 
 <!-- 표지에서 **먼저** 말해야 하는 것 (2026-09-03).
      전에는 원칙이 랭귀지 문서 안쪽에, 우리가 다시 만든 것이 17절에 묻혀 있었다.
@@ -217,6 +229,7 @@ def build():
      자기 원칙과 자기 산출물이 있는데도. 순서를 바꾼다. -->
 <section class="band" id="what">
   <div class="wrap">
+    <p class="band__k">원칙</p>
     <h2>값으로 말한다</h2>
     <p class="lead">조용하되 흐리지 않은 화면. 눈에 띄려고 애쓰는 요소가 없고,
        그 대신 모든 자리가 정확한 값 위에 있다. 말로 하면 사람마다 달라지므로
@@ -238,6 +251,7 @@ def build():
 
 <section class="band band--tint" id="ours">
   <div class="wrap">
+    <p class="band__k">차이</p>
     <h2>규격은 받고, 그림은 그렸다</h2>
     <p class="lead">HIG 에서 받은 것은 <b>수치와 방법</b>이고, 아래는 그 위에서
        우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.
@@ -255,9 +269,10 @@ def build():
   </div>
 </section>
 
-<section class="band band--tint" id="guide">
+<section class="band" id="guide">
   <div class="wrap">
-    <h2>가이드</h2>
+    <p class="band__k"><span class="n">01</span>가이드</p>
+    <h2>만들 때 펼치는 문서</h2>
     <p class="lead">주제 하나가 문서 하나다. 굵은 한 줄이 지침이고 그 아래가 이유이며,
        모든 지침에 도해가 붙는다 — 잘된 예와 잘못된 예를 나란히 놓는 방식이다.</p>
     <div class="tiles">{tiles}</div>
@@ -266,10 +281,11 @@ def build():
   </div>
 </section>
 
-<section class="band" id="language">
+<section class="band band--tint" id="language">
   <div class="wrap">
-    <h2>랭귀지</h2>
-    <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>이다.
+    <p class="band__k"><span class="n">02</span>랭귀지</p>
+    <h2>고요한 정밀</h2>
+    <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>다.
        19개 절 121개 규칙이 한 문서에 있고, HIG 에서 그대로 받은 것과 우리가 정한 것을
        구분해 적어둔다.</p>
     <div class="links">
@@ -280,12 +296,15 @@ def build():
       <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
         <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
     </div>
+    <p class="lead" style="margin:var(--sp-6) 0 0">
+      <a class="more" href="language.html">랭귀지 19절 전체 보기 →</a></p>
   </div>
 </section>
 
-<section class="band band--tint" id="tokens">
+<section class="band" id="tokens">
   <div class="wrap">
-    <h2>토큰</h2>
+    <p class="band__k"><span class="n">03</span>토큰</p>
+    <h2>말이 아니라 값</h2>
     <p class="lead">값은 이 한 파일 안에만 있다. 코드에서는 <code>--sub</code>·<code>--warn</code>
        같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</p>
     <div class="tiles">
@@ -301,10 +320,11 @@ def build():
   </div>
 </section>
 
-<section class="band" id="icons">
+<section class="band band--tint" id="icons">
   <div class="wrap">
-    <h2>아이콘</h2>
-    <p class="lead">334개를 좌표로 직접 그렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
+    <p class="band__k"><span class="n">04</span>아이콘</p>
+    <h2>좌표로 그린 334종</h2>
+    <p class="lead">24 격자 위에 하나씩 올렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
        원전이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
     <div class="tiles">
       <a class="tile" href="/icons/catalog.html"><div class="tile__art">{art_icons()}</div>
@@ -312,14 +332,17 @@ def build():
       <a class="tile" href="guide/icons.html"><div class="tile__art">{art_lang()}</div>
         <div class="tile__t">아이콘 지침</div><div class="tile__d">굵기를 옆 글자에 맞춘다 · 뜻이 겹치면 하나만 쓴다</div></a>
     </div>
+    <p class="lead" style="margin:var(--sp-6) 0 0">
+      <a class="more" href="/icons/catalog.html">아이콘 334종 전체 보기 →</a></p>
   </div>
 </section>
 
-<section class="band band--tint" id="resources">
+<section class="band" id="resources">
   <div class="wrap">
-    <h2>리소스</h2>
-    <p class="lead">쓰던 그대로 내려받는다. 문서에 그려둔 값과 내려받은 파일의 값이 같다 —
-       빌드할 때 같은 파일을 담기 때문이다.</p>
+    <p class="band__k"><span class="n">05</span>리소스</p>
+    <h2>쓰는 파일 그대로</h2>
+    <p class="lead">문서에 그려둔 값과 내려받은 파일의 값이 같다 — 빌드할 때
+       사이트가 쓰는 파일을 그대로 담기 때문이다.</p>
     <div class="res">{res_cards()}</div>
     <p class="lead" style="margin:var(--sp-8) 0 0">
       <a class="more" href="resources.html">리소스 전체 보기 →</a></p>
