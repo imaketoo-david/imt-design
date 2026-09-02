@@ -12,11 +12,12 @@ SITE="https://design.imaketoo.com"
 echo "▸ 1. 대비 검증"
 python3 check_contrast.py | tail -2
 
-echo "▸ 2. CSS 버전 스탬프"
+echo "▸ 2. 가이드 빌드 · CSS 버전 스탬프"
 # sed 를 안 쓴다: macOS 의 -i 는 빈 인자를 요구하고 GNU 는 그걸 파일명으로 읽는다.
 # 두 곳 다 도는 한 줄이 없어서, 이미 쓰고 있는 python3 에 맡긴다.
 # (stock-sim/build.sh 가 같은 이유로 같은 선택을 했다)
 V="$(date +%Y%m%d-%H%M)"
+IMT_V="$V" ./build.sh
 V="$V" python3 - <<'PYX'
 import os, re
 v = os.environ["V"]
@@ -45,6 +46,8 @@ echo "▸ 5. 라이브 확인"
 B="$(date +%s)"
 printf "  language.html  -> %s\n" "$(curl -s -o /dev/null -w '%{http_code}' "${SITE}/language.html?b=${B}")"
 printf "  index.html     -> %s\n" "$(curl -s -o /dev/null -w '%{http_code}' "${SITE}/index.html?b=${B}")"
+printf "  가이드 쪽수     -> %s\n" "$(ls guide/*.html | wc -l | tr -d ' ')"
+printf "  guide/layout    -> %s\n" "$(curl -s -o /dev/null -w '%{http_code}' "${SITE}/guide/layout.html?b=${B}")"
 printf "  CSS 버전 일치   -> %s\n" "$(curl -s "${SITE}/language.html?b=${B}" | grep -c "components.css?v=${V}")"
 printf "  prefers-contrast-> %s\n" "$(curl -s "${SITE}/tokens.css?v=${V}" | grep -c 'prefers-contrast' || true)"
 echo "완료."

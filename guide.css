@@ -1,0 +1,105 @@
+/* ══════════════════════════════════════════════════════════════
+   IMT Design Guide — 도해 어휘
+   애플 문서를 지탱하는 건 글이 아니라 그림이다. 그리고 그 그림은
+   몇 가지 유형의 반복이다. 여기 그 유형을 규격으로 고정한다.
+
+   원칙: 도해는 '그림 파일' 이 아니라 '살아 있는 컴포넌트' 다.
+        토큰이 바뀌면 도해도 같이 바뀐다 — 문서와 코드가 어긋날 수 없다.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 페이지 뼈대 ─────────────────────────────────────────────── */
+.g-doc{max-width:760px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
+.g-kicker{font:var(--fw-sb) var(--fs-tag)/1 var(--font);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--sub2);margin:0 0 var(--sp-2)}
+.g-title{font:var(--fw-sb) var(--fs-3xl)/var(--lh-title) var(--font);
+  letter-spacing:var(--tr-3xl);color:var(--ink);margin:0 0 var(--sp-3)}
+.g-abstract{font:var(--fw-r) var(--fs-lg)/var(--lh-base) var(--font);
+  letter-spacing:var(--tr-base);color:var(--ink2);margin:0 0 var(--sp-8);max-width:62ch}
+.g-h2{font:var(--fw-sb) var(--fs-title2)/var(--lh-title) var(--font);
+  letter-spacing:var(--tr-2xl);color:var(--ink);margin:var(--sp-12) 0 var(--sp-4);
+  scroll-margin-top:84px}
+.g-h3{font:var(--fw-sb) var(--fs-xl)/var(--lh-head) var(--font);
+  letter-spacing:var(--tr-xl);color:var(--ink);margin:var(--sp-8) 0 var(--sp-3)}
+.g-p{font-size:var(--fs-base);line-height:var(--lh-base);color:var(--ink2);
+  margin:0 0 var(--sp-4);max-width:66ch}
+.g-p code,.g-li code,.g-cap code{font:var(--fw-r) var(--fs-sm) var(--font-num);
+  background:var(--fill4);padding:1px 5px;border-radius:var(--r-xs);color:var(--ink2)}
+
+/* ── 지침 한 줄 — 애플의 굵은 머리문장 ────────────────────────── */
+.g-rule{margin:0 0 var(--sp-5);max-width:66ch}
+.g-rule b{display:block;font:var(--fw-sb) var(--fs-lg)/var(--lh-head) var(--font);
+  letter-spacing:var(--tr-xl);color:var(--ink);margin-bottom:5px}
+.g-rule span{display:block;font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)}
+
+/* ── 도해 공통 ───────────────────────────────────────────────── */
+.g-fig{margin:var(--sp-6) 0}
+.g-fig__body{background:var(--inset);border-radius:var(--r);padding:var(--sp-6);
+  box-shadow:var(--edge)}
+.g-cap{margin-top:var(--sp-2);font-size:var(--fs-sm);line-height:1.5;color:var(--sub)}
+.g-cap b{color:var(--ink2);font-weight:var(--fw-m)}
+
+/* ── ① 비교 — 잘된 예 / 잘못된 예 ─────────────────────────────
+   애플 문서에서 가장 많이 쓰이는 형태. 두 장을 나란히 놓고
+   무엇이 다른지 눈으로 즉시 알게 한다. */
+.g-cmp{display:grid;gap:var(--sp-3);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g-cmp__i{background:var(--card);border-radius:var(--r-in);overflow:hidden;
+  box-shadow:var(--edge);display:flex;flex-direction:column}
+.g-cmp__stage{flex:1;min-height:130px;padding:var(--sp-5);display:flex;
+  align-items:center;justify-content:center}
+.g-cmp__tag{display:flex;align-items:center;gap:6px;padding:9px var(--sp-4);
+  font:var(--fw-m) var(--fs-sm)/1.4 var(--font);border-top:var(--hairline) solid var(--line-soft)}
+.g-cmp__i--do  .g-cmp__tag{color:var(--ok)}
+.g-cmp__i--no  .g-cmp__tag{color:var(--danger)}
+.g-cmp__tag svg{width:1.05em;height:1.05em;flex:none}
+
+/* ── ② 해부 — 부품에 번호를 달아 지목한다 ─────────────────────── */
+.g-ana{display:grid;gap:var(--sp-5);grid-template-columns:1fr;align-items:center}
+@media(min-width:640px){.g-ana{grid-template-columns:1.1fr .9fr}}
+.g-ana__stage{background:var(--card);border-radius:var(--r-in);box-shadow:var(--edge);
+  padding:var(--sp-6);display:flex;align-items:center;justify-content:center;position:relative}
+.g-ana__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--sp-3)}
+.g-ana__list li{display:flex;gap:var(--sp-3);font-size:var(--fs-md);
+  line-height:var(--lh-base);color:var(--sub)}
+.g-ana__list b{color:var(--ink);font-weight:var(--fw-m)}
+.g-pin{flex:none;width:20px;height:20px;border-radius:50%;background:var(--ink);
+  color:var(--bg);display:grid;place-items:center;
+  font:var(--fw-sb) var(--fs-tag)/1 var(--font-num)}
+.g-pin--abs{position:absolute}
+
+/* ── ③ 단계 — 축·스케일을 나열한다 ────────────────────────────── */
+.g-scale{display:flex;flex-wrap:wrap;gap:var(--sp-3)}
+.g-scale__i{flex:1 1 84px;background:var(--card);border-radius:var(--r-in);
+  box-shadow:var(--edge);padding:var(--sp-4) var(--sp-3);text-align:center}
+.g-scale__v{display:grid;place-items:center;min-height:48px;color:var(--ink)}
+.g-scale__n{margin-top:8px;font:var(--fw-m) var(--fs-sm)/1.3 var(--font);color:var(--ink2)}
+.g-scale__u{font:var(--fw-r) var(--fs-tag)/1.3 var(--font-num);color:var(--sub2)}
+
+/* ── ④ 사양표 ────────────────────────────────────────────────── */
+.g-spec{width:100%;border-collapse:collapse;font-size:var(--fs-md)}
+.g-spec th{text-align:left;font-weight:var(--fw-sb);color:var(--ink);
+  padding:10px var(--sp-3);border-bottom:1px solid var(--line);white-space:nowrap}
+.g-spec td{padding:10px var(--sp-3);border-bottom:var(--hairline) solid var(--line-soft);
+  color:var(--ink2);vertical-align:top}
+.g-spec tr:last-child td{border-bottom:0}
+.g-spec td:first-child{font-weight:var(--fw-m);color:var(--ink);white-space:nowrap}
+.g-spec__wrap{overflow-x:auto}
+.g-spec__wrap>.g-spec{min-width:440px}
+
+/* ── ⑤ 격자 — 치수를 눈금으로 보여준다 ────────────────────────── */
+.g-grid{background:
+   linear-gradient(var(--line-soft) 1px,transparent 1px) 0 0/100% 8px,
+   linear-gradient(90deg,var(--line-soft) 1px,transparent 1px) 0 0/8px 100%,
+   var(--card);
+  border-radius:var(--r-in);box-shadow:var(--edge);padding:var(--sp-6);
+  display:flex;align-items:center;justify-content:center;min-height:150px}
+.g-dim{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.g-dim::before{content:attr(data-dim);position:absolute;left:50%;transform:translateX(-50%);
+  bottom:-24px;font:var(--fw-r) var(--fs-tag) var(--font-num);color:var(--brand);white-space:nowrap}
+.g-dim::after{content:'';position:absolute;left:0;right:0;bottom:-12px;height:1px;background:var(--brand)}
+
+/* ── ⑥ 상태 순서 ─────────────────────────────────────────────── */
+.g-seq{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center}
+.g-seq__i{background:var(--card);border-radius:var(--r-in);box-shadow:var(--edge);
+  padding:var(--sp-4);text-align:center;min-width:104px}
+.g-seq__n{margin-top:8px;font:var(--fw-r) var(--fs-tag)/1.3 var(--font);color:var(--sub)}
+.g-seq__arrow{color:var(--sub2);flex:none}
