@@ -47,7 +47,7 @@ index.html       레퍼런스 사이트 (스와치를 런타임에 읽어 그림
 <link rel="stylesheet" href="https://design.imaketoo.com/components.css">
 <link rel="stylesheet" href="https://design.imaketoo.com/patterns.css">
 ```
-아이콘은 [IMT Icons](https://icons.imaketoo.com) 324종. 크로스 오리진 `<use>` 는 막히므로 스프라이트를 fetch 로 주입하거나 같은 도메인에 둔다.
+아이콘은 [IMT Icons](/icons/catalog.html) 334종. 2026-09-03 에 `design.imaketoo.com/icons/` 로 합쳤다 — 같은 도메인이라 `<use>` 가 그냥 되고, 옛 `icons.imaketoo.com` 은 301 로 넘어온다.
 
 **사이트가 덮어쓸 수 있는 건 `--brand` 세 개뿐이다.**
 ```css
