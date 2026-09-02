@@ -14,3 +14,4 @@ else
 fi
 
 IMT_V="${IMT_V:-dev}" python3 src/build_guide.py
+IMT_V="${IMT_V:-dev}" python3 src/build_site.py

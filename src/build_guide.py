@@ -66,11 +66,12 @@ SHELL = """<!doctype html>
 <link rel="stylesheet" href="../tokens.css?v={v}">
 <link rel="stylesheet" href="../components.css?v={v}">
 <link rel="stylesheet" href="../patterns.css?v={v}">
+<link rel="stylesheet" href="../site.css?v={v}">
 <link rel="stylesheet" href="../guide.css?v={v}">
 <style>
   .gs{{display:grid;grid-template-columns:236px 1fr;gap:var(--sp-8);max-width:1160px;
     margin:0 auto;padding:0 var(--sp-5)}}
-  .gs__nav{{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;
+  .gs__nav{{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;
     gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto;
     padding-bottom:var(--sp-8)}}
   .gs__nav a{{color:var(--sub);text-decoration:none;padding:5px var(--sp-3);
@@ -97,14 +98,21 @@ SHELL = """<!doctype html>
   .g-next b{{color:var(--ink);font-weight:var(--fw-sb);font-size:var(--fs-base)}}
   @media(max-width:900px){{.gs{{grid-template-columns:1fr}}.gs__nav{{display:none}}}}
 </style></head><body>
-<nav class="imt-nav">
-  <a class="imt-nav__brand" href="../index.html">IMT Design</a>
-  <div class="imt-nav__links">
-    <a href="../index.html">시스템</a>
+<nav class="gnav">
+  <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
+  <span class="gnav__sp"></span>
+  <a href="https://icons.imaketoo.com">아이콘 334</a>
+  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+  <button class="gnav__t" id="theme">다크</button>
+</nav>
+<nav class="lnav">
+  <a class="lnav__t" href="index.html">가이드</a>
+  <div class="lnav__i">
+    <a href="../index.html">개요</a>
+    <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
-    <a href="index.html">가이드</a>
+    <a href="../index-full.html">토큰</a>
     <a href="https://icons.imaketoo.com">아이콘</a>
-    <button class="imt-btn imt-btn--sm" id="theme">다크</button>
   </div>
 </nav>
 {sprite}

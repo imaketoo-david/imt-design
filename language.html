@@ -4,10 +4,11 @@
 <title>IMT Design Language</title>
 <link rel="stylesheet" href="tokens.css?v=20260902-2058">
 <link rel="stylesheet" href="components.css?v=20260902-2058">
+<link rel="stylesheet" href="site.css?v=dev">
 <link rel="stylesheet" href="patterns.css?v=20260902-2058">
 <style>
   .ds{display:grid;grid-template-columns:230px 1fr;gap:var(--sp-8);max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
-  .ds__nav{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto}
+  .ds__nav{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto}
   .ds__nav a{color:var(--sub);text-decoration:none;padding:5px var(--sp-3);border-radius:var(--r-in)}
   .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
   .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
@@ -31,14 +32,21 @@
 </style>
 </head><body>
 
-<nav class="imt-nav">
-  <a class="imt-nav__brand" href="index.html">IMT Design</a>
-  <div class="imt-nav__links">
-    <a href="index.html">시스템</a>
+<nav class="gnav">
+  <a class="gnav__b" href="index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
+  <span class="gnav__sp"></span>
+  <a href="https://icons.imaketoo.com">아이콘 334</a>
+  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+  <button class="gnav__t" id="theme">다크</button>
+</nav>
+<nav class="lnav">
+  <a class="lnav__t" href="index.html">디자인 시스템</a>
+  <div class="lnav__i">
+    <a href="index.html">개요</a>
     <a href="guide/index.html">가이드</a>
-    <a href="https://icons.imaketoo.com">아이콘 324</a>
-    <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
-    <button class="imt-btn imt-btn--sm" id="theme">다크</button>
+    <a href="language.html" class="on">랭귀지</a>
+    <a href="index-full.html">토큰</a>
+    <a href="https://icons.imaketoo.com">아이콘</a>
   </div>
 </nav>
 
@@ -87,7 +95,7 @@
       <div class="r"><span class="r__n">L-0.1</span><div><div class="r__t">값이 아니라 의미가 진실이다</div><div class="r__s">애플은 문서에 색 값을 적어두고도 "앱에 하드코딩하지 말라, 값은 릴리스마다 달라진다"고 못 박는다. 웹에는 시스템 색 API가 없어 우리는 값을 고정할 수밖에 없다. 그래서 값은 <code>tokens.css</code> 안에만 두고, 코드에서는 <code>--sub</code>·<code>--warn</code> 같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.2</span><div><div class="r__t">의미를 바꿔 쓰지 않는다</div><div class="r__s">구분선 색을 글자색으로, 보조 라벨색을 배경색으로 돌려쓰는 순간 시스템은 무너진다. 필요한 의미가 없으면 새 토큰을 만든다 — 있는 걸 비틀지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.3</span><div><div class="r__t">규칙은 기계가 검사할 수 있어야 한다</div><div class="r__s">대비는 <code>check_contrast.py</code>, 미정의 토큰 참조는 빌드 스크립트가 잡는다. 사람 눈으로만 지키는 규칙은 6개월 뒤에 반드시 깨진다.</div></div></div>
-      <div class="r"><span class="r__n">L-0.6</span><div><div class="r__t">문서는 둘이고, 역할이 다르다</div><div class="r__s">이 문서(<b>디자인 랭귀지</b>)는 <b>왜 그렇게 하는가</b>와 <b>애플과 어디서 갈라서는가</b>를 정한다 — 판단이 필요할 때 여기를 본다. <a href="index.html">시스템 참조서</a>는 <b>무엇을 쓰는가</b>다 — 토큰 값, 컴포넌트, 복사해 갈 코드. 같은 내용을 두 곳에 적지 않는다. 대신 규칙 번호(<code>L-3.1</code>)로 서로를 가리킨다.</div></div></div>
+      <div class="r"><span class="r__n">L-0.6</span><div><div class="r__t">문서는 둘이고, 역할이 다르다</div><div class="r__s">이 문서(<b>디자인 랭귀지</b>)는 <b>왜 그렇게 하는가</b>와 <b>애플과 어디서 갈라서는가</b>를 정한다 — 판단이 필요할 때 여기를 본다. <a href="index-full.html">시스템 참조서</a>는 <b>무엇을 쓰는가</b>다 — 토큰 값, 컴포넌트, 복사해 갈 코드. 같은 내용을 두 곳에 적지 않는다. 대신 규칙 번호(<code>L-3.1</code>)로 서로를 가리킨다.</div></div></div>
       <div class="r"><span class="r__n">L-0.5</span><div><div class="r__t">CSS 링크에 버전을 붙인다</div><div class="r__s">CDN은 CSS를 몇 시간씩 캐시한다. 파일을 올려도 사용자에게는 옛날 것이 간다. <code>tokens.css?v=20260902b</code> 처럼 배포마다 값을 바꾼다 — URL이 달라지면 캐시가 비켜간다. 잊기 쉬우니 서버가 짧은 <code>Cache-Control</code>을 함께 내려주는 편이 낫다.</div></div></div>
       <div class="r"><span class="r__n">L-0.4</span><div><div class="r__t">기존 이름은 지우지 않는다</div><div class="r__s">토큰은 추가하고 값만 조정한다. 이름을 지우면 sim·plan·marketing·speak·chess 다섯 사이트를 동시에 고쳐야 한다. 시스템의 수명은 하위 호환이 결정한다.</div></div></div>
     </div>
@@ -114,7 +122,7 @@
   <!-- 2 -->
   <section class="imt-section" id="principles">
     <h2 class="imt-section__title">2. 일곱 원칙</h2>
-    <p class="lede">애플의 여덟 원칙(Purpose·Agency·Responsibility·Familiarity·Flexibility·Simplicity·Craft·Delight)을 우리 상황 — 혼자 만들고, 주로 데이터를 보여주고, 사용자가 대개 나 자신이거나 소수 — 에 맞춰 일곱으로 다시 묶었다. 여기 있는 것은 <b>왜</b>다. 화면을 그릴 때 손이 기억해야 할 <b>무엇</b>은 <a href="index.html#principles">시스템 참조서의 «만들 때 지키는 일곱»</a>에 있다.</p>
+    <p class="lede">애플의 여덟 원칙(Purpose·Agency·Responsibility·Familiarity·Flexibility·Simplicity·Craft·Delight)을 우리 상황 — 혼자 만들고, 주로 데이터를 보여주고, 사용자가 대개 나 자신이거나 소수 — 에 맞춰 일곱으로 다시 묶었다. 여기 있는 것은 <b>왜</b>다. 화면을 그릴 때 손이 기억해야 할 <b>무엇</b>은 <a href="index-full.html#principles">시스템 참조서의 «만들 때 지키는 일곱»</a>에 있다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-2.1</span><div><div class="r__t">화면의 목적을 한 문장으로 말할 수 없으면 만들지 않는다</div><div class="r__s">"이 화면은 <b>___</b>를 판단하게 한다." 빈칸이 안 채워지면 그 화면은 아직 설계되지 않은 것이다.</div></div></div>
       <div class="r"><span class="r__n">L-2.2</span><div><div class="r__t">비켜선다</div><div class="r__s">UI는 콘텐츠 위에 얹히는 것이지 콘텐츠와 경쟁하는 것이 아니다. 브랜드·로고·장식이 데이터보다 눈에 먼저 들어오면 잘못 만든 것이다.</div></div></div>

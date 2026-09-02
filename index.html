@@ -2,531 +2,95 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>IMT Design System</title>
-<link rel="stylesheet" href="tokens.css?v=20260902-2058">
-<link rel="stylesheet" href="components.css?v=20260902-2058">
-<link rel="stylesheet" href="patterns.css?v=20260902-2058">
-<style>
-  .ds{display:grid;grid-template-columns:210px 1fr;gap:var(--sp-8);max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
-  .ds__nav{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md)}
-  .ds__nav a{color:var(--sub);text-decoration:none;padding:6px var(--sp-3);border-radius:var(--r-in)}
-  .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
-  .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
-  @media(max-width:860px){.ds{grid-template-columns:1fr}.ds__nav{display:none}}
-  .ds > main{min-width:0}
-  pre{max-width:100%}
-
-  .sw{display:grid;gap:var(--sp-2);grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
-  .sw button{display:flex;flex-direction:column;gap:0;border:0;padding:0;background:transparent;cursor:pointer;text-align:left;font:inherit}
-  .sw i{display:block;height:54px;border-radius:var(--r-in);box-shadow:var(--edge)}
-  .sw b{display:block;margin-top:6px;font:var(--fw-m) var(--fs-sm)/1.4 var(--font);color:var(--ink)}
-  .sw code{font:var(--fw-r) var(--fs-xs)/1.4 var(--font-num);color:var(--sub)}
-
-  .rule{display:flex;gap:var(--sp-3);padding:var(--sp-4) 0;border-bottom:var(--hairline) solid var(--line-soft)}
-  .rule:last-child{border-bottom:0}
-  .rule__n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:var(--fw-sb) var(--fs-sm)/1 var(--font)}
-  .rule__t{font:var(--fw-sb) var(--fs-base)/1.45 var(--font);color:var(--ink)}
-  .rule__s{font-size:var(--fs-md);color:var(--sub);margin-top:3px}
-
-  .demo{background:var(--inset);border-radius:var(--r);padding:var(--sp-5);display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center}
-  .demo--col{flex-direction:column;align-items:stretch}
-  pre{margin:var(--sp-2) 0 0;padding:var(--sp-3) var(--sp-4);background:var(--inset);color:var(--ink2);box-shadow:var(--edge);border-radius:var(--r-in);overflow-x:auto;font:var(--fw-r) var(--fs-sm)/1.65 var(--font-num);letter-spacing:0}
-  .copy{align-self:flex-start;margin-top:var(--sp-2)}
-
-  .matstage{display:flex;gap:var(--sp-3);flex-wrap:wrap;padding:var(--sp-5);border-radius:var(--r);
-    background:linear-gradient(120deg,#0071e3 0%,#30b0c7 38%,#ff9500 70%,#ff2d55 100%)}
-  .matstage--rich{background:
-    radial-gradient(circle at 18% 30%,#ffd60a 0 12%,transparent 12.5%),
-    radial-gradient(circle at 72% 68%,#ff2d55 0 16%,transparent 16.5%),
-    linear-gradient(140deg,#1d1d1f,#0071e3 55%,#5856d6)}
-  .matchip{flex:1 1 130px;min-height:76px;border-radius:var(--r-in);padding:var(--sp-3);
-    display:flex;flex-direction:column;justify-content:center;gap:2px}
-  .matchip b{font-size:var(--fs-base);font-weight:var(--fw-sb);letter-spacing:var(--tr-base)}
-  .matchip span{font-size:var(--fs-xs);opacity:.72}
-  .tscale{display:flex;flex-direction:column;gap:var(--sp-2)}
-  .tscale div{display:flex;align-items:baseline;gap:var(--sp-4);border-bottom:var(--hairline) solid var(--line-soft);padding-bottom:var(--sp-2)}
-  .tscale code{flex:none;width:96px;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub)}
-  .spx{display:flex;flex-direction:column;gap:6px}
-  .spx div{display:flex;align-items:center;gap:var(--sp-3)}
-  .spx i{display:block;height:14px;border-radius:3px;background:var(--brand);opacity:.85}
-  .spx code{font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub);width:86px;flex:none}
-  .rx{display:flex;gap:var(--sp-4);flex-wrap:wrap}
-  .rx div{text-align:center}
-  .rx i{display:block;width:84px;height:84px;background:var(--brand-soft);box-shadow:inset 0 0 0 2px var(--brand)}
-  .rx code{font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub);display:block;margin-top:6px}
-  .shx{display:flex;gap:var(--sp-5);flex-wrap:wrap}
-  .shx i{display:grid;place-items:center;width:150px;height:88px;background:var(--card);border-radius:var(--r);font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub)}
-</style></head><body>
-
-<nav class="imt-nav">
-  <a class="imt-nav__brand" href="#top"><svg class="imt-i imt-i--md" style="color:var(--brand)"><use href="#i-layers"/></svg>IMT Design</a>
-  <div class="imt-nav__links">
-    <a href="language.html">디자인 랭귀지</a>
-    <a href="guide/index.html">가이드</a>
-    <a href="https://icons.imaketoo.com">아이콘 324</a>
-    <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
-    <button class="imt-btn imt-btn--sm" id="theme">다크</button>
-  </div>
+<link rel="stylesheet" href="tokens.css?v=dev">
+<link rel="stylesheet" href="components.css?v=dev">
+<link rel="stylesheet" href="patterns.css?v=dev">
+<link rel="stylesheet" href="site.css?v=dev">
+<link rel="stylesheet" href="guide.css?v=dev">
+</head><body>
+<nav class="gnav">
+  <a class="gnav__b" href="index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
+  <span class="gnav__sp"></span>
+  <a href="https://icons.imaketoo.com">아이콘 334</a>
+  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+  <button class="gnav__t" id="theme">다크</button>
 </nav>
+<nav class="lnav">
+  <a class="lnav__t" href="index.html">디자인 시스템</a>
+  <div class="lnav__i"><a href="index.html" class=on>개요</a><a href="guide/index.html">가이드</a><a href="language.html">랭귀지</a><a href="#tokens">토큰</a><a href="https://icons.imaketoo.com">아이콘</a></div>
+</nav>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-check-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.8 12a8.2 8.2 0 1 0 16.4 0a8.2 8.2 0 1 0 -16.4 0Z"/><path d="M8.2 12.2l2.7 2.7 5-5.4"/></g></symbol><symbol id="i-x-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.8 12a8.2 8.2 0 1 0 16.4 0a8.2 8.2 0 1 0 -16.4 0Z"/><path d="M9.4 9.4l5.2 5.2M14.6 9.4l-5.2 5.2"/></g></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 12h14.8"/><path d="M14 6.6l5.4 5.4-5.4 5.4"/></g></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 19.4V4.6"/><path d="M6.6 10L12 4.6l5.4 5.4"/></g></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.6v14.8"/><path d="M6.6 14l5.4 5.4 5.4-5.4"/></g></symbol><symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.8 12.6l4.7 4.7L19.2 7.2"/></g></symbol><symbol id="i-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></g></symbol><symbol id="i-warning" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M10.35 4.45L3.2 16.85a1.9 1.9 0 0 0 1.65 2.85h14.3a1.9 1.9 0 0 0 1.65-2.85L13.65 4.45a1.9 1.9 0 0 0-3.3 0z"/><path d="M12 9.6v4.1"/><path d="M12 16.7h.01"/></g></symbol><symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.2 12a7.8 7.8 0 1 0 15.6 0a7.8 7.8 0 1 0 -15.6 0Z"/><path d="M12 11.4v5"/><path d="M12 8h.01"/></g></symbol><symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M17.6 10.4a5.6 5.6 0 0 0-11.2 0c0 4.6-2 6-2 6h15.2s-2-1.4-2-6z"/><path d="M13.7 19.4a2 2 0 0 1-3.4 0"/></g></symbol><symbol id="i-star" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.4l2.4 4.87 5.37.78-3.885 3.79.917 5.34L12 16.66l-4.802 2.52.917-5.34L4.23 10.05l5.37-.78z"/></g></symbol><symbol id="i-edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 19.6h3.9L19 8.9a2.2 2.2 0 0 0 0-3.1l-.8-.8a2.2 2.2 0 0 0-3.1 0L4.4 15.7z"/><path d="M13.8 6.6l3.6 3.6"/></g></symbol><symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.2 10.9a6.7 6.7 0 1 0 13.4 0a6.7 6.7 0 1 0 -13.4 0Z"/><path d="M15.65 15.65L20.4 20.4"/></g></symbol><symbol id="i-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.6v14.8M4.6 12h14.8"/></g></symbol><symbol id="i-trash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 6.8h14.8"/><path d="M9.4 6.8V5.4a1.8 1.8 0 0 1 1.8-1.8h1.6a1.8 1.8 0 0 1 1.8 1.8v1.4"/><path d="M6.7 6.8l.83 11.4a2 2 0 0 0 2 1.85h4.94a2 2 0 0 0 2-1.85l.83-11.4"/><path d="M10.4 10.6v5.8M13.6 10.6v5.8"/></g></symbol><symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><path d="M4.65 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/><path d="M10.75 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/><path d="M16.85 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/></g></symbol><symbol id="i-filter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.4 6.8h17.2M6.4 12h11.2M9.6 17.2h4.8"/></g></symbol><symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M8.2 10.2H15.8C18.8906 10.2 19.2 10.5094 19.2 13.6V16.4C19.2 19.4906 18.8906 19.8 15.8 19.8H8.2C5.1094 19.8 4.8 19.4906 4.8 16.4V13.6C4.8 10.5094 5.1094 10.2 8.2 10.2Z"/><path d="M8.2 10.2V7.9a3.8 3.8 0 0 1 7.6 0v2.3"/><path d="M12 14.3v2.2"/></g></symbol><symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 3.8l8 4.2-8 4.2-8-4.2z"/><path d="M4.4 12.6L12 16.6l7.6-4"/><path d="M4.4 16.8L12 20.8l7.6-4"/></g></symbol><symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M13.8 3.6H7.8A2.6 2.6 0 0 0 5.2 6.2v11.6a2.6 2.6 0 0 0 2.6 2.6h8.4a2.6 2.6 0 0 0 2.6-2.6V8.8z"/><path d="M13.8 3.6v5.2h5"/><path d="M8.8 13.4h6.4M8.8 16.6h4"/></g></symbol><symbol id="i-trend-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 16.8l5.8-5.8 3.2 3.2 6.2-6.2"/><path d="M15.6 8h4v4"/></g></symbol><symbol id="i-trend-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 7.2l5.8 5.8 3.2-3.2 6.2 6.2"/><path d="M15.6 16h4v-4"/></g></symbol><symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M8.3 8.4a3.7 3.7 0 1 0 7.4 0a3.7 3.7 0 1 0 -7.4 0Z"/><path d="M5.2 20.2a6.8 6.8 0 0 1 13.6 0"/></g></symbol><symbol id="i-sparkle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4l1.9 5.2 5.2 1.9-5.2 1.9L12 18.2l-1.9-5.2-5.2-1.9 5.2-1.9z"/></g></symbol><symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.4 9a2.5 2.5 0 0 1 2.5-2.5h1.7l1.25-2.2h6.3l1.25 2.2h1.7A2.5 2.5 0 0 1 20.6 9v7.9a2.5 2.5 0 0 1-2.5 2.5H5.9a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M8.6 12.7a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0Z"/></g></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 10.4V9.2a3.6 3.6 0 0 1 3.6-3.6h9.4"/><path d="M14.8 2.8l2.8 2.8-2.8 2.8"/><path d="M19.4 13.6v1.2a3.6 3.6 0 0 1-3.6 3.6H6.4"/><path d="M9.2 21.2l-2.8-2.8 2.8-2.8"/></g></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.6 8.4v9.2a2.4 2.4 0 0 0 2.4 2.4h12a2.4 2.4 0 0 0 2.4-2.4v-6a2.4 2.4 0 0 0-2.4-2.4H4.8"/><path d="M3.6 8.4a2.4 2.4 0 0 1 2.4-2.4h9.2"/><path d="M16.8 14.6h.01"/></g></symbol><symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M6.6 3.6v5a4.4 4.4 0 0 0 8.8 0v-5"/><path d="M5.2 3.6h2.8M14 3.6h2.8"/><path d="M11 13v1.6a4.2 4.2 0 0 0 8.4 0v-1"/><path d="M17.5 11.4a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z"/></g></symbol><symbol id="i-chart-line" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.2 4.4v15.4h15.4"/><path d="M7.6 15.4l3.4-3.9 2.9 2.4 4.2-5.7"/></g></symbol><symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 3.8l8.2 4.2v8L12 20.2 3.8 16V8z"/><path d="M3.8 8L12 12.2 20.2 8"/><path d="M12 12.2v8"/></g></symbol><symbol id="i-brush" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M9.8 4.2h4.4v7.4H9.8z"/><path d="M8.2 11.6h7.6v3.8a3.8 3.8 0 0 1-7.6 0z"/></g></symbol><symbol id="i-chart-bar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M6.6 19.4v-5.4M12 19.4v-11M17.4 19.4v-7.6"/></g></symbol><symbol id="i-arrow-left" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M19.4 12H4.6"/><path d="M10 6.6L4.6 12l5.4 5.4"/></g></symbol></svg>
 
-<div class="imt-page imt-page--full" id="top" style="padding-bottom:var(--sp-6)">
-  <header class="imt-page__head">
-    <h1 class="imt-page__title">IMT Design System</h1>
-    <p class="imt-page__lede">"애플 스타일" 을 말이 아니라 값으로 고정한다. 이 페이지의 모든 색·크기는 <code>tokens.css</code> 를 런타임에 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
-  </header>
-</div>
+<header class="hero">
+  <h1>애플 스타일을,<br>값으로 고정한다</h1>
+  <p>말로 전하던 기준을 토큰·규칙·도해로 바꿨다. 이 사이트의 모든 색과 크기는
+     <code>tokens.css</code> 를 실제로 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
+</header>
 
-<div class="ds">
-  <aside class="ds__nav">
-    <b>기초</b>
-    <a href="#principles">만들 때 지키는 일곱</a><a href="#color">색</a><a href="#type">타이포</a>
-    <a href="#space">간격</a><a href="#radius">라운드</a><a href="#material">머티리얼</a><a href="#shadow">그림자</a><a href="#motion">모션</a><a href="#a11y">접근성 규격</a>
-    <b>컴포넌트</b>
-    <a href="#button">버튼</a><a href="#card">카드</a><a href="#seg">세그먼트·칩</a>
-    <a href="#badge">배지</a><a href="#list">목록·표</a><a href="#form">입력</a><a href="#overlay">모달·토스트</a>
-    <b>패턴</b>
-    <a href="#dash">대시보드</a><a href="#chart">차트</a><a href="#cardnews">카드뉴스</a>
-    <b>사용</b>
-    <a href="#use">가져다 쓰기</a>
-    <a href="language.html">디자인 랭귀지 ↗</a>
-    <a href="guide/index.html">가이드 ↗</a>
-  </aside>
+<nav class="cats"><a href="guide/layout.html"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg></span><span>기초</span></a><a href="guide/data.html"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-chart-line"/></svg></span><span>패턴</span></a><a href="guide/buttons.html"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-box"/></svg></span><span>컴포넌트</span></a><a href="https://icons.imaketoo.com"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-sparkle"/></svg></span><span>아이콘</span></a><a href="language.html"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-doc"/></svg></span><span>랭귀지</span></a><a href="#tokens"><span class="cats__i"><svg class="imt-i" aria-hidden="true"><use href="#i-brush"/></svg></span><span>토큰</span></a></nav>
 
-  <main>
-  <!-- ─── 만들 때 지키는 일곱 ─── -->
-  <section class="imt-section" id="principles">
-    <h2 class="imt-section__title">만들 때 지키는 일곱</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4);max-width:66ch;line-height:var(--lh-base)">화면을 그릴 때 손이 먼저 기억해야 하는 것들이다. <b>왜 이렇게 하는가</b>와 <b>애플과 어디서 갈라서는가</b>는 <a href="language.html">디자인 랭귀지</a>에 있다 — 규칙 번호(<code>L-3.1</code> 같은)로 서로를 가리킨다.</p>
-    <div class="imt-card">
-<div class="rule"><span class="rule__n">1</span><div><div class="rule__t">화면은 세 층이다 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-3.1~3.6</span></div><div class="rule__s">콘텐츠(표·차트·본문) 위에 컨트롤(상단바·탭바·사이드바)이 <b>떠 있고</b>, 그 위에 알림(모달·토스트)이 있다. 컨트롤 층에만 <code>--glass</code>를 쓴다. 콘텐츠 층에 유리를 얹으면 위계가 무너진다 — 2026년 애플의 가장 큰 변화이자, 요즘 "애플처럼 보이는가"를 가장 크게 좌우하는 한 가지다.</div></div></div>
-      <div class="rule"><span class="rule__n">2</span><div><div class="rule__t">면은 그림자가 아니라 배경 대비로 나눈다 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-4.1</span></div><div class="rule__s">배경은 회색조(<code>--bg</code>), 카드는 순백(<code>--card</code>). 둘 다 흰색이면 그림자를 아무리 얹어도 경계가 흐릿하다. 그림자는 <b>떠 있음</b>을 말할 때만 쓴다.</div></div></div>
-      <div class="rule"><span class="rule__n">3</span><div><div class="rule__t">라운드는 하나만 쓴다 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-6.1~6.2</span></div><div class="rule__s">카드·패널·버튼·드롭다운·탭 전부 <code>--r</code>. 예외는 세 개뿐 — 세그먼트 안쪽, 글자만 한 배지, 시트. 바깥 라운드 − 패딩 = 안쪽 라운드로 동심원을 맞춘다.</div></div></div>
-      <div class="rule"><span class="rule__n">4</span><div><div class="rule__t">글자 크기는 정해진 단계만 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-7.1~7.2</span></div><div class="rule__s">11.5px 같은 중간값을 한 번 허용하면 금방 20가지로 불어나고, 눈은 그 차이를 위계로 읽지 못한다. 굵기도 셋뿐이다 — 400·500·600. 가는 굵기는 토큰에 아예 없다.</div></div></div>
-      <div class="rule"><span class="rule__n">5</span><div><div class="rule__t">간격은 4의 배수 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-5.1~5.2</span></div><div class="rule__s">6px·10px·14px 금지. 리듬이 무너지는 가장 흔한 원인이다. 컨트롤 주위 여백도 정해져 있다 — 테두리 있으면 12px, 없으면 24px.</div></div></div>
-      <div class="rule"><span class="rule__n">6</span><div><div class="rule__t">큰 글자일수록 자간을 좁힌다 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-7.3~7.4</span></div><div class="rule__s">34px 제목에 <code>-0.024em</code>, 13px 본문에 <code>-0.008em</code>. 시스템 폰트는 크기마다 자간을 자동 조정하는데, 웹에서는 우리가 대신해줘야 한다. 한글 본문 행간만 1.55로 넓힌다.</div></div></div>
-      <div class="rule"><span class="rule__n">7</span><div><div class="rule__t">색만으로 뜻을 전하지 않는다 <span style="font-size:var(--fs-sm);color:var(--sub);font-weight:var(--fw-r)">L-8.1 · 16.1</span></div><div class="rule__s">상태·등락은 반드시 아이콘이나 라벨과 함께. 차트는 시리즈 2개 이상이면 범례를 항상 넣는다. 대비는 눈이 아니라 <code>check_contrast.py</code>가 판정한다 — 17pt 이하 4.5:1, 비텍스트 3:1.</div></div></div>
+<section class="band band--tint">
+  <div class="wrap">
+    <h2>가이드</h2>
+    <p class="lead">주제 하나가 문서 하나다. 굵은 한 줄이 지침이고 그 아래가 이유이며,
+       모든 지침에 도해가 붙는다 — 잘된 예와 잘못된 예를 나란히 놓는 방식이다.</p>
+    <div class="tiles"><a class="tile" href="guide/layout.html"><div class="tile__art"><div style="position:relative;width:136px;height:88px"><div style="position:absolute;inset:18px 0 0;border-radius:12px;background:linear-gradient(140deg,var(--c1),var(--c6));opacity:.9"></div><div style="position:absolute;left:12px;right:12px;top:8px;height:26px;border-radius:9px;background:rgba(255,255,255,.62);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7)"></div><div style="position:absolute;left:30px;right:30px;bottom:8px;height:24px;border-radius:9px;background:var(--card);box-shadow:var(--sh-lift)"></div></div></div><div class="tile__t">기초 · 8쪽</div><div class="tile__d">레이아웃 · 색 · 타이포그래피 · 머티리얼 · 아이콘 · 접근성 · 다크 모드 · 모션</div></a><a class="tile" href="guide/data.html"><div class="tile__art"><div style="display:flex;gap:8px;align-items:flex-end"><div style="width:16px;height:28px;border-radius:4px;background:var(--c1);opacity:0.35"></div><div style="width:16px;height:44px;border-radius:4px;background:var(--c1);opacity:0.5"></div><div style="width:16px;height:36px;border-radius:4px;background:var(--c1);opacity:0.65"></div><div style="width:16px;height:58px;border-radius:4px;background:var(--c1);opacity:0.8"></div><div style="width:16px;height:70px;border-radius:4px;background:var(--c1);opacity:1"></div><div style="width:16px;height:52px;border-radius:4px;background:var(--c1);opacity:0.8"></div></div></div><div class="tile__t">패턴 · 6쪽</div><div class="tile__d">데이터 표현 · 피드백 · 입력 받기 · 겹침 · 검색 · 문안</div></a><a class="tile" href="guide/buttons.html"><div class="tile__art"><div style="display:flex;flex-direction:column;gap:9px;align-items:center"><button class="imt-btn imt-btn--primary">기본 동작</button><button class="imt-btn imt-btn--soft">보조</button><span class="imt-badge" style="color:var(--ok);background:var(--green-soft)">정상</span></div></div><div class="tile__t">컴포넌트 · 7쪽</div><div class="tile__d">버튼 · 카드 · 목록과 표 · 세그먼트 · 칩 · 배지 · 내비게이션 · 입력 필드 · 모달 · 시트 · 토스트</div></a></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>전체 문서</h2>
+    <div class="links"><a href="guide/layout.html"><b>레이아웃</b><span>화면을 여는 순간 어디를 봐야 하는지 알게 만드는 일이다. 위치·간격·정렬은 취향이 아니라 위계를 만드는 도구다.</span></a><a href="guide/color.html"><b>색</b><span>색은 장식이 아니라 의미다. 그래서 이름으로 부르고, 값은 한 파일 안에만 둔다. 값이 바뀌어도 뜻은 그대로여야 한…</span></a><a href="guide/typography.html"><b>타이포그래피</b><span>글자는 화면의 대부분을 차지한다. 크기·굵기·자간·행간 네 가지만 정해두면 나머지는 저절로 정해진다.</span></a><a href="guide/materials.html"><b>머티리얼</b><span>재질은 앞과 뒤를 나누는 도구다. 무엇을 얼마나 비칠지 정하는 일이지, 예쁜 흐림 효과를 얹는 일이 아니다.</span></a><a href="guide/icons.html"><b>아이콘</b><span>334개를 좌표로 직접 그렸다. 애플 심볼의 그림은 쓸 수 없지만 규격은 전부 승계했고, 몇 가지는 더 싼 방법으로…</span></a><a href="guide/accessibility.html"><b>접근성</b><span>배려가 아니라 규격이다. 수치가 정해져 있으니 눈으로 다투지 않고 기계가 판정한다.</span></a><a href="guide/dark-mode.html"><b>다크 모드</b><span>명도를 뒤집는 일이 아니다. 어두운 화면에서 눈이 색을 다르게 받아들이므로, 값을 따로 고른다.</span></a><a href="guide/motion.html"><b>모션</b><span>움직임은 어디서 와서 어디로 갔는지 알려주는 도구다. 예쁘라고 넣는 순간 지연이 된다.</span></a><a href="guide/data.html"><b>데이터 표현</b><span>차트는 예뻐지려고 그리는 것이 아니라 판단하게 하려고 그린다. 무엇을 말할지 정하지 못했으면 아직 표로 두는 편이…</span></a><a href="guide/feedback.html"><b>피드백</b><span>지금 무슨 일이 일어나고 있는지, 끝났는지, 잘못됐다면 무엇을 하면 되는지. 이 셋을 화면이 먼저 말하게 한다.</span></a><a href="guide/input.html"><b>입력 받기</b><span>가장 좋은 입력은 입력하지 않는 것이다. 타이핑은 마지막 수단이고, 그 전에 시스템이 알아내거나 고르게 할 방법을…</span></a><a href="guide/overlay.html"><b>겹침</b><span>무엇을 띄울지 매번 즉흥으로 고르면 앱이 산만해진다. 상황별로 답을 고정해 둔다.</span></a><a href="guide/search.html"><b>검색</b><span>찾는 것이 목록보다 빠를 때만 검색이 의미가 있다. 그러려면 즉시 반응하고, 무엇을 찾고 있는지 계속 보여야 한다.</span></a><a href="guide/words.html"><b>문안</b><span>UI 텍스트는 설명이 아니라 디자인이다. 버튼 하나의 이름이 그 화면의 마지막 안내다.</span></a><a href="guide/buttons.html"><b>버튼</b><span>누르면 무슨 일이 일어나는지, 그리고 그중 무엇이 가장 중요한지를 모양으로 말한다.</span></a><a href="guide/cards.html"><b>카드</b><span>관련된 것을 한 덩어리로 묶는 가장 기본적인 도구다. 무엇을 한 카드에 넣을지가 곧 정보 설계다.</span></a><a href="guide/lists.html"><b>목록과 표</b><span>많은 것을 한 번에 보여주는 두 가지 방법이다. 훑어보게 할 것인지 비교하게 할 것인지가 갈림길이다.</span></a><a href="guide/selection.html"><b>세그먼트 · 칩 · 배지</b><span>셋 다 작고 둥글어서 헷갈리기 쉽지만 하는 일이 다르다. 화면을 바꾸는 것, 조건을 좁히는 것, 상태를 알리는 것.</span></a><a href="guide/navigation.html"><b>내비게이션</b><span>지금 어디에 있고 어디로 갈 수 있는지를 항상 보이게 한다. 길을 잃는 화면은 대개 여기가 비어 있다.</span></a><a href="guide/fields.html"><b>입력 필드</b><span>무엇을 넣어야 하는지, 지금 맞게 넣고 있는지, 틀렸다면 어디가 틀렸는지. 필드 하나가 이 셋을 말해야 한다.</span></a><a href="guide/overlays.html"><b>모달 · 시트 · 토스트</b><span>무엇을 언제 띄울지는 겹침에서 정한다. 여기서는 그 셋의 생김새와 사양을 정한다.</span></a></div>
+  </div>
+</section>
+
+<section class="band band--tint" id="tokens">
+  <div class="wrap">
+    <h2>토큰</h2>
+    <p class="lead">값은 이 한 파일 안에만 있다. 코드에서는 <code>--sub</code>·<code>--warn</code>
+       같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</p>
+    <div class="tiles">
+      <a class="tile" href="guide/color.html"><div class="tile__art"><div style="display:flex;gap:6px"><div style="width:26px;height:64px;border-radius:7px;background:var(--c1)"></div><div style="width:26px;height:64px;border-radius:7px;background:var(--c2)"></div><div style="width:26px;height:64px;border-radius:7px;background:var(--c3)"></div><div style="width:26px;height:64px;border-radius:7px;background:var(--c4)"></div><div style="width:26px;height:64px;border-radius:7px;background:var(--c5)"></div><div style="width:26px;height:64px;border-radius:7px;background:var(--c6)"></div></div></div>
+        <div class="tile__t">색</div><div class="tile__d">면 3단 · 글자 4단 · 상태 4색 · 차트 8슬롯</div></a>
+      <a class="tile" href="guide/typography.html"><div class="tile__art"><div style="text-align:center;line-height:1"><div style="font:var(--fw-sb) 44px var(--font);letter-spacing:var(--tr-3xl);color:var(--ink)">Aa</div><div style="margin-top:8px;font:var(--fw-r) var(--fs-sm) var(--font-num);color:var(--sub)">34 · 28 · 22 · 17 · 13</div></div></div>
+        <div class="tile__t">타이포그래피</div><div class="tile__d">12단계 · 애플 텍스트 스타일 대응</div></a>
+      <a class="tile" href="https://icons.imaketoo.com"><div class="tile__art"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;color:var(--ink2)"><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-bell"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-star"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-search"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-doc"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-lock"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-camera"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-trend-up"/></svg><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-check-circle"/></svg></div></div>
+        <div class="tile__t">아이콘 334</div><div class="tile__d">굵기 9단 · 크기 3단 · 좌표로 직접 그린 세트</div></a>
     </div>
-  </section>
+    <p class="lead" style="margin-top:var(--sp-6)">
+      <a href="index-full.html" style="color:var(--brand);text-decoration:none">
+        토큰 값 전체와 컴포넌트 보기 →</a></p>
+  </div>
+</section>
 
-  <!-- ─── 색 ─── -->
-  <section class="imt-section" id="color">
-    <h2 class="imt-section__title">색</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4)">클릭하면 변수명이 복사됩니다. 다크 토글에 따라 값이 실제로 바뀝니다.</p>
-    <div id="colorGroups" class="imt-stack"></div>
-  </section>
-
-  <!-- ─── 타이포 ─── -->
-  <section class="imt-section" id="type">
-    <h2 class="imt-section__title">타이포</h2>
-    <div class="imt-card"><div class="tscale" id="tscale"></div></div>
-  </section>
-
-  <!-- ─── 간격 ─── -->
-  <section class="imt-section" id="space">
-    <h2 class="imt-section__title">간격</h2>
-    <div class="imt-card"><div class="spx" id="spx"></div></div>
-  </section>
-
-  <!-- ─── 라운드 ─── -->
-  <section class="imt-section" id="radius">
-    <h2 class="imt-section__title">라운드</h2>
-    <div class="imt-card"><div class="rx" id="rx"></div></div>
-  </section>
-
-  <!-- ─── 머티리얼 ─── -->
-  <section class="imt-section" id="material">
-    <h2 class="imt-section__title">머티리얼 · Liquid Glass</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4)">애플은 재질을 <b>두 벌</b>로 나눈다. 표준 머티리얼은 <b>콘텐츠 레이어</b>의 구조를 만들고, Liquid Glass 는 그 위에 뜨는 <b>컨트롤·내비게이션 레이어</b> 전용이다. 콘텐츠 레이어에 글래스를 쓰면 위계가 무너진다.</p>
-
-    <div class="imt-card">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">표준 머티리얼 4단 — 콘텐츠 레이어</h3>
-      <div class="matstage">
-        <div class="matchip" style="background:var(--mat-ultrathin);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>ultraThin</b><span>가장 얇음</span></div>
-        <div class="matchip" style="background:var(--mat-thin);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>thin</b><span>맥락 유지</span></div>
-        <div class="matchip" style="background:var(--mat);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>regular</b><span>기본</span></div>
-        <div class="matchip" style="background:var(--mat-thick);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>thick</b><span>대비 확보</span></div>
-      </div>
-      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">두꺼울수록 대비가 좋고, 얇을수록 뒤 맥락이 남는다. 얇은 재질 위에 <code>--sub2</code>(quaternary) 단계 글자를 올리지 않는다.</p>
+<section class="band">
+  <div class="wrap wrap--narrow">
+    <h2>애플과의 관계</h2>
+    <p class="lead"><b>디자인 가이드는 100% 승계한다.</b> 버튼·글자·위치·색·라운드에 대해
+      애플이 정해둔 것을 다시 고민하지 않는다. 쓸 수 없는 것은 가이드가 아니라
+      <b>산출물</b>(심볼 아트워크·폰트 파일·템플릿)이고, 그건 규격만 읽고 우리 방식으로 다시 만든다.</p>
+    <div class="links">
+      <a href="language.html#legal"><b>무엇을 배우고 무엇을 받지 않는가</b>
+        <span>HIG 문서는 읽고, 애플 에셋은 받지 않는다</span></a>
+      <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
+        <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
     </div>
+  </div>
+</section>
 
-    <div class="imt-card" style="margin-top:var(--sp-4)">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">Liquid Glass 2종 — 컨트롤 레이어</h3>
-      <div class="matstage matstage--rich">
-        <div class="matchip" style="background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);box-shadow:var(--glass-sh);border:1px solid var(--glass-line);border-radius:var(--r-cap)"><b>regular</b><span>기본 · 휘도 보정</span></div>
-        <div class="matchip" style="background:var(--glass-clear);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:var(--r-cap);color:#fff"><b>clear</b><span>사진·영상 위에서만</span></div>
-      </div>
-      <div class="rule" style="margin-top:var(--sp-4)"><span class="rule__n">!</span><div><div class="rule__t">clear 를 밝은 콘텐츠 위에 얹을 때는 <code>--glass-dim</code>(35%) 을 먼저 깐다</div><div class="rule__s">HIG 명시값이다. 콘텐츠가 충분히 어두우면 생략한다. 커스텀 컨트롤에 글래스를 여러 개 쓰지 않는다 — 콘텐츠로 향해야 할 주의를 뺏는다.</div></div></div>
-    </div>
-
-    <div class="imt-card" style="margin-top:var(--sp-4)">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">시스템 설정을 이긴다고 생각하지 않는다</h3>
-      <div class="imt-tablewrap"><table class="imt-table"><tbody>
-        <tr><td><code>prefers-reduced-transparency</code></td><td style="color:var(--sub)">머티리얼·글래스가 전부 <code>--card</code> 불투명 면으로 바뀐다</td></tr>
-        <tr><td><code>prefers-contrast: more</code></td><td style="color:var(--sub)">글자·선·상태색이 고대비 변형으로 교체된다</td></tr>
-        <tr><td><code>prefers-reduced-motion</code></td><td style="color:var(--sub)">모든 전환이 0.01ms 로 눌린다</td></tr>
-      </tbody></table></div>
-    </div>
-  </section>
-
-  <!-- ─── 그림자 ─── -->
-  <section class="imt-section" id="shadow">
-    <h2 class="imt-section__title">그림자</h2>
-    <div class="demo shx">
-      <i style="box-shadow:var(--edge)">--edge</i>
-      <i style="box-shadow:var(--sh)">--sh</i>
-      <i style="box-shadow:var(--sh-lift)">--sh-lift</i>
-      <i style="box-shadow:var(--ring)">--ring</i>
-    </div>
-  </section>
-
-  <!-- ─── 모션 ─── -->
-  <section class="imt-section" id="motion">
-    <h2 class="imt-section__title">모션</h2>
-    <div class="demo">
-      <button class="imt-btn" id="mEase">--ease · 0.2s</button>
-      <button class="imt-btn" id="mSpring">--spring · 0.32s</button>
-      <div style="width:100%;height:40px;position:relative;margin-top:var(--sp-2)">
-        <span id="ball" style="position:absolute;left:0;top:6px;width:28px;height:28px;border-radius:50%;background:var(--brand)"></span>
-      </div>
-    </div>
-    <pre>--ease:   cubic-bezier(.4,0,.2,1)    /* 이동·페이드 — 기본 */
---spring: cubic-bezier(.34,1.4,.5,1) /* 등장·토글 — 살짝 튄다 */
---dur-1:.12s  --dur-2:.2s  --dur-3:.32s</pre>
-  </section>
-
-  <!-- ─── 접근성 규격 ─── -->
-  <section class="imt-section" id="a11y">
-    <h2 class="imt-section__title">접근성 규격</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4)">아래 수치는 애플 HIG 의 실측 표를 그대로 옮긴 것이다. 디자인이 "애플스러운가" 를 눈으로 다투는 대신 이 표로 판정한다.</p>
-
-    <div class="imt-card">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">최소 명도대비</h3>
-      <div class="imt-tablewrap"><table class="imt-table">
-        <thead><tr><th>글자 크기</th><th>굵기</th><th>최소 대비</th></tr></thead>
-        <tbody>
-          <tr><td>17pt 이하</td><td>전부</td><td><b>4.5:1</b></td></tr>
-          <tr><td>18pt</td><td>전부</td><td><b>3:1</b></td></tr>
-          <tr><td>전부</td><td>Bold</td><td><b>3:1</b></td></tr>
-        </tbody>
-      </table></div>
-      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">기본값이 이를 못 맞추면 <b>최소한 Increase Contrast 가 켜졌을 때</b> 더 높은 대비를 제공해야 한다 — 애플 자신도 systemRed 에 별도 accessible 변형을 둔다. 이 시스템의 고대비 변형은 <code>@media (prefers-contrast: more)</code> 에 있다. 전 항목 통과 여부는 <code>python3 check_contrast.py</code> 로 확인한다.</p>
-    </div>
-
-    <div class="imt-card" style="margin-top:var(--sp-4)">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">컨트롤 크기</h3>
-      <div class="imt-tablewrap"><table class="imt-table">
-        <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th><th>토큰</th></tr></thead>
-        <tbody>
-          <tr><td>iOS · iPadOS · watchOS</td><td>44 × 44 pt</td><td>28 × 28 pt</td><td><code>--tap</code> / <code>--tap-min</code></td></tr>
-          <tr><td>macOS</td><td>28 × 28 pt</td><td>20 × 20 pt</td><td><code>--ctl</code> / <code>--ctl-min</code></td></tr>
-          <tr><td>visionOS</td><td>60 × 60 pt</td><td>28 × 28 pt</td><td><code>--tap-vision</code></td></tr>
-        </tbody>
-      </table></div>
-      <div class="rule" style="margin-top:var(--sp-4)"><span class="rule__n">!</span><div><div class="rule__t">기준은 '보이는 크기' 가 아니라 '히트영역' 이다</div><div class="rule__s">38px 버튼이라도 눌리는 범위가 44px 면 규격을 만족한다. 이 시스템은 <code>@media (pointer: coarse)</code> 에서만 <code>min-height:var(--tap)</code> 를 걸어, 마우스 환경의 밀도를 해치지 않는다.</div></div></div>
-      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">간격도 크기만큼 중요하다 — 베젤 있는 요소 주위 <code>--gap-ctl</code>(12px), 베젤 없는 요소 주위 <code>--gap-ctl-plain</code>(24px).</p>
-    </div>
-
-    <div class="imt-card" style="margin-top:var(--sp-4)">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">글자 최소 크기</h3>
-      <div class="imt-tablewrap"><table class="imt-table">
-        <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th></tr></thead>
-        <tbody>
-          <tr><td>iOS · iPadOS</td><td>17 pt</td><td>11 pt</td></tr>
-          <tr><td>macOS</td><td>13 pt</td><td>10 pt</td></tr>
-          <tr><td>visionOS</td><td>17 pt</td><td>12 pt</td></tr>
-        </tbody>
-      </table></div>
-      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">Ultralight · Thin · Light 는 쓰지 않는다 — 토큰에 아예 없다(<code>--fw-r</code> 400 / <code>--fw-m</code> 500 / <code>--fw-sb</code> 600). <code>--fs-tag</code>(10px)는 macOS 최소치에는 맞지만 iOS 최소치보다 작다. 모바일에서 뜻이 있는 글자에는 <code>--fs-xs</code>(11px) 이상을 쓴다.</p>
-    </div>
-  </section>
-
-  <!-- ─── 버튼 ─── -->
-  <section class="imt-section" id="button">
-    <h2 class="imt-section__title">버튼</h2>
-    <div class="demo">
-      <button class="imt-btn imt-btn--primary"><svg class="imt-i imt-i--sm"><use href="#i-plus"/></svg>기본</button>
-      <button class="imt-btn imt-btn--soft">소프트</button>
-      <button class="imt-btn">보조</button>
-      <button class="imt-btn imt-btn--ghost">고스트</button>
-      <button class="imt-btn imt-btn--danger"><svg class="imt-i imt-i--sm"><use href="#i-trash"/></svg>삭제</button>
-      <button class="imt-btn imt-btn--icon"><svg class="imt-i imt-i--sm"><use href="#i-more"/></svg></button>
-      <button class="imt-btn" disabled>비활성</button>
-    </div>
-    <button class="imt-btn imt-btn--sm copy" data-copy='&lt;button class="imt-btn imt-btn--primary"&gt;기본&lt;/button&gt;'>HTML 복사</button>
-  </section>
-
-  <!-- ─── 카드 ─── -->
-  <section class="imt-section" id="card">
-    <h2 class="imt-section__title">카드</h2>
-    <div class="imt-grid">
-      <div class="imt-card">
-        <div class="imt-card__head"><div><h3 class="imt-card__title">기본 카드</h3><p class="imt-card__sub">그림자 + 옅은 테두리</p></div>
-        <button class="imt-btn imt-btn--icon imt-btn--sm"><svg class="imt-i imt-i--sm"><use href="#i-more"/></svg></button></div>
-        <p style="margin:0;color:var(--sub)">면을 나누는 기본 단위. 안쪽 여백은 <code>--sp-5</code>.</p>
-      </div>
-      <div class="imt-card imt-card--flat">
-        <h3 class="imt-card__title">플랫</h3>
-        <p style="margin:var(--sp-2) 0 0;color:var(--sub)">테두리만. 목록 안에 카드를 겹칠 때.</p>
-      </div>
-      <div class="imt-card imt-card--inset">
-        <h3 class="imt-card__title">인셋</h3>
-        <p style="margin:var(--sp-2) 0 0;color:var(--sub)">카드 안의 강조 면.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 세그먼트·칩 ─── -->
-  <section class="imt-section" id="seg">
-    <h2 class="imt-section__title">세그먼트 · 칩</h2>
-    <div class="demo demo--col">
-      <div class="imt-seg" id="segDemo">
-        <button aria-selected="true">오늘</button><button aria-selected="false">주간</button><button aria-selected="false">월간</button>
-      </div>
-      <div class="imt-cluster" id="chipDemo" style="margin-top:var(--sp-3)">
-        <button class="imt-chip" aria-pressed="true">전체</button>
-        <button class="imt-chip" aria-pressed="false">알뜰폰</button>
-        <button class="imt-chip" aria-pressed="false">자급제</button>
-        <button class="imt-chip" aria-pressed="false"><svg class="imt-i imt-i--sm"><use href="#i-filter"/></svg>더보기</button>
-      </div>
-    </div>
-    <pre>/* 세그먼트 안쪽 라운드 = 바깥(--r 16) − 패딩(3) = --r-in 13
-   이 계산이 안 맞으면 동심원이 깨져 어색해진다 */</pre>
-  </section>
-
-  <!-- ─── 배지 ─── -->
-  <section class="imt-section" id="badge">
-    <h2 class="imt-section__title">배지</h2>
-    <div class="demo">
-      <span class="imt-badge">기본</span>
-      <span class="imt-badge imt-badge--ok"><svg><use href="#i-check"/></svg>정상</span>
-      <span class="imt-badge imt-badge--warn"><svg><use href="#i-warning"/></svg>주의</span>
-      <span class="imt-badge imt-badge--danger"><svg><use href="#i-error"/></svg>오류</span>
-      <span class="imt-badge imt-badge--info"><svg><use href="#i-info"/></svg>안내</span>
-      <span class="imt-badge imt-badge--up"><svg><use href="#i-trend-up"/></svg>2.64%</span>
-      <span class="imt-badge imt-badge--down"><svg><use href="#i-trend-down"/></svg>0.99%</span>
-    </div>
-    <p style="color:var(--sub);margin-top:var(--sp-3)">상태색은 <b>반드시 아이콘·라벨과 함께</b>. 색만으로 상태를 전하면 색각 이상 사용자가 읽지 못한다.</p>
-  </section>
-
-  <!-- ─── 목록·표 ─── -->
-  <section class="imt-section" id="list">
-    <h2 class="imt-section__title">목록 · 표</h2>
-    <div class="imt-grid imt-grid--lg">
-      <div class="imt-list">
-        <a class="imt-row" href="#list"><svg class="imt-i imt-row__ico"><use href="#i-chart-line"/></svg>
-          <span class="imt-row__main"><span class="imt-row__t">추이 분석</span><span class="imt-row__s">최근 25개월</span></span>
-          <span class="imt-row__v">324</span><svg class="imt-i imt-row__chev"><use href="#i-chevron-right"/></svg></a>
-        <a class="imt-row" href="#list"><svg class="imt-i imt-row__ico"><use href="#i-bell"/></svg>
-          <span class="imt-row__main"><span class="imt-row__t">알림</span><span class="imt-row__s">읽지 않음 3</span></span>
-          <svg class="imt-i imt-row__chev"><use href="#i-chevron-right"/></svg></a>
-        <a class="imt-row" href="#list"><svg class="imt-i imt-row__ico"><use href="#i-lock"/></svg>
-          <span class="imt-row__main"><span class="imt-row__t">보안</span></span>
-          <svg class="imt-i imt-row__chev"><use href="#i-chevron-right"/></svg></a>
-      </div>
-      <div class="imt-card" style="padding:var(--sp-3) var(--sp-4)">
-        <div class="imt-tablewrap"><table class="imt-table">
-          <thead><tr><th>종목</th><th class="num">현재가</th><th class="num">등락</th></tr></thead>
-          <tbody>
-            <tr><td>SK하이닉스</td><td class="num">1,633,000</td><td class="num" style="color:var(--down)">−3.54%</td></tr>
-            <tr><td>TIGER 200</td><td class="num">108,170</td><td class="num" style="color:var(--up)">+2.64%</td></tr>
-            <tr><td>삼성전자</td><td class="num">96,400</td><td class="num" style="color:var(--flat)">0.00%</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-    </div>
-    <p style="color:var(--sub);margin-top:var(--sp-3)">표에 세로선을 긋지 않는다. 숫자는 <code>tabular-nums</code> 로 자릿수를 고정한다.</p>
-  </section>
-
-  <!-- ─── 입력 ─── -->
-  <section class="imt-section" id="form">
-    <h2 class="imt-section__title">입력</h2>
-    <div class="demo" style="gap:var(--sp-4)">
-      <label class="imt-field" style="flex:1;min-width:200px"><span class="imt-label">이름</span><input class="imt-input" placeholder="입력하세요"></label>
-      <label class="imt-field" style="flex:1;min-width:200px"><span class="imt-label">구분</span>
-        <select class="imt-select"><option>전체</option><option>알뜰폰</option></select></label>
-      <label class="imt-search" style="flex:1;min-width:220px">
-        <svg class="imt-i imt-i--sm"><use href="#i-search"/></svg><input placeholder="검색"></label>
-      <label class="imt-cluster" style="gap:var(--sp-2)"><input type="checkbox" class="imt-switch" checked><span class="imt-label">알림 받기</span></label>
-    </div>
-  </section>
-
-  <!-- ─── 모달·토스트 ─── -->
-  <section class="imt-section" id="overlay">
-    <h2 class="imt-section__title">모달 · 토스트</h2>
-    <div class="demo">
-      <button class="imt-btn imt-btn--primary" id="openM">모달 열기</button>
-      <button class="imt-btn" id="openT">토스트 띄우기</button>
-    </div>
-  </section>
-
-  <!-- ─── 대시보드 ─── -->
-  <section class="imt-section" id="dash">
-    <h2 class="imt-section__title">대시보드</h2>
-    <div class="imt-kpi" style="margin-bottom:var(--sp-4)">
-      <div class="imt-stat"><div class="imt-stat__label"><svg><use href="#i-portfolio"/></svg>평가금액</div>
-        <div class="imt-stat__value">64,208,140</div>
-        <div class="imt-stat__delta imt-stat__delta--up"><svg><use href="#i-trend-up"/></svg>+1,672,583</div></div>
-      <div class="imt-stat"><div class="imt-stat__label"><svg><use href="#i-percent"/></svg>수익률</div>
-        <div class="imt-stat__value">+2.64%</div>
-        <div class="imt-stat__delta imt-stat__delta--up"><svg><use href="#i-trend-up"/></svg>전일 +0.31%p</div></div>
-      <div class="imt-stat"><div class="imt-stat__label"><svg><use href="#i-coin"/></svg>예수금</div>
-        <div class="imt-stat__value">3,410,000</div>
-        <div class="imt-stat__delta imt-stat__delta--flat">변동 없음</div></div>
-      <div class="imt-stat"><div class="imt-stat__label"><svg><use href="#i-bell"/></svg>알림</div>
-        <div class="imt-stat__value">3</div>
-        <div class="imt-stat__delta imt-stat__delta--down"><svg><use href="#i-trend-down"/></svg>어제 5</div></div>
-    </div>
-    <pre>&lt;div class="imt-kpi"&gt;  /* 4개까지. 5개 넘으면 위계가 사라진다 */
-&lt;div class="imt-grid"&gt; /* auto-fill minmax(280px,1fr) — 미디어쿼리 불필요 */</pre>
-  </section>
-
-  <!-- ─── 차트 ─── -->
-  <section class="imt-section" id="chart">
-    <h2 class="imt-section__title">차트</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4)">8슬롯 고정 순서. 순환 금지 — 9번째 시리즈는 '기타' 로 접는다. 명도대비·색각(CVD)·채도 검사를 라이트/다크 양쪽에서 통과한 값이다.</p>
-    <div class="sw" id="chartSw" style="margin-bottom:var(--sp-4)"></div>
-    <div class="imt-chart">
-      <div class="imt-chart__head"><h3 class="imt-chart__title">월간 검색량</h3><span class="imt-chart__unit">단위: 천 건</span></div>
-      <div class="imt-legend">
-        <span class="imt-legend__item"><i class="imt-legend__dot" style="background:var(--c1)"></i>알뜰폰</span>
-        <span class="imt-legend__item"><i class="imt-legend__dot" style="background:var(--c2)"></i>자급제</span>
-        <span class="imt-legend__item"><i class="imt-legend__dot" style="background:var(--c3)"></i>eSIM</span>
-      </div>
-      <div class="imt-chart__body" style="height:220px"><svg id="demoChart" width="100%" height="220" role="img" aria-label="월간 검색량 추이"></svg></div>
-      <div class="imt-chart__foot">축·그리드는 뒤로 물리고 데이터가 앞에 온다. 선 2px, 마커 8px 이상, 막대 끝만 4px 라운드.</div>
-    </div>
-    <pre>/* 하지 말 것 */
-이중 y축 금지        →  두 개 차트로 나누거나 공통 기준으로 지수화
-색 순환 금지         →  9번째는 '기타'
-순위로 색 배정 금지  →  색은 항목에 붙는다 (필터로 개수가 변해도 색은 그대로)
-무지개 그라디언트    →  연속형은 한 색 밝기 변화, 발산형은 두 색 + 회색 중립</pre>
-  </section>
-
-  <!-- ─── 카드뉴스 ─── -->
-  <section class="imt-section" id="cardnews">
-    <h2 class="imt-section__title">카드뉴스</h2>
-    <p style="color:var(--sub);margin:0 0 var(--sp-4)">인스타 4:5 (1080×1350). 안전 여백 안에만 글을 넣는다.</p>
-    <div class="imt-card" style="overflow:hidden;padding:0">
-      <div style="width:100%;aspect-ratio:1080/1350;position:relative;overflow:hidden">
-        <div class="imt-canvas" style="transform:scale(.34);transform-origin:top left;position:absolute">
-          <div class="imt-canvas__safe">
-            <div class="imt-canvas__kicker">알뜰폰 시장</div>
-            <h3 class="imt-canvas__title">8월 검색량<br>전월 대비 5.5% 증가</h3>
-            <p class="imt-canvas__lede">eSIM 관련 검색이 증가를 이끌었다. 자급제 단말 수요와 맞물린 흐름으로 보인다.</p>
-          </div>
-          <div class="imt-canvas__foot"><span>marketing.imaketoo.com</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── 사용 ─── -->
-  <section class="imt-section" id="use">
-    <h2 class="imt-section__title">가져다 쓰기</h2>
-    <div class="imt-card">
-      <h3 class="imt-card__title">1. CSS 세 줄</h3>
-      <pre>&lt;link rel="stylesheet" href="https://design.imaketoo.com/tokens.css"&gt;
-&lt;link rel="stylesheet" href="https://design.imaketoo.com/components.css"&gt;
-&lt;link rel="stylesheet" href="https://design.imaketoo.com/patterns.css"&gt;</pre>
-      <h3 class="imt-card__title" style="margin-top:var(--sp-5)">2. 아이콘</h3>
-      <pre>/* 같은 도메인에 sprite.svg 를 두거나, 아래처럼 주입한다.
-   &lt;use href="https://다른도메인/..."&gt; 는 브라우저가 막는다 */
-fetch("https://icons.imaketoo.com/sprite.svg").then(r=&gt;r.text())
-  .then(t=&gt;document.body.insertAdjacentHTML("afterbegin",t));
-
-&lt;svg class="imt-i"&gt;&lt;use href="#i-chart-line"/&gt;&lt;/svg&gt;</pre>
-      <h3 class="imt-card__title" style="margin-top:var(--sp-5)">3. 사이트 브랜드색만 덮어쓰기</h3>
-      <pre>:root{ --brand:#1E37F6; --brand-hover:#4459FF; --brand-soft:rgba(30,55,246,.10) }</pre>
-      <p style="color:var(--sub);margin-top:var(--sp-4)">중립색·간격·타이포·라운드는 절대 덮어쓰지 않는다. 그 순간 다시 갈라진다.</p>
-    </div>
-  </section>
-  </main>
-</div>
-
-<dialog class="imt-modal" id="dlg"><div class="imt-modal__body">
-  <h3 class="imt-modal__title">삭제하시겠습니까?</h3>
-  <p class="imt-modal__desc">이 작업은 되돌릴 수 없습니다.</p>
-  <div class="imt-modal__foot">
-    <button class="imt-btn" onclick="dlg.close()">취소</button>
-    <button class="imt-btn imt-btn--danger" onclick="dlg.close()">삭제</button>
-  </div></div></dialog>
-
-<div class="imt-toast" id="toast"></div>
+<footer class="foot"><div class="wrap">
+  IMT Design System · 가이드 21쪽 · 아이콘 334 ·
+  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a> ·
+  <a href="https://icons.imaketoo.com">icons.imaketoo.com</a>
+</div></footer>
 
 <script>
-/* 아이콘 스프라이트 주입 — 크로스 오리진 <use> 가 막히므로 fetch 로 가져온다 */
-fetch("https://icons.imaketoo.com/sprite.svg").then(r=>r.text())
-  .then(t=>document.body.insertAdjacentHTML("afterbegin",t)).catch(()=>{});
-
-const cs = () => getComputedStyle(document.documentElement);
-const V  = n => cs().getPropertyValue(n).trim();
-
-const GROUPS = [
-  ["면 · grouped",["--bg","--card","--inset","--sheet"]],
-  ["면 · system", ["--bg-sys","--bg-sys-2","--bg-sys-3"]],
-  ["선",      ["--line","--line-soft","--line-opaque"]],
-  ["글자",    ["--ink","--ink2","--sub","--sub2"]],
-  ["글자 · 의미",["--placeholder","--link"]],
-  ["채움",    ["--fill1","--fill2","--fill3","--fill4"]],
-  ["강조",    ["--brand","--brand-hover","--brand-soft"]],
-  ["시스템",  ["--green","--red","--orange","--yellow","--teal","--indigo","--pink"]],
-  ["등락",    ["--up","--down","--flat"]],
-  ["상태",    ["--ok","--warn","--danger","--info"]],
-];
-function paintColors(){
-  document.getElementById("colorGroups").innerHTML = GROUPS.map(([t,ks])=>`
-    <div class="imt-card"><h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">${t}</h3>
-      <div class="sw">${ks.map(k=>`<button data-copy="var(${k})"><i style="background:var(${k})"></i><b>${k}</b><code>${V(k)}</code></button>`).join("")}</div></div>`).join("");
-  document.getElementById("chartSw").innerHTML =
-    ["--c1","--c2","--c3","--c4","--c5","--c6","--c7","--c8"]
-    .map((k,i)=>`<button data-copy="var(${k})"><i style="background:var(${k})"></i><b>슬롯 ${i+1}</b><code>${V(k)}</code></button>`).join("");
-}
-const TS=[["--fs-3xl","히어로 · Large Title"],["--fs-title1","Title 1"],["--fs-2xl","요약 숫자 · macOS Large Title"],
-          ["--fs-title2","Title 2"],["--fs-xl","섹션 제목 · Title 3"],["--fs-lg","강조 값 · Body/Headline"],
-          ["--fs-callout","Callout"],["--fs-base","값 · Subhead"],["--fs-md","본문 · Footnote"],
-          ["--fs-sm","라벨 · Caption 1"],["--fs-xs","보조 · Caption 2"],["--fs-tag","배지"]];
-document.getElementById("tscale").innerHTML = TS.map(([k,d])=>
-  `<div><code>${k}</code><span style="font-size:var(${k});font-weight:var(--fw-sb);letter-spacing:var(--tr-xl)">애플 스타일 Apple 2026</span><span style="margin-left:auto;color:var(--sub);font-size:var(--fs-xs)">${d}</span></div>`).join("");
-const SP=["--sp-1","--sp-2","--sp-3","--sp-4","--sp-5","--sp-6","--sp-8","--sp-10","--sp-12","--sp-16"];
-document.getElementById("spx").innerHTML = SP.map(k=>
-  `<div><code>${k}</code><i style="width:var(${k})"></i><span style="color:var(--sub);font-size:var(--fs-xs)">${V(k)}</span></div>`).join("");
-const RX=[["--r","카드·버튼·탭 전부"],["--r-in","세그먼트 안쪽"],["--r-xs","배지"],["--r-sheet","시트·모달"],["--r-cap","캡슐 — 애플 현행 버튼"]];
-document.getElementById("rx").innerHTML = RX.map(([k,d])=>
-  `<div><i style="border-radius:var(${k})"></i><code>${k} · ${V(k)}</code><code style="color:var(--sub2)">${d}</code></div>`).join("");
-
-/* 데모 차트 — 마크 규격 그대로 */
-function drawChart(){
-  const svg=document.getElementById("demoChart"); if(!svg) return;
-  const W=svg.clientWidth||600,H=220,P={t:14,r:14,b:26,l:44};
-  const S=[[62,58,66,71,69,74,78,83],[41,44,42,48,52,51,55,59],[12,14,19,23,21,27,31,34]];
-  const M=["2월","3월","4월","5월","6월","7월","8월","9월"];
-  const mx=90,x=i=>P.l+i*(W-P.l-P.r)/(S[0].length-1),y=v=>H-P.b-(v/mx)*(H-P.t-P.b);
-  let o="";
-  for(let g=0;g<=4;g++){const gy=P.t+g*(H-P.t-P.b)/4;
-    o+=`<line class="imt-gridline" x1="${P.l}" y1="${gy}" x2="${W-P.r}" y2="${gy}"/>`;
-    o+=`<text class="imt-axis" x="${P.l-8}" y="${gy+4}" text-anchor="end">${Math.round(mx-g*mx/4)}</text>`;}
-  M.forEach((m,i)=>o+=`<text class="imt-axis" x="${x(i)}" y="${H-8}" text-anchor="middle">${m}</text>`);
-  S.forEach((s,si)=>{o+=`<path class="imt-line" stroke="var(--c${si+1})" d="M${s.map((v,i)=>`${x(i)} ${y(v)}`).join("L")}"/>`;
-    s.forEach((v,i)=>{if(i===s.length-1)o+=`<circle class="imt-dot" cx="${x(i)}" cy="${y(v)}" fill="var(--c${si+1})"/>`;});});
-  svg.innerHTML=o;
-}
-function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");
-  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),1500);}
-document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-copy]");
-  if(b){navigator.clipboard.writeText(b.dataset.copy).then(()=>toast("복사됨 · "+b.dataset.copy));return;}
-  const s=e.target.closest("#segDemo button");
-  if(s){[...s.parentNode.children].forEach(c=>c.setAttribute("aria-selected",c===s));return;}
-  const c=e.target.closest("#chipDemo .imt-chip");
-  if(c){c.setAttribute("aria-pressed",c.getAttribute("aria-pressed")!=="true");}
-});
-openM.onclick=()=>dlg.showModal();
-openT.onclick=()=>toast("저장했습니다");
-const ball=document.getElementById("ball");
-mEase.onclick=()=>{ball.style.transition="transform var(--dur-2) var(--ease)";ball.style.transform=ball.style.transform?"":"translateX(240px)";};
-mSpring.onclick=()=>{ball.style.transition="transform var(--dur-3) var(--spring)";ball.style.transform=ball.style.transform?"":"translateX(240px)";};
 const T=document.getElementById("theme");
-T.onclick=()=>{const d=document.documentElement.getAttribute("data-theme")==="dark";
-  document.documentElement.setAttribute("data-theme",d?"light":"dark");T.textContent=d?"다크":"라이트";
-  paintColors();};
-paintColors(); drawChart(); addEventListener("resize",drawChart);
-</script></body></html>
+const ap=d=>{document.documentElement.setAttribute("data-theme",d?"dark":"light");T.textContent=d?"라이트":"다크";};
+let d=matchMedia("(prefers-color-scheme: dark)").matches;
+try{const s=localStorage.getItem("imt-theme"); if(s) d=s==="dark";}catch(e){}
+ap(d);
+T.onclick=()=>{d=!d;ap(d);try{localStorage.setItem("imt-theme",d?"dark":"light")}catch(e){}};
+</script>
+</body></html>
