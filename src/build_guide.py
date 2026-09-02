@@ -142,9 +142,31 @@ def main():
         if prev_p: cells.append(f'<a href="{prev_p["slug"]}.html"><span>이전</span><b>{prev_p["title"]}</b></a>')
         if next_p: cells.append(f'<a href="{next_p["slug"]}.html"><span>다음</span><b>{next_p["title"]}</b></a>')
         if cells: nxt = f'<div class="g-next">{"".join(cells)}</div>'
+        body = render_blocks(p["blocks"])
+        if "@@TOC@@" in body:
+            groups = {}
+            for q in pages:
+                if q["slug"] == "index":
+                    continue
+                groups.setdefault(q["group"], []).append(q)
+            cards = []
+            for g, qs in groups.items():
+                items = "".join(
+                    f'<a href="{q["slug"]}.html" style="display:block;padding:9px 0;'
+                    f'border-bottom:var(--hairline) solid var(--line-soft);text-decoration:none">'
+                    f'<b style="color:var(--ink);font-weight:var(--fw-m);font-size:var(--fs-base)">'
+                    f'{q["title"]}</b>'
+                    f'<span style="display:block;color:var(--sub);font-size:var(--fs-sm);'
+                    f'margin-top:2px;line-height:1.5">{q["abstract"]}</span></a>' for q in qs)
+                cards.append(
+                    f'<div class="imt-card" style="margin-bottom:var(--sp-4)">'
+                    f'<h3 style="margin:0 0 var(--sp-2);font:var(--fw-sb) var(--fs-base) var(--font);'
+                    f'color:var(--sub2);text-transform:uppercase;letter-spacing:.06em">{g}</h3>'
+                    f'{items}</div>')
+            body = body.replace("@@TOC@@", "".join(cards))
         html = SHELL.format(
             title=p["title"], kicker=p["kicker"], abstract=p["abstract"],
-            body=render_blocks(p["blocks"]), toc=toc(p),
+            body=body, toc=toc(p),
             side=sidebar(pages, p["slug"]), next=nxt, sprite=sprite, v=VER)
         open(os.path.join(OUT, p["slug"] + ".html"), "w", encoding="utf-8").write(html)
     print(f"가이드 {len(pages)}쪽 생성:", ", ".join(p["slug"] for p in pages))

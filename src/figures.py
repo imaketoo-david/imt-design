@@ -21,7 +21,10 @@ def cmp2(items, cap=""):
     """비교 — 잘된 예 / 잘못된 예. items = [(kind, stage_html, label)]
     kind: 'do' | 'no'. 애플 문서에서 가장 많이 쓰이는 형태다."""
     out = []
-    for kind, stage, label in items:
+    LABEL = {"do": "이렇게", "no": "이렇게 하지 않는다"}
+    for it in items:
+        kind, stage = it[0], it[1]
+        label = it[2] if len(it) > 2 else LABEL[kind]
         mark = ic("check-circle") if kind == "do" else ic("x-circle")
         out.append(
             f'<div class="g-cmp__i g-cmp__i--{kind}">'

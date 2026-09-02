@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>검색 — IMT Design Guide</title>
+<link rel="stylesheet" href="../tokens.css?v=dev">
+<link rel="stylesheet" href="../components.css?v=dev">
+<link rel="stylesheet" href="../patterns.css?v=dev">
+<link rel="stylesheet" href="../guide.css?v=dev">
+<style>
+  .gs{display:grid;grid-template-columns:236px 1fr;gap:var(--sp-8);max-width:1160px;
+    margin:0 auto;padding:0 var(--sp-5)}
+  .gs__nav{position:sticky;top:72px;align-self:start;display:flex;flex-direction:column;
+    gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto;
+    padding-bottom:var(--sp-8)}
+  .gs__nav a{color:var(--sub);text-decoration:none;padding:5px var(--sp-3);
+    border-radius:var(--r-in)}
+  .gs__nav a:hover{color:var(--ink);background:var(--fill4)}
+  .gs__nav a.on{color:var(--ink);background:var(--fill3);font-weight:var(--fw-m)}
+  .gs__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);
+    font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);
+    text-transform:uppercase;letter-spacing:.06em}
+  .gs>main{min-width:0}
+  .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
+    padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
+    margin:0 0 var(--sp-8);font-size:var(--fs-md)}
+  .g-toc b{color:var(--sub2);font:var(--fw-sb) var(--fs-tag) var(--font);
+    text-transform:uppercase;letter-spacing:.06em;margin-right:var(--sp-2)}
+  .g-toc a{color:var(--brand);text-decoration:none}
+  .g-toc a:hover{text-decoration:underline}
+  .g-next{display:flex;gap:var(--sp-3);margin-top:var(--sp-16);
+    padding-top:var(--sp-6);border-top:var(--hairline) solid var(--line)}
+  .g-next a{flex:1;padding:var(--sp-4);background:var(--card);border-radius:var(--r);
+    box-shadow:var(--edge);text-decoration:none}
+  .g-next span{display:block;font-size:var(--fs-tag);color:var(--sub2);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+  .g-next b{color:var(--ink);font-weight:var(--fw-sb);font-size:var(--fs-base)}
+  @media(max-width:900px){.gs{grid-template-columns:1fr}.gs__nav{display:none}}
+</style></head><body>
+<nav class="imt-nav">
+  <a class="imt-nav__brand" href="../index.html">IMT Design</a>
+  <div class="imt-nav__links">
+    <a href="../index.html">시스템</a>
+    <a href="../language.html">랭귀지</a>
+    <a href="index.html">가이드</a>
+    <a href="https://icons.imaketoo.com">아이콘</a>
+    <button class="imt-btn imt-btn--sm" id="theme">다크</button>
+  </div>
+</nav>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="i-check-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.8 12a8.2 8.2 0 1 0 16.4 0a8.2 8.2 0 1 0 -16.4 0Z"/><path d="M8.2 12.2l2.7 2.7 5-5.4"/></g></symbol><symbol id="i-x-circle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.8 12a8.2 8.2 0 1 0 16.4 0a8.2 8.2 0 1 0 -16.4 0Z"/><path d="M9.4 9.4l5.2 5.2M14.6 9.4l-5.2 5.2"/></g></symbol><symbol id="i-arrow-right" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 12h14.8"/><path d="M14 6.6l5.4 5.4-5.4 5.4"/></g></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 19.4V4.6"/><path d="M6.6 10L12 4.6l5.4 5.4"/></g></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.6v14.8"/><path d="M6.6 14l5.4 5.4 5.4-5.4"/></g></symbol><symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.8 12.6l4.7 4.7L19.2 7.2"/></g></symbol><symbol id="i-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M6.4 6.4l11.2 11.2M17.6 6.4L6.4 17.6"/></g></symbol><symbol id="i-warning" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M10.35 4.45L3.2 16.85a1.9 1.9 0 0 0 1.65 2.85h14.3a1.9 1.9 0 0 0 1.65-2.85L13.65 4.45a1.9 1.9 0 0 0-3.3 0z"/><path d="M12 9.6v4.1"/><path d="M12 16.7h.01"/></g></symbol><symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.2 12a7.8 7.8 0 1 0 15.6 0a7.8 7.8 0 1 0 -15.6 0Z"/><path d="M12 11.4v5"/><path d="M12 8h.01"/></g></symbol><symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M17.6 10.4a5.6 5.6 0 0 0-11.2 0c0 4.6-2 6-2 6h15.2s-2-1.4-2-6z"/><path d="M13.7 19.4a2 2 0 0 1-3.4 0"/></g></symbol><symbol id="i-star" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.4l2.4 4.87 5.37.78-3.885 3.79.917 5.34L12 16.66l-4.802 2.52.917-5.34L4.23 10.05l5.37-.78z"/></g></symbol><symbol id="i-edit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 19.6h3.9L19 8.9a2.2 2.2 0 0 0 0-3.1l-.8-.8a2.2 2.2 0 0 0-3.1 0L4.4 15.7z"/><path d="M13.8 6.6l3.6 3.6"/></g></symbol><symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.2 10.9a6.7 6.7 0 1 0 13.4 0a6.7 6.7 0 1 0 -13.4 0Z"/><path d="M15.65 15.65L20.4 20.4"/></g></symbol><symbol id="i-plus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4.6v14.8M4.6 12h14.8"/></g></symbol><symbol id="i-trash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 6.8h14.8"/><path d="M9.4 6.8V5.4a1.8 1.8 0 0 1 1.8-1.8h1.6a1.8 1.8 0 0 1 1.8 1.8v1.4"/><path d="M6.7 6.8l.83 11.4a2 2 0 0 0 2 1.85h4.94a2 2 0 0 0 2-1.85l.83-11.4"/><path d="M10.4 10.6v5.8M13.6 10.6v5.8"/></g></symbol><symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><path d="M4.65 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/><path d="M10.75 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/><path d="M16.85 12a1.25 1.25 0 1 0 2.5 0a1.25 1.25 0 1 0 -2.5 0Z"/></g></symbol><symbol id="i-filter" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.4 6.8h17.2M6.4 12h11.2M9.6 17.2h4.8"/></g></symbol><symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M8.2 10.2H15.8C18.8906 10.2 19.2 10.5094 19.2 13.6V16.4C19.2 19.4906 18.8906 19.8 15.8 19.8H8.2C5.1094 19.8 4.8 19.4906 4.8 16.4V13.6C4.8 10.5094 5.1094 10.2 8.2 10.2Z"/><path d="M8.2 10.2V7.9a3.8 3.8 0 0 1 7.6 0v2.3"/><path d="M12 14.3v2.2"/></g></symbol><symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 3.8l8 4.2-8 4.2-8-4.2z"/><path d="M4.4 12.6L12 16.6l7.6-4"/><path d="M4.4 16.8L12 20.8l7.6-4"/></g></symbol><symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M13.8 3.6H7.8A2.6 2.6 0 0 0 5.2 6.2v11.6a2.6 2.6 0 0 0 2.6 2.6h8.4a2.6 2.6 0 0 0 2.6-2.6V8.8z"/><path d="M13.8 3.6v5.2h5"/><path d="M8.8 13.4h6.4M8.8 16.6h4"/></g></symbol><symbol id="i-trend-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 16.8l5.8-5.8 3.2 3.2 6.2-6.2"/><path d="M15.6 8h4v4"/></g></symbol><symbol id="i-trend-down" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.4 7.2l5.8 5.8 3.2-3.2 6.2 6.2"/><path d="M15.6 16h4v-4"/></g></symbol><symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M8.3 8.4a3.7 3.7 0 1 0 7.4 0a3.7 3.7 0 1 0 -7.4 0Z"/><path d="M5.2 20.2a6.8 6.8 0 0 1 13.6 0"/></g></symbol><symbol id="i-sparkle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M12 4l1.9 5.2 5.2 1.9-5.2 1.9L12 18.2l-1.9-5.2-5.2-1.9 5.2-1.9z"/></g></symbol><symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.4 9a2.5 2.5 0 0 1 2.5-2.5h1.7l1.25-2.2h6.3l1.25 2.2h1.7A2.5 2.5 0 0 1 20.6 9v7.9a2.5 2.5 0 0 1-2.5 2.5H5.9a2.5 2.5 0 0 1-2.5-2.5z"/><path d="M8.6 12.7a3.4 3.4 0 1 0 6.8 0a3.4 3.4 0 1 0 -6.8 0Z"/></g></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M4.6 10.4V9.2a3.6 3.6 0 0 1 3.6-3.6h9.4"/><path d="M14.8 2.8l2.8 2.8-2.8 2.8"/><path d="M19.4 13.6v1.2a3.6 3.6 0 0 1-3.6 3.6H6.4"/><path d="M9.2 21.2l-2.8-2.8 2.8-2.8"/></g></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M3.6 8.4v9.2a2.4 2.4 0 0 0 2.4 2.4h12a2.4 2.4 0 0 0 2.4-2.4v-6a2.4 2.4 0 0 0-2.4-2.4H4.8"/><path d="M3.6 8.4a2.4 2.4 0 0 1 2.4-2.4h9.2"/><path d="M16.8 14.6h.01"/></g></symbol><symbol id="i-stethoscope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor"><path d="M6.6 3.6v5a4.4 4.4 0 0 0 8.8 0v-5"/><path d="M5.2 3.6h2.8M14 3.6h2.8"/><path d="M11 13v1.6a4.2 4.2 0 0 0 8.4 0v-1"/><path d="M17.5 11.4a1.9 1.9 0 1 0 3.8 0a1.9 1.9 0 1 0 -3.8 0Z"/></g></symbol></svg>
+<div class="gs">
+  <aside class="gs__nav"><b>시작</b><a href="index.html">가이드</a><b>기초</b><a href="layout.html">레이아웃</a><a href="color.html">색</a><a href="typography.html">타이포그래피</a><a href="materials.html">머티리얼</a><a href="icons.html">아이콘</a><a href="accessibility.html">접근성</a><a href="dark-mode.html">다크 모드</a><a href="motion.html">모션</a><b>패턴</b><a href="data.html">데이터 표현</a><a href="feedback.html">피드백</a><a href="input.html">입력 받기</a><a href="overlay.html">겹침</a><a href="search.html" class="on">검색</a><a href="words.html">문안</a><b>컴포넌트</b><a href="buttons.html">버튼</a><a href="cards.html">카드</a><a href="lists.html">목록과 표</a><a href="selection.html">세그먼트 · 칩 · 배지</a><a href="navigation.html">내비게이션</a><a href="fields.html">입력 필드</a><a href="overlays.html">모달 · 시트 · 토스트</a></aside>
+  <main class="g-doc" style="padding-left:0;padding-right:0">
+    <p class="g-kicker">패턴</p>
+    <h1 class="g-title">검색</h1>
+    <p class="g-abstract">찾는 것이 목록보다 빠를 때만 검색이 의미가 있다. 그러려면 즉시 반응하고, 무엇을 찾고 있는지 계속 보여야 한다.</p>
+    <nav class="g-toc"><b>이 문서</b><a href="#single">한 곳에서 전부 찾게 한다</a><a href="#instant">치는 즉시 반응한다</a><a href="#scope">범위를 항상 보여준다</a><a href="#empty">결과가 없을 때</a><a href="#history">기록과 프라이버시</a><a href="#results">결과 화면</a></nav>
+    <h2 class="g-h2" id="single">한 곳에서 전부 찾게 한다</h2>
+<div class="g-rule"><b>검색창이 여러 개면 어디서 찾을지부터 골라야 한다</b><span>탭마다 검색이 따로 있으면, 사용자는 못 찾을 때마다 '다른 탭에서 찾아야 하나' 를 의심한다. 하나로 모으고 <b>범위</b>로 좁힌다.</span></div>
+<figure class="g-fig"><div class="g-fig__body"><label class="imt-search" style="width:100%;max-width:280px"><svg class="imt-i" aria-hidden="true"><use href="#i-search"/></svg><input placeholder="종목명 · 종목코드"></label></div><p class="g-cap">힌트에 <b>무엇으로 찾을 수 있는지</b>를 적는다. '검색' 만 있으면 종목코드로도 되는지 알 수 없다.</p></figure>
+<h2 class="g-h2" id="instant">치는 즉시 반응한다</h2>
+<div class="g-rule"><b>Enter 를 눌러야 결과가 나오면 탐색이 아니라 조회가 된다</b><span>즉시 반응하면 사람들은 두 글자만 치고 결과를 보며 좁혀 간다. 검색어를 완성하는 부담이 사라진다.</span></div>
+<figure class="g-fig"><div class="g-fig__body"><div style="width:100%;max-width:280px"><label class="imt-search" style="width:100%"><svg class="imt-i" aria-hidden="true"><use href="#i-search"/></svg><input value="삼성"></label><div style="margin-top:6px;background:var(--card);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden"><div style="display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:var(--fs-md);color:var(--ink2);border-bottom:var(--hairline) solid var(--line-soft)"><b style="color:var(--ink)">삼성</b>전자<span style="margin-left:auto;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub2)">005930</span></div><div style="display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:var(--fs-md);color:var(--ink2);border-bottom:var(--hairline) solid var(--line-soft)"><b style="color:var(--ink)">삼성</b>SDI<span style="margin-left:auto;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub2)">006400</span></div><div style="display:flex;align-items:center;gap:9px;padding:9px 12px;font-size:var(--fs-md);color:var(--ink2);border-bottom:var(--hairline) solid var(--line-soft)"><b style="color:var(--ink)">삼성</b>바이오로직스<span style="margin-left:auto;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub2)">207940</span></div></div></div></div><p class="g-cap">일치한 부분을 굵게 표시한다. 종목코드처럼 <b>식별에 필요한 값</b>을 함께 보여준다.</p></figure>
+<figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>규칙</th><th>이유</th></tr></thead><tbody><tr><td>입력이 멈춘 뒤 150~250ms 에 요청</td><td>글자마다 요청하면 서버도 화면도 흔들린다</td></tr><tr><td>이전 요청은 취소한다</td><td>늦게 온 옛 결과가 새 결과를 덮는 사고가 흔하다</td></tr><tr><td>결과가 바뀌어도 입력 포커스는 유지</td><td>계속 칠 수 있어야 한다</td></tr><tr><td>로딩 중에도 이전 결과를 남긴다</td><td>화면이 비면 '없다' 로 읽힌다</td></tr></tbody></table></div></figure>
+<h2 class="g-h2" id="scope">범위를 항상 보여준다</h2>
+<div class="g-rule"><b>지금 어디에서 찾고 있는지 화면에 있어야 한다</b><span>'없다' 는 결과의 절반은 <b>범위가 좁아서</b>다. 범위가 보이지 않으면 사용자는 데이터가 없다고 결론 내린다.</span></div>
+<figure class="g-fig"><div class="g-fig__body"><div style="width:100%;max-width:300px"><label class="imt-search" style="width:100%"><svg class="imt-i" aria-hidden="true"><use href="#i-search"/></svg><input value="반도체"></label><div class="imt-seg" style="margin-top:8px"><button class=on>전체</button><button>보유</button><button>관심</button><button>기록</button></div></div></div><p class="g-cap">범위는 넓은 쪽을 기본으로 두고 좁히게 한다. 좁은 쪽이 기본이면 못 찾는 경험이 먼저 온다.</p></figure>
+<h2 class="g-h2" id="empty">결과가 없을 때</h2>
+<div class="g-rule"><b>검색어를 다시 보여주고, 넓힐 방법을 준다</b><span>오타였는지 확인할 수 있어야 하고, 한 번 눌러서 범위를 넓힐 수 있어야 한다.</span></div>
+<figure class="g-fig"><div class="g-fig__body"><div class="imt-empty" style="width:100%;max-width:300px"><svg class="imt-i imt-i--scale-l" aria-hidden="true"><use href="#i-search"/></svg><div style="font:var(--fw-sb) var(--fs-base) var(--font);color:var(--ink);margin-top:6px">&ldquo;삼성전자우B&rdquo; 결과 없음</div><div style="font-size:var(--fs-sm);color:var(--sub);margin-top:4px;line-height:1.55">보유 종목에서만 찾고 있습니다.<br>전체로 넓혀 보시겠어요?</div><button class="imt-btn imt-btn--soft imt-btn--sm" style="margin-top:12px">전체에서 다시 찾기</button></div></div></figure>
+<h2 class="g-h2" id="history">기록과 프라이버시</h2>
+<div class="g-rule"><b>검색 기록을 보여주기 전에 한 번 생각한다</b><span>누가 화면을 같이 볼 수 있는 상황이 있다. 지우는 방법을 항상 함께 둔다.</span></div>
+<h2 class="g-h2" id="results">결과 화면</h2>
+<figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>규칙</th><th>내용</th></tr></thead><tbody><tr><td>검색어를 결과에 강조 표시</td><td>왜 이게 나왔는지 보인다</td></tr><tr><td>개수를 알려준다</td><td>'12건' — 더 좁혀야 하는지 판단하게 한다</td></tr><tr><td>정렬 기준을 밝힌다</td><td>관련도순인지 최신순인지</td></tr><tr><td>결과가 많으면 필터를 붙인다</td><td>다시 치게 하지 않는다</td></tr></tbody></table></div></figure>
+    <div class="g-next"><a href="overlay.html"><span>이전</span><b>겹침</b></a><a href="words.html"><span>다음</span><b>문안</b></a></div>
+  </main>
+</div>
+<script>
+const T=document.getElementById("theme");
+const ap=d=>{document.documentElement.setAttribute("data-theme",d?"dark":"light");T.textContent=d?"라이트":"다크";};
+let d=matchMedia("(prefers-color-scheme: dark)").matches;
+try{const s=localStorage.getItem("imt-theme"); if(s) d=s==="dark";}catch(e){}
+ap(d);
+T.onclick=()=>{d=!d;ap(d);try{localStorage.setItem("imt-theme",d?"dark":"light")}catch(e){}};
+</script>
+</body></html>
