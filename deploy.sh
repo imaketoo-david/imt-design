@@ -33,6 +33,11 @@ for f in files:
     s = open(f, encoding="utf-8").read()
     s2 = re.sub(r'href="((?:\.\./)?)(tokens|components|patterns|site|guide)\.css(?:\?v=[^"]*)?"',
                 lambda m: f'href="{m.group(1)}{m.group(2)}.css?v={v}"', s)
+    # 다른 사이트로 나가는 링크에도 버전을 붙인다.
+    # 서버가 Cache-Control 을 안 내리면 브라우저는 같은 URL 을 재검증 없이 캐시에서 준다 —
+    # 2026-09-02 에 아이콘 카탈로그가 배포 뒤에도 하루 종일 옛 화면으로 보였다.
+    s2 = re.sub(r'https://icons\.imaketoo\.com(?:/catalog\.html)?(?:\?v=[^"\']*)?(?=["\'])',
+                f'https://icons.imaketoo.com/catalog.html?v={v}', s2)
     if s2 != s:
         open(f, "w", encoding="utf-8").write(s2); n += 1
 print(f"  CSS 버전 스탬프 {n}개 파일")
