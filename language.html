@@ -2,18 +2,11 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>IMT Design Language</title>
-<link rel="stylesheet" href="tokens.css?v=20260902-2112">
-<link rel="stylesheet" href="components.css?v=20260902-2112">
+<link rel="stylesheet" href="tokens.css?v=20260902-1245">
+<link rel="stylesheet" href="components.css?v=20260902-1245">
 <link rel="stylesheet" href="site.css?v=dev">
-<link rel="stylesheet" href="patterns.css?v=20260902-2112">
+<link rel="stylesheet" href="patterns.css?v=20260902-1245">
 <style>
-  .ds{display:grid;grid-template-columns:230px 1fr;gap:var(--sp-8);max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
-  .ds__nav{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto}
-  .ds__nav a{color:var(--sub);text-decoration:none;padding:5px var(--sp-3);border-radius:var(--r-in)}
-  .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
-  .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
-  @media(max-width:860px){.ds{grid-template-columns:1fr}.ds__nav{display:none}}
-  .ds > main{min-width:0}
   pre{max-width:100%}
 
   .r{display:flex;gap:var(--sp-3);padding:var(--sp-4) 0;border-bottom:var(--hairline) solid var(--line-soft)}
@@ -47,19 +40,20 @@
     <a href="language.html" class="on">랭귀지</a>
     <a href="index-full.html">토큰</a>
     <a href="https://icons.imaketoo.com">아이콘</a>
+    <a href="resources.html">리소스</a>
   </div>
 </nav>
 
-<div class="imt-page imt-page--full" id="top" style="padding-bottom:var(--sp-6)">
-  <header class="imt-page__head">
-    <p class="kicker">IMT Design Language · v1</p>
-    <h1 class="imt-page__title">우리가 "애플 스타일"이라고 부르는 것</h1>
-    <p class="imt-page__lede">애플 휴먼 인터페이스 가이드라인 157개 문서를 읽고, 우리 조건 — 웹, 한글, 대시보드와 차트, 1인 개발 — 에 맞게 다시 쓴 규칙이다. 애플 문장을 옮겨 적지 않았고, 애플 에셋을 받지도 않았다. 아래 규칙은 전부 번호가 붙어 있다. 앞으로 "애플 스타일로" 대신 <code>L-4.2</code> 처럼 부른다.</p>
+<div class="wrap" id="top">
+  <header class="phead">
+    <p class="phead__k">IMT Design Language · v1</p>
+    <h1>우리가 "애플 스타일"이라고 부르는 것</h1>
+    <p>애플 휴먼 인터페이스 가이드라인 157개 문서를 읽고, 우리 조건 — 웹, 한글, 대시보드와 차트, 1인 개발 — 에 맞게 다시 쓴 규칙이다. 애플 문장을 옮겨 적지 않았고, 애플 에셋을 받지도 않았다. 아래 규칙은 전부 번호가 붙어 있다. 앞으로 "애플 스타일로" 대신 <code>L-4.2</code> 처럼 부른다.</p>
   </header>
 </div>
 
-<div class="ds">
-  <aside class="ds__nav">
+<div class="wrap cols">
+  <aside class="side">
     <b>기준</b>
     <a href="#status">0. 이 문서의 지위</a>
     <a href="#legal">1. 무엇을 배우고 무엇을 받지 않는가</a>

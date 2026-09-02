@@ -356,3 +356,42 @@ img,svg{ max-width:100%; display:block }
     transition-duration:.01ms !important; scroll-behavior:auto !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   기술 절(HIG Technologies 29쪽)에서 가져온 값 · 2026-09-02
+   근거는 HIG-COVERAGE.md 에 쪽 단위로 적어두었다.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  /* 마크·배지 둘레 최소 여백 — 자기 높이의 1/10.
+     apple-pay · healthkit · augmented-reality 세 문서가 같은 값을 말한다. */
+  --clear:            .1em;
+
+  /* 버튼 세로 리듬 — 글자 크기는 버튼 높이의 43%, 뒤집으면 233%.
+     sign-in-with-apple 이 명시한 유일한 비율이다. */
+  --btn-ratio:        2.33;
+  --btn-min-w:        140px;   /* 글자 있는 버튼 최소 너비 */
+  --btn-pad-end:      8%;      /* 글자와 오른쪽 끝 사이 최소 여백 */
+
+  /* 유휴·저조도에서 낮추는 단계. 요소를 지우지 않고 이 값만 건다.
+     always-on: 레이아웃을 흔들면 고장으로 읽힌다. */
+  --dim-2:            .62;     /* 보조 글자·아이콘 */
+  --dim-3:            .38;     /* 넓은 색면·이미지 */
+
+  /* 사진·그러데이션 위에 얹는 글자. 단색 배경용 --ink 를 그대로 쓰지 않는다. */
+  --on-media:         #fff;
+  --on-media-2:       rgba(255,255,255,.76);
+  --on-media-scrim:   rgba(0,0,0,.28);
+
+  /* 추정값의 확신 단계. 숫자를 그대로 내보내지 않고 이 셋 중 하나로 말한다.
+     machine-learning: 낮은 구간은 아예 그리지 않는다. */
+  --conf-hi:          var(--ok);
+  --conf-mid:         var(--warn);
+  --conf-lo:          var(--flat);
+  --conf-cut:         .55;     /* 이 아래는 값을 렌더링하지 않는다 */
+
+  /* 차트 각주(출처·기준일) 여백. maps 의 귀속 표시 규격을 그대로 쓴다. */
+  --note-pad-x:       7px;
+  --note-pad-y:       10px;
+  --note-min-w:       200px;   /* 차트가 이보다 좁으면 각주를 생략한다 */
+  --note-min-h:       100px;
+}

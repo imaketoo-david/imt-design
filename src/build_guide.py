@@ -69,19 +69,6 @@ SHELL = """<!doctype html>
 <link rel="stylesheet" href="../site.css?v={v}">
 <link rel="stylesheet" href="../guide.css?v={v}">
 <style>
-  .gs{{display:grid;grid-template-columns:236px 1fr;gap:var(--sp-8);max-width:1160px;
-    margin:0 auto;padding:0 var(--sp-5)}}
-  .gs__nav{{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;
-    gap:1px;font-size:var(--fs-md);max-height:calc(100vh - 96px);overflow:auto;
-    padding-bottom:var(--sp-8)}}
-  .gs__nav a{{color:var(--sub);text-decoration:none;padding:5px var(--sp-3);
-    border-radius:var(--r-in)}}
-  .gs__nav a:hover{{color:var(--ink);background:var(--fill4)}}
-  .gs__nav a.on{{color:var(--ink);background:var(--fill3);font-weight:var(--fw-m)}}
-  .gs__nav b{{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);
-    font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);
-    text-transform:uppercase;letter-spacing:.06em}}
-  .gs>main{{min-width:0}}
   .g-toc{{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
     margin:0 0 var(--sp-8);font-size:var(--fs-md)}}
@@ -106,26 +93,31 @@ SHELL = """<!doctype html>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
 <nav class="lnav">
-  <a class="lnav__t" href="index.html">가이드</a>
+  <a class="lnav__t" href="../index.html">디자인 시스템</a>
   <div class="lnav__i">
     <a href="../index.html">개요</a>
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
     <a href="https://icons.imaketoo.com">아이콘</a>
+    <a href="../resources.html">리소스</a>
   </div>
 </nav>
 {sprite}
-<div class="gs">
-  <aside class="gs__nav">{side}</aside>
-  <main class="g-doc" style="padding-left:0;padding-right:0">
-    <p class="g-kicker">{kicker}</p>
-    <h1 class="g-title">{title}</h1>
-    <p class="g-abstract">{abstract}</p>
-    {toc}
-    {body}
-    {next}
-  </main>
+<div class="wrap">
+  <header class="phead">
+    <p class="phead__k">{kicker}</p>
+    <h1>{title}</h1>
+    <p>{abstract}</p>
+  </header>
+  <div class="cols">
+    <aside class="side">{side}</aside>
+    <main>
+      {toc}
+      {body}
+      {next}
+    </main>
+  </div>
 </div>
 <script>
 const T=document.getElementById("theme");

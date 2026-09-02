@@ -7,13 +7,6 @@
 <link rel="stylesheet" href="site.css?v=dev">
 <link rel="stylesheet" href="patterns.css?v=20260902-2058">
 <style>
-  .ds{display:grid;grid-template-columns:210px 1fr;gap:var(--sp-8);max-width:1180px;margin:0 auto;padding:0 var(--sp-5) var(--sp-16)}
-  .ds__nav{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;gap:1px;font-size:var(--fs-md)}
-  .ds__nav a{color:var(--sub);text-decoration:none;padding:6px var(--sp-3);border-radius:var(--r-in)}
-  .ds__nav a:hover{color:var(--ink);background:var(--fill4)}
-  .ds__nav b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);text-transform:uppercase;letter-spacing:.06em}
-  @media(max-width:860px){.ds{grid-template-columns:1fr}.ds__nav{display:none}}
-  .ds > main{min-width:0}
   pre{max-width:100%}
 
   .sw{display:grid;gap:var(--sp-2);grid-template-columns:repeat(auto-fill,minmax(148px,1fr))}
@@ -73,18 +66,19 @@
     <a href="language.html">랭귀지</a>
     <a href="index-full.html" class="on">토큰</a>
     <a href="https://icons.imaketoo.com">아이콘</a>
+    <a href="resources.html">리소스</a>
   </div>
 </nav>
 
-<div class="imt-page imt-page--full" id="top" style="padding-bottom:var(--sp-6)">
-  <header class="imt-page__head">
-    <h1 class="imt-page__title">IMT Design System</h1>
-    <p class="imt-page__lede">"애플 스타일" 을 말이 아니라 값으로 고정한다. 이 페이지의 모든 색·크기는 <code>tokens.css</code> 를 런타임에 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
+<div class="wrap" id="top">
+  <header class="phead">
+    <h1>IMT Design System</h1>
+    <p>"애플 스타일" 을 말이 아니라 값으로 고정한다. 이 페이지의 모든 색·크기는 <code>tokens.css</code> 를 런타임에 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
   </header>
 </div>
 
-<div class="ds">
-  <aside class="ds__nav">
+<div class="wrap cols">
+  <aside class="side">
     <b>기초</b>
     <a href="#principles">만들 때 지키는 일곱</a><a href="#color">색</a><a href="#type">타이포</a>
     <a href="#space">간격</a><a href="#radius">라운드</a><a href="#material">머티리얼</a><a href="#shadow">그림자</a><a href="#motion">모션</a><a href="#a11y">접근성 규격</a>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMT 앱 아이콘 템플릿 · 1024 캔버스 · 3레이어 · 안전 원 지름 512
+     레이어 y중심 357 / 512 / 667 — 위아래 155px 시차로 깊이를 만든다.
+     각 레이어의 <g>를 열어 그 안에만 그린다. 원 밖으로 나가면 잘린다. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="safe"><circle cx="512" cy="512" r="256"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a84ff"/><stop offset="1" stop-color="#5e5ce6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 레이어 — 캔버스를 꽉 채운다 -->
+  <g id="layer-back">
+    <rect width="1024" height="1024" rx="230" fill="url(#bg)"/>
+  </g>
+
+  <!-- 중간 레이어 — 안전 원 안 -->
+  <g id="layer-mid" clip-path="url(#safe)">
+    <circle cx="512" cy="512" r="256" fill="#fff" opacity=".14"/>
+  </g>
+
+  <!-- 전경 레이어 — 안전 원 안, 여기에 기호를 그린다 -->
+  <g id="layer-fore" clip-path="url(#safe)" fill="none" stroke="#fff"
+     stroke-width="34" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M400 560 L480 640 L624 424"/>
+  </g>
+
+  <!-- 참고선 — 내보내기 전에 이 그룹을 지운다 -->
+  <g id="guides" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2">
+    <circle cx="512" cy="512" r="256"/>
+    <circle cx="512" cy="357" r="256" stroke-dasharray="8 8"/>
+    <circle cx="512" cy="667" r="256" stroke-dasharray="8 8"/>
+    <line x1="512" y1="0" x2="512" y2="1024"/><line x1="0" y1="512" x2="1024" y2="512"/>
+  </g>
+</svg>

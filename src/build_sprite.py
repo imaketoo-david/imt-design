@@ -11,7 +11,8 @@ SRC = os.path.join(ROOT, "..", "imt-icons", "sprite.svg")
 NEED = ['check-circle','x-circle','arrow-right','arrow-up','arrow-down','check','close',
         'warning','info','bell','star','edit','search','plus','trash','more','filter',
         'lock','layers','doc','trend-up','trend-down','person','sparkle','camera',
-        'repeat','wallet','stethoscope','chart-line','box','brush','chart-bar','arrow-left']
+        'repeat','wallet','stethoscope','chart-line','box','brush','chart-bar','arrow-left','download','link','ruler','contrast',
+        'rounded-square','book-open','palette' if False else 'dots-grid']
 
 src = open(SRC, encoding="utf-8").read()
 syms = {m.group(1): f'<symbol id="i-{m.group(1)}"{m.group(2)}</symbol>'

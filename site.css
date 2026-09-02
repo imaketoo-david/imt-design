@@ -102,3 +102,64 @@
   .band{padding:var(--sp-10) 0}
   .lnav__t{font-size:var(--fs-lg)}
 }
+
+/* ══════════════════════════════════════════════════════════════
+   문서 영역 공통 뼈대 — 가이드 · 랭귀지 · 토큰 · 아이콘 넷이 같다.
+     [글로벌 바] [로컬 내비] [페이지 머리(전체 폭)] [목록 | 본문]
+   구조가 다르면 같은 사이트로 안 읽힌다.
+   ══════════════════════════════════════════════════════════════ */
+.phead{padding:var(--sp-10) 0 var(--sp-6);max-width:74ch}
+.phead__k{margin:0 0 var(--sp-2);font:var(--fw-sb) var(--fs-tag)/1 var(--font);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--sub2)}
+.phead h1{margin:0 0 var(--sp-3);font:var(--fw-sb) var(--fs-3xl)/1.12 var(--font);
+  letter-spacing:var(--tr-3xl);color:var(--ink)}
+.phead p{margin:0;font-size:var(--fs-lg);line-height:var(--lh-base);
+  letter-spacing:var(--tr-base);color:var(--ink2)}
+
+.cols{display:grid;grid-template-columns:212px 1fr;gap:var(--sp-8);align-items:start;
+  padding-bottom:var(--sp-16)}
+.cols>main,.cols>div{min-width:0}
+.side{position:sticky;top:112px;align-self:start;display:flex;flex-direction:column;gap:1px;
+      max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:none;
+  max-height:calc(100vh - 140px);overflow-y:auto;padding-bottom:var(--sp-6);
+  font-size:var(--fs-md);scrollbar-width:thin}
+.side b{display:block;margin:var(--sp-4) 0 var(--sp-1);padding:0 var(--sp-3);
+  font:var(--fw-sb) var(--fs-xs)/1.6 var(--font);color:var(--sub2);
+  text-transform:uppercase;letter-spacing:.06em}
+.side b:first-child{margin-top:0}
+.side a{color:var(--sub);text-decoration:none;padding:6px var(--sp-3);border-radius:var(--r-in)}
+.side a:hover{color:var(--ink);background:var(--fill4)}
+.side a.on{color:var(--ink);background:var(--fill3);font-weight:var(--fw-m)}
+
+@media(max-width:900px){
+  .cols{grid-template-columns:1fr;gap:var(--sp-5)}
+  .side{position:static;max-height:none;flex-direction:row;flex-wrap:wrap;gap:6px}
+  .side b{display:none}
+  .side a{background:var(--card);box-shadow:var(--edge);border-radius:var(--r-cap);
+    padding:5px 12px;font-size:var(--fs-sm)}
+  .phead{padding:var(--sp-8) 0 var(--sp-5)}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ④ 리소스(다운로드) — 애플 다운로드 페이지의 카드 구성을 승계
+   아트는 받아온 것이 아니라 토큰으로 우리가 그린다.
+   ══════════════════════════════════════════════════════════════ */
+.res{display:grid;gap:var(--sp-6);grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+     margin:var(--sp-8) 0 0}
+.rcard{display:flex;flex-direction:column;background:var(--card);border-radius:var(--r-lg);
+       box-shadow:var(--edge);padding:var(--sp-8) var(--sp-7) var(--sp-6)}
+.rcard__art{display:grid;place-items:center;height:150px;margin-bottom:var(--sp-6)}
+.rcard__sq{display:grid;place-items:center;width:118px;height:118px;border-radius:26px;
+           box-shadow:var(--sh-lift)}
+.rcard__sq svg{width:56px;height:56px;stroke-width:1.4;color:#fff}
+.rcard h3{margin:0 0 var(--sp-3);font:var(--fw-sb) var(--fs-title2)/1.25 var(--font);
+          letter-spacing:var(--tr-xl);color:var(--ink)}
+.rcard p{margin:0 0 var(--sp-6);font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)}
+.rcard__foot{margin-top:auto;padding-top:var(--sp-5);
+             border-top:var(--hairline) solid var(--line);display:flex;flex-direction:column;gap:11px}
+.rcard__foot a{display:flex;align-items:center;gap:8px;color:var(--link);text-decoration:none;
+               font-size:var(--fs-base);min-height:var(--tap-min)}
+.rcard__foot a:hover{text-decoration:underline}
+.rcard__foot svg{width:15px;height:15px;stroke-width:1.7;flex:none}
+.rcard__m{margin:calc(var(--sp-4) * -1) 0 var(--sp-6);font:var(--fw-r) var(--fs-sm)/1 var(--font-num);
+          color:var(--flat);letter-spacing:var(--tr-sm)}

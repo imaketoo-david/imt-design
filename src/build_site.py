@@ -23,16 +23,16 @@ def ic(n, cls=""):
     c = f" {cls}" if cls else ""
     return f'<svg class="imt-i{c}" aria-hidden="true"><use href="#i-{n}"/></svg>'
 
-CATS = [("layers", "기초", "guide/layout.html"),
-        ("chart-line", "패턴", "guide/data.html"),
-        ("box", "컴포넌트", "guide/buttons.html"),
-        ("sparkle", "아이콘", "https://icons.imaketoo.com"),
-        ("doc", "랭귀지", "language.html"),
-        ("brush", "토큰", "#tokens")]
+CATS = [("layers",     "가이드",  "guide/index.html"),
+        ("doc",        "랭귀지",  "language.html"),
+        ("brush",      "토큰",    "index-full.html"),
+        ("sparkle",    "아이콘",  "https://icons.imaketoo.com"),
+        ("download",   "리소스",  "resources.html")]
 
 LNAV = [("개요", "index.html", True), ("가이드", "guide/index.html", False),
-        ("랭귀지", "language.html", False), ("토큰", "#tokens", False),
-        ("아이콘", "https://icons.imaketoo.com", False)]
+        ("랭귀지", "language.html", False), ("토큰", "index-full.html", False),
+        ("아이콘", "https://icons.imaketoo.com", False),
+        ("리소스", "resources.html", False)]
 
 def shell(title, body, sprite, lnav_on="개요", extra_css=""):
     nav = "".join(f'<a href="{h}"{" class=on" if t == lnav_on else ""}>{t}</a>' for t, h, _ in LNAV)
@@ -111,6 +111,72 @@ def art_btn():
 
 ART = {"기초": art_layers, "패턴": art_grid, "컴포넌트": art_btn}
 
+def art_space():
+    return ('<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">'
+      + "".join(f'<div style="height:10px;width:{w}px;border-radius:3px;'
+                f'background:var(--c1);opacity:{o}"></div>'
+                for w, o in [(20,.30),(32,.45),(52,.6),(84,.78),(132,1)])
+      + '<div style="margin-top:6px;font:var(--fw-r) var(--fs-xs) var(--font-num);'
+        'color:var(--flat)">4 · 8 · 12 · 20 · 32</div></div>')
+
+def art_lang():
+    return ('<div style="width:150px;display:flex;flex-direction:column;gap:7px">'
+      + "".join(f'<div style="height:7px;width:{w}%;border-radius:4px;background:var(--fill2)"></div>'
+                for w in (100, 92, 74))
+      + '<div style="margin-top:6px;height:7px;width:46%;border-radius:4px;background:var(--c1)"></div>'
+      '</div>')
+
+ART = {"기초": art_layers, "패턴": art_grid, "컴포넌트": art_btn}
+
+
+# ── 리소스 카드 ──────────────────────────────────────────────────
+def rcard(grad, glyph, title, meta, desc, dl, dl_label, more, more_label):
+    return f"""<article class="rcard">
+  <div class="rcard__art"><div class="rcard__sq" style="background:{grad}">{ic(glyph)}</div></div>
+  <h3>{title}</h3>
+  <p class="rcard__m">{meta}</p>
+  <p>{desc}</p>
+  <div class="rcard__foot">
+    <a href="{dl}" download>{ic("download")}{dl_label}</a>
+    <a href="{more}">{ic("doc")}{more_label}</a>
+  </div>
+</article>"""
+
+def kb(n): return f"{n // 1024}KB" if n >= 1024 else f"{n}B"
+
+def res_cards():
+    import json
+    f = os.path.join(ROOT, "dl", "_sizes.json")
+    z = json.load(open(f)) if os.path.exists(f) else {}
+    g1 = "linear-gradient(140deg,#0a84ff,#5e5ce6)"
+    g2 = "linear-gradient(140deg,#30d158,#0a84ff)"
+    g3 = "linear-gradient(140deg,#5e5ce6,#bf5af2)"
+    g4 = "linear-gradient(140deg,#ff9f0a,#ff375f)"
+    return "".join([
+      rcard(g1, "brush", "IMT 디자인 리소스",
+            f"ZIP · {kb(z.get('tokens',0))}",
+            "토큰·컴포넌트·짜임새 스타일시트와 최소 화면 하나. 값을 직접 쓰지 않고 "
+            "의미 이름만 부르는 방식이 그대로 들어 있다.",
+            "dl/imt-tokens.zip", "다운로드", "guide/color.html", "더 알아보기"),
+      rcard(g2, "sparkle", "아이콘 세트",
+            f"ZIP · {kb(z.get('icons',0))} · SVG {z.get('n_svg',334)}개",
+            "낱개 SVG와 스프라이트, 웹폰트까지. 굵기 9단·크기 3단이 CSS 변수 두 개로 "
+            "움직인다 — 그림을 아홉 벌 그려두지 않았다.",
+            "dl/imt-icons.zip", "다운로드", "https://icons.imaketoo.com", "카탈로그 보기"),
+      rcard(g3, "rounded-square", "앱 아이콘 템플릿",
+            f"SVG · {kb(z.get('appicon',0))} · 1024pt",
+            "1024 캔버스에 배경·중간·전경 세 겹, 안전 원 지름 512. 레이어를 위아래 "
+            "155씩 어긋나게 두어 깊이를 확인한다. 참고선은 내보내기 전에 지운다.",
+            "dl/imt-appicon-template.svg", "다운로드", "guide/icons.html", "아이콘 지침"),
+      rcard(g4, "box", "UI 키트",
+            f"ZIP · {kb(z.get('uikit',0))}",
+            "버튼·카드·입력·배지가 실제로 도는 HTML 한 벌. 화면을 새로 짤 때 "
+            "여기서 잘라다 쓰면 값이 어긋날 일이 없다.",
+            "dl/imt-ui-kit.zip", "다운로드", "index-full.html", "컴포넌트 보기"),
+    ])
+
+
+# ── 표지 ─────────────────────────────────────────────────────────
 def build():
     pages = load_pages()
     sp = os.path.join(ROOT, "guide", "_sprite.svg")
@@ -125,23 +191,12 @@ def build():
         if p["slug"] == "index": continue
         groups.setdefault(p["group"], []).append(p)
 
-    tiles = []
-    for g, ps in groups.items():
-        art = ART.get(g, art_layers)()
-        tiles.append(
-            f'<a class="tile" href="guide/{ps[0]["slug"]}.html">'
-            f'<div class="tile__art">{art}</div>'
-            f'<div class="tile__t">{g} · {len(ps)}쪽</div>'
-            f'<div class="tile__d">{" · ".join(q["title"] for q in ps)}</div></a>')
-
-    def plain(t, n=64):
-        """요약에서 태그를 걷어내고 자른다. 태그 한가운데를 자르면 마크업이 샌다."""
-        t = re.sub(r"<[^>]+>", "", t).strip()
-        return t if len(t) <= n else t[:n].rstrip() + "…"
-
-    doclinks = "".join(
-        f'<a href="guide/{q["slug"]}.html"><b>{q["title"]}</b>'
-        f'<span>{plain(q["abstract"])}</span></a>' for g in groups for q in groups[g])
+    tiles = "".join(
+        f'<a class="tile" href="guide/{ps[0]["slug"]}.html">'
+        f'<div class="tile__art">{ART.get(g, art_layers)()}</div>'
+        f'<div class="tile__t">{g} · {len(ps)}쪽</div>'
+        f'<div class="tile__d">{" · ".join(q["title"] for q in ps)}</div></a>'
+        for g, ps in groups.items())
 
     body = f"""
 <header class="hero">
@@ -152,19 +207,32 @@ def build():
 
 <nav class="cats">{cats}</nav>
 
-<section class="band band--tint">
+<section class="band band--tint" id="guide">
   <div class="wrap">
     <h2>가이드</h2>
     <p class="lead">주제 하나가 문서 하나다. 굵은 한 줄이 지침이고 그 아래가 이유이며,
        모든 지침에 도해가 붙는다 — 잘된 예와 잘못된 예를 나란히 놓는 방식이다.</p>
-    <div class="tiles">{"".join(tiles)}</div>
+    <div class="tiles">{tiles}</div>
+    <p class="lead" style="margin:var(--sp-6) 0 0">
+      <a href="guide/index.html" style="color:var(--brand);text-decoration:none">
+        가이드 {len(pages)-1}쪽 전체 보기 →</a></p>
   </div>
 </section>
 
-<section class="band">
+<section class="band" id="language">
   <div class="wrap">
-    <h2>전체 문서</h2>
-    <div class="links">{doclinks}</div>
+    <h2>랭귀지</h2>
+    <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>이다.
+       19개 절 121개 규칙이 한 문서에 있고, 애플에서 그대로 받은 것과 우리가 정한 것을
+       구분해 적어둔다.</p>
+    <div class="links">
+      <a href="language.html"><b>디자인 랭귀지 전문</b>
+        <span>19절 121규칙 — 결정과 근거를 한 곳에</span></a>
+      <a href="language.html#legal"><b>무엇을 배우고 무엇을 받지 않는가</b>
+        <span>HIG 문서는 읽고, 애플 에셋은 받지 않는다</span></a>
+      <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
+        <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
+    </div>
   </div>
 </section>
 
@@ -178,27 +246,38 @@ def build():
         <div class="tile__t">색</div><div class="tile__d">면 3단 · 글자 4단 · 상태 4색 · 차트 8슬롯</div></a>
       <a class="tile" href="guide/typography.html"><div class="tile__art">{art_type()}</div>
         <div class="tile__t">타이포그래피</div><div class="tile__d">12단계 · 애플 텍스트 스타일 대응</div></a>
-      <a class="tile" href="https://icons.imaketoo.com"><div class="tile__art">{art_icons()}</div>
-        <div class="tile__t">아이콘 334</div><div class="tile__d">굵기 9단 · 크기 3단 · 좌표로 직접 그린 세트</div></a>
+      <a class="tile" href="guide/layout.html"><div class="tile__art">{art_space()}</div>
+        <div class="tile__t">간격과 라운드</div><div class="tile__d">4의 배수 · 손끝 44pt · 포인터 28pt</div></a>
     </div>
-    <p class="lead" style="margin-top:var(--sp-6)">
+    <p class="lead" style="margin:var(--sp-6) 0 0">
       <a href="index-full.html" style="color:var(--brand);text-decoration:none">
         토큰 값 전체와 컴포넌트 보기 →</a></p>
   </div>
 </section>
 
-<section class="band">
-  <div class="wrap wrap--narrow">
-    <h2>애플과의 관계</h2>
-    <p class="lead"><b>디자인 가이드는 100% 승계한다.</b> 버튼·글자·위치·색·라운드에 대해
-      애플이 정해둔 것을 다시 고민하지 않는다. 쓸 수 없는 것은 가이드가 아니라
-      <b>산출물</b>(심볼 아트워크·폰트 파일·템플릿)이고, 그건 규격만 읽고 우리 방식으로 다시 만든다.</p>
-    <div class="links">
-      <a href="language.html#legal"><b>무엇을 배우고 무엇을 받지 않는가</b>
-        <span>HIG 문서는 읽고, 애플 에셋은 받지 않는다</span></a>
-      <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
-        <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
+<section class="band" id="icons">
+  <div class="wrap">
+    <h2>아이콘</h2>
+    <p class="lead">334개를 좌표로 직접 그렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
+       애플이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
+    <div class="tiles">
+      <a class="tile" href="https://icons.imaketoo.com"><div class="tile__art">{art_icons()}</div>
+        <div class="tile__t">아이콘 카탈로그</div><div class="tile__d">334개 · 이름으로 검색 · 클릭하면 코드 복사</div></a>
+      <a class="tile" href="guide/icons.html"><div class="tile__art">{art_lang()}</div>
+        <div class="tile__t">아이콘 지침</div><div class="tile__d">굵기를 옆 글자에 맞춘다 · 뜻이 겹치면 하나만 쓴다</div></a>
     </div>
+  </div>
+</section>
+
+<section class="band band--tint" id="resources">
+  <div class="wrap">
+    <h2>리소스</h2>
+    <p class="lead">쓰던 그대로 내려받는다. 문서에 그려둔 값과 내려받은 파일의 값이 같다 —
+       빌드할 때 같은 파일을 담기 때문이다.</p>
+    <div class="res">{res_cards()}</div>
+    <p class="lead" style="margin:var(--sp-8) 0 0">
+      <a href="resources.html" style="color:var(--brand);text-decoration:none">
+        리소스 전체 보기 →</a></p>
   </div>
 </section>
 
@@ -210,7 +289,40 @@ def build():
 """
     open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(
         shell("IMT Design System", body, sprite, "개요"))
-    print(f"▸ 표지 생성 · 가이드 {len(pages)-1}쪽 · 카테고리 {len(CATS)}")
+
+    # ── 리소스 페이지 ────────────────────────────────────────────
+    rbody = f"""
+<div class="wrap">
+  <header class="phead">
+    <p class="phead__k">리소스</p>
+    <h1>다운로드</h1>
+    <p>토큰·아이콘·템플릿을 파일로 받는다. 이 사이트가 실제로 쓰는 파일과 같은 것이라,
+       문서에 적힌 값과 내려받은 값이 어긋나지 않는다.</p>
+  </header>
+  <div class="res">{res_cards()}</div>
+
+  <section style="margin-top:var(--sp-16)">
+    <h2 class="band-h" style="margin:0 0 var(--sp-4);font:var(--fw-sb) var(--fs-title2)/1.25 var(--font);
+        letter-spacing:var(--tr-xl);color:var(--ink)">애플 에셋은 담지 않는다</h2>
+    <p style="margin:0;max-width:64ch;font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)">
+      SF Symbols 아트워크·San Francisco 서체·Sketch/Figma 템플릿은 여기 없다.
+      규격만 읽고 우리 좌표로 다시 그렸다. 앱 아이콘 템플릿의 1024 캔버스·3레이어·
+      지름 512 안전 원은 애플이 공개한 <b>수치</b>이고, 그 안에 그려 넣은 것은 우리 것이다.
+      <a href="language.html#legal" style="color:var(--brand);text-decoration:none">기준 보기 →</a>
+    </p>
+  </section>
+</div>
+
+<footer class="foot" style="margin-top:var(--sp-16)"><div class="wrap">
+  IMT Design System ·
+  <a href="index.html">개요</a> ·
+  <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
+</div></footer>
+"""
+    open(os.path.join(ROOT, "resources.html"), "w", encoding="utf-8").write(
+        shell("리소스 — IMT Design System", rbody, sprite, "리소스"))
+
+    print(f"▸ 표지·리소스 생성 · 가이드 {len(pages)-1}쪽 · 영역 {len(CATS)}")
 
 
 if __name__ == "__main__":
