@@ -147,19 +147,21 @@
 .res{display:grid;gap:var(--sp-6);grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
      margin:var(--sp-8) 0 0}
 .rcard{display:flex;flex-direction:column;background:var(--card);border-radius:var(--r-lg);
-       box-shadow:var(--edge);padding:var(--sp-8) var(--sp-7) var(--sp-6)}
-.rcard__art{display:grid;place-items:center;height:150px;margin-bottom:var(--sp-6)}
-.rcard__sq{display:grid;place-items:center;width:118px;height:118px;border-radius:26px;
+       box-shadow:var(--edge);padding:var(--sp-8)}
+.rcard__art{display:grid;place-items:center;height:132px;margin-bottom:var(--sp-6)}
+.rcard__sq{display:grid;place-items:center;width:112px;height:112px;border-radius:25px;
            box-shadow:var(--sh-lift)}
-.rcard__sq svg{width:56px;height:56px;stroke-width:1.4;color:#fff}
-.rcard h3{margin:0 0 var(--sp-3);font:var(--fw-sb) var(--fs-title2)/1.25 var(--font);
+.rcard__sq svg{width:52px;height:52px;stroke-width:1.4;color:#fff}
+/* 제목·용량·설명을 한 덩어리로 — 제목 바로 밑에 용량, 한 칸 띄고 설명 */
+.rcard h3{margin:0 0 5px;font:var(--fw-sb) var(--fs-title2)/1.25 var(--font);
           letter-spacing:var(--tr-xl);color:var(--ink)}
-.rcard p{margin:0 0 var(--sp-6);font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)}
+.rcard__m{margin:0 0 var(--sp-4);font:var(--fw-r) var(--fs-sm)/1 var(--font-num);
+          color:var(--flat);letter-spacing:var(--tr-sm)}
+.rcard p{margin:0 0 var(--sp-6);font-size:var(--fs-base);line-height:var(--lh-base);
+         color:var(--sub);min-height:calc(var(--fs-base) * var(--lh-base) * 3)}
 .rcard__foot{margin-top:auto;padding-top:var(--sp-5);
-             border-top:var(--hairline) solid var(--line);display:flex;flex-direction:column;gap:11px}
+             border-top:var(--hairline) solid var(--line);display:flex;flex-direction:column;gap:10px}
 .rcard__foot a{display:flex;align-items:center;gap:8px;color:var(--link);text-decoration:none;
                font-size:var(--fs-base);min-height:var(--tap-min)}
 .rcard__foot a:hover{text-decoration:underline}
 .rcard__foot svg{width:15px;height:15px;stroke-width:1.7;flex:none}
-.rcard__m{margin:calc(var(--sp-4) * -1) 0 var(--sp-6);font:var(--fw-r) var(--fs-sm)/1 var(--font-num);
-          color:var(--flat);letter-spacing:var(--tr-sm)}

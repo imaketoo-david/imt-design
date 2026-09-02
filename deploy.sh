@@ -12,6 +12,8 @@ SITE="https://design.imaketoo.com"
 echo "▸ 1. 대비 검증"
 python3 check_contrast.py | tail -2
 
+python3 check_tokens.py || exit 1
+
 echo "▸ 2. 가이드 빌드 · CSS 버전 스탬프"
 # sed 를 안 쓴다: macOS 의 -i 는 빈 인자를 요구하고 GNU 는 그걸 파일명으로 읽는다.
 # 두 곳 다 도는 한 줄이 없어서, 이미 쓰고 있는 python3 에 맡긴다.
