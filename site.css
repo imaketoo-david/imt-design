@@ -52,7 +52,10 @@
 .cats{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--sp-6) var(--sp-10);
   padding:var(--sp-6) var(--sp-5) var(--sp-12)}
 .cats a{display:flex;flex-direction:column;align-items:center;gap:10px;
-  text-decoration:none;color:var(--sub);min-width:76px}
+  text-decoration:none;color:var(--sub);min-width:76px;
+  padding:var(--sp-2) var(--sp-3) var(--sp-3);border-radius:var(--r);
+  transition:background var(--dur-2) var(--ease)}
+.cats a:hover{background:var(--fill4)}
 .cats a:hover{color:var(--ink)}
 .cats__i{display:grid;place-items:center;width:58px;height:58px;color:var(--ink2)}
 .cats__i svg{width:38px;height:38px;stroke-width:1.3}
