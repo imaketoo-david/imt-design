@@ -2,10 +2,10 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>IMT Design Language</title>
-<link rel="stylesheet" href="tokens.css?v=20260903-0625">
-<link rel="stylesheet" href="components.css?v=20260903-0625">
-<link rel="stylesheet" href="site.css?v=20260903-0625">
-<link rel="stylesheet" href="patterns.css?v=20260903-0625">
+<link rel="stylesheet" href="tokens.css?v=20260903-0641">
+<link rel="stylesheet" href="components.css?v=20260903-0641">
+<link rel="stylesheet" href="site.css?v=20260903-0641">
+<link rel="stylesheet" href="patterns.css?v=20260903-0641">
 <style>
   pre{max-width:100%}
 
@@ -28,7 +28,7 @@
 <nav class="gnav">
   <a class="gnav__b" href="index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html?v=20260903-0625">아이콘 334</a>
+  <a href="/icons/catalog.html?v=20260903-0641">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -39,7 +39,7 @@
     <a href="guide/index.html">가이드</a>
     <a href="language.html" class="on">랭귀지</a>
     <a href="index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0625">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-0641">아이콘</a>
     <a href="resources.html">리소스</a>
   </div>
 </nav>
@@ -47,8 +47,8 @@
 <div class="wrap" id="top">
   <header class="phead">
     <p class="phead__k">IMT Design Language · v1</p>
-    <h1>우리가 "애플 스타일"이라고 부르는 것</h1>
-    <p>애플 휴먼 인터페이스 가이드라인 157개 문서를 읽고, 우리 조건 — 웹, 한글, 대시보드와 차트, 1인 개발 — 에 맞게 다시 쓴 규칙이다. 애플 문장을 옮겨 적지 않았고, 애플 에셋을 받지도 않았다. 아래 규칙은 전부 번호가 붙어 있다. 앞으로 "애플 스타일로" 대신 <code>L-4.2</code> 처럼 부른다.</p>
+    <h1>고요한 정밀 — 우리가 지키는 것</h1>
+    <p>HIG 157개 문서를 읽고, 우리 조건 — 웹, 한글, 대시보드와 차트, 1인 개발 — 에 맞게 <b>다시 쓴</b> 규칙이다. 원전의 문장을 옮겨 적지 않았고, 배포 에셋도 받지 않았다. 가져온 것은 <b>수치와 방법</b>뿐이고 나머지는 우리가 정했다. 아래 규칙은 전부 번호가 붙어 있다. 앞으로 "그 느낌으로" 대신 <code>L-4.2</code> 처럼 부른다.</p>
   </header>
 </div>
 
@@ -76,7 +76,7 @@
     <a href="#words">15. 문안</a>
     <b>판정</b>
     <a href="#a11y">16. 접근성</a>
-    <a href="#diverge">17. 애플과 갈라서는 지점</a>
+    <a href="#diverge">17. 원전과 갈라서는 지점</a>
     <a href="#check">18. 배포 전 체크리스트</a>
   </aside>
   <main>
@@ -84,12 +84,12 @@
   <!-- 0 -->
   <section class="imt-section" id="status">
     <h2 class="imt-section__title">0. 이 문서의 지위</h2>
-    <p class="lede">디자인 언어는 취향이 아니라 판정 기준이다. "이게 더 애플스러운가"를 눈으로 다투면 매번 결론이 달라진다. 그래서 규칙에 번호를 붙였다.</p>
+    <p class="lede">디자인 언어는 취향이 아니라 판정 기준이다. "이게 더 그 느낌인가"를 눈으로 다투면 매번 결론이 달라진다. 그래서 규칙에 번호를 붙였다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-0.1</span><div><div class="r__t">값이 아니라 의미가 진실이다</div><div class="r__s">애플은 문서에 색 값을 적어두고도 "앱에 하드코딩하지 말라, 값은 릴리스마다 달라진다"고 못 박는다. 웹에는 시스템 색 API가 없어 우리는 값을 고정할 수밖에 없다. 그래서 값은 <code>tokens.css</code> 안에만 두고, 코드에서는 <code>--sub</code>·<code>--warn</code> 같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.2</span><div><div class="r__t">의미를 바꿔 쓰지 않는다</div><div class="r__s">구분선 색을 글자색으로, 보조 라벨색을 배경색으로 돌려쓰는 순간 시스템은 무너진다. 필요한 의미가 없으면 새 토큰을 만든다 — 있는 걸 비틀지 않는다.</div></div></div>
       <div class="r"><span class="r__n">L-0.3</span><div><div class="r__t">규칙은 기계가 검사할 수 있어야 한다</div><div class="r__s">대비는 <code>check_contrast.py</code>, 미정의 토큰 참조는 빌드 스크립트가 잡는다. 사람 눈으로만 지키는 규칙은 6개월 뒤에 반드시 깨진다.</div></div></div>
-      <div class="r"><span class="r__n">L-0.6</span><div><div class="r__t">문서는 둘이고, 역할이 다르다</div><div class="r__s">이 문서(<b>디자인 랭귀지</b>)는 <b>왜 그렇게 하는가</b>와 <b>애플과 어디서 갈라서는가</b>를 정한다 — 판단이 필요할 때 여기를 본다. <a href="index-full.html">시스템 참조서</a>는 <b>무엇을 쓰는가</b>다 — 토큰 값, 컴포넌트, 복사해 갈 코드. 같은 내용을 두 곳에 적지 않는다. 대신 규칙 번호(<code>L-3.1</code>)로 서로를 가리킨다.</div></div></div>
+      <div class="r"><span class="r__n">L-0.6</span><div><div class="r__t">문서는 둘이고, 역할이 다르다</div><div class="r__s">이 문서(<b>디자인 랭귀지</b>)는 <b>왜 그렇게 하는가</b>와 <b>원전과 어디서 갈라서는가</b>를 정한다 — 판단이 필요할 때 여기를 본다. <a href="index-full.html">시스템 참조서</a>는 <b>무엇을 쓰는가</b>다 — 토큰 값, 컴포넌트, 복사해 갈 코드. 같은 내용을 두 곳에 적지 않는다. 대신 규칙 번호(<code>L-3.1</code>)로 서로를 가리킨다.</div></div></div>
       <div class="r"><span class="r__n">L-0.5</span><div><div class="r__t">CSS 링크에 버전을 붙인다</div><div class="r__s">CDN은 CSS를 몇 시간씩 캐시한다. 파일을 올려도 사용자에게는 옛날 것이 간다. <code>tokens.css?v=20260902b</code> 처럼 배포마다 값을 바꾼다 — URL이 달라지면 캐시가 비켜간다. 잊기 쉬우니 서버가 짧은 <code>Cache-Control</code>을 함께 내려주는 편이 낫다. <b>버전은 CSS 파일 <u>전부</u>에 찍는다</b> — 2026-09-02 에 <code>site.css?v=dev</code> 하나를 빼먹었더니 그 파일만 캐시에 얼어붙어, 랭귀지·토큰 두 쪽의 2단 배치가 나흘 내내 옛 CSS로 그려졌다. 빠뜨린 파일은 티가 안 난다 — 나머지가 멀쩡히 갱신되기 때문이다.</div></div></div>
       <div class="r"><span class="r__n">L-0.4</span><div><div class="r__t">기존 이름은 지우지 않는다</div><div class="r__s">토큰은 추가하고 값만 조정한다. 이름을 지우면 sim·plan·marketing·speak·chess 다섯 사이트를 동시에 고쳐야 한다. 시스템의 수명은 하위 호환이 결정한다.</div></div></div>
     </div>
@@ -98,7 +98,7 @@
   <!-- 1 -->
   <section class="imt-section" id="legal">
     <h2 class="imt-section__title">1. 무엇을 배우고, 무엇을 받지 않는가</h2>
-    <p class="lede">애플 디자인 사이트에는 읽는 문서와 내려받는 에셋이 같이 있다. 둘의 성격이 완전히 다르다. 이 구분이 우리 아이콘 324개가 legally clean 한 이유다.</p>
+    <p class="lede">HIG 사이트에는 읽는 문서와 내려받는 에셋이 같이 있다. 둘의 성격이 완전히 다르다. 이 구분이 우리 아이콘 324개가 legally clean 한 이유다.</p>
     <div class="imt-card">
       <div class="imt-tablewrap"><table class="imt-table">
         <thead><tr><th>대상</th><th>성격</th><th>우리 방침</th></tr></thead>
@@ -116,7 +116,7 @@
   <!-- 2 -->
   <section class="imt-section" id="principles">
     <h2 class="imt-section__title">2. 일곱 원칙</h2>
-    <p class="lede">애플의 여덟 원칙(Purpose·Agency·Responsibility·Familiarity·Flexibility·Simplicity·Craft·Delight)을 우리 상황 — 혼자 만들고, 주로 데이터를 보여주고, 사용자가 대개 나 자신이거나 소수 — 에 맞춰 일곱으로 다시 묶었다. 여기 있는 것은 <b>왜</b>다. 화면을 그릴 때 손이 기억해야 할 <b>무엇</b>은 <a href="index-full.html#principles">시스템 참조서의 «만들 때 지키는 일곱»</a>에 있다.</p>
+    <p class="lede">HIG 의 여덟 원칙(Purpose·Agency·Responsibility·Familiarity·Flexibility·Simplicity·Craft·Delight)을 우리 상황 — 혼자 만들고, 주로 데이터를 보여주고, 사용자가 대개 나 자신이거나 소수 — 에 맞춰 일곱으로 다시 묶었다. 여기 있는 것은 <b>왜</b>다. 화면을 그릴 때 손이 기억해야 할 <b>무엇</b>은 <a href="index-full.html#principles">시스템 참조서의 «만들 때 지키는 일곱»</a>에 있다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-2.1</span><div><div class="r__t">화면의 목적을 한 문장으로 말할 수 없으면 만들지 않는다</div><div class="r__s">"이 화면은 <b>___</b>를 판단하게 한다." 빈칸이 안 채워지면 그 화면은 아직 설계되지 않은 것이다.</div></div></div>
       <div class="r"><span class="r__n">L-2.2</span><div><div class="r__t">비켜선다</div><div class="r__s">UI는 콘텐츠 위에 얹히는 것이지 콘텐츠와 경쟁하는 것이 아니다. 브랜드·로고·장식이 데이터보다 눈에 먼저 들어오면 잘못 만든 것이다.</div></div></div>
@@ -131,7 +131,7 @@
   <!-- 3 -->
   <section class="imt-section" id="layers">
     <h2 class="imt-section__title">3. 화면은 세 층이다</h2>
-    <p class="lede">2026년 애플의 가장 큰 변화. 컨트롤은 콘텐츠와 <b>같은 평면에 있지 않다.</b> 콘텐츠 위에 떠 있고, 콘텐츠가 그 아래로 지나간다. 이 한 가지를 지키느냐가 요즘 "애플처럼 보이는가"를 가장 크게 좌우한다.</p>
+    <p class="lede">2026년 애플의 가장 큰 변화. 컨트롤은 콘텐츠와 <b>같은 평면에 있지 않다.</b> 콘텐츠 위에 떠 있고, 콘텐츠가 그 아래로 지나간다. 이 한 가지를 지키느냐가 요즘 "고요한 정밀이 나오는가"를 가장 크게 좌우한다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-3.1</span><div><div class="r__t">콘텐츠 층 — 표·차트·본문·카드</div><div class="r__s">여기는 불투명하다. 면을 나눌 때는 표준 머티리얼(<code>--mat-ultrathin</code>~<code>--mat-thick</code>)이나 배경 대비를 쓴다. <b>여기에 글래스를 쓰지 않는다.</b></div></div></div>
       <div class="r"><span class="r__n">L-3.2</span><div><div class="r__t">컨트롤 층 — 상단바·탭바·사이드바·툴바</div><div class="r__s">여기만 <code>--glass</code>를 쓴다. 반투명하게 떠 있고, 아래로 콘텐츠가 비쳐 지나간다. 경계는 그림자가 아니라 <code>--glass-line</code> 한 줄로 만든다.</div></div></div>
@@ -187,10 +187,10 @@
   <!-- 7 -->
   <section class="imt-section" id="type">
     <h2 class="imt-section__title">7. 글자</h2>
-    <p class="lede">애플 텍스트 스타일은 크기·굵기·행간이 한 세트로 정해져 있다. 우리는 그 단계를 그대로 가져오되, 한글 본문의 행간만 넓혔다.</p>
+    <p class="lede">HIG 텍스트 스타일은 크기·굵기·행간이 한 세트로 정해져 있다. 우리는 그 단계를 그대로 가져오되, 한글 본문의 행간만 넓혔다.</p>
     <div class="imt-card">
       <div class="imt-tablewrap"><table class="imt-table">
-        <thead><tr><th>토큰</th><th>px</th><th>대응하는 애플 스타일</th><th>쓰는 곳</th></tr></thead>
+        <thead><tr><th>토큰</th><th>px</th><th>대응하는 HIG 스타일</th><th>쓰는 곳</th></tr></thead>
         <tbody>
           <tr><td><code>--fs-3xl</code></td><td>34</td><td>Large Title</td><td>히어로</td></tr>
           <tr><td><code>--fs-title1</code></td><td>28</td><td>Title 1</td><td>페이지 제목</td></tr>
@@ -208,8 +208,8 @@
       </table></div>
       <div class="r" style="margin-top:var(--sp-4)"><span class="r__n">L-7.1</span><div><div class="r__t">정해진 단계만 쓴다</div><div class="r__s">11.5px 같은 중간값을 허용하면 눈은 그 차이를 위계로 읽지 못한다. 그냥 지저분해질 뿐이다.</div></div></div>
       <div class="r"><span class="r__n">L-7.2</span><div><div class="r__t">가는 굵기를 쓰지 않는다</div><div class="r__s">400 · 500 · 600 셋뿐이다. Thin·Light 는 토큰에 아예 없다 — 작은 글자에서 읽히지 않는다.</div></div></div>
-      <div class="r"><span class="r__n">L-7.3</span><div><div class="r__t">큰 글자일수록 자간을 좁힌다</div><div class="r__s">34px에 <code>-.024em</code>, 13px에 <code>-.008em</code>. 이 하나가 "애플처럼 보이는가"를 가장 크게 좌우한다. 시스템 폰트는 실제로 크기마다 자간을 자동 조정하는데, 웹에서는 우리가 대신해줘야 한다.</div></div></div>
-      <div class="r"><span class="r__n">L-7.4</span><div><div class="r__t">한글 본문 행간은 1.55, 영문·숫자 제목은 1.21</div><div class="r__s">애플 실측은 본문 17/22 = 1.29다. 한글은 받침 때문에 글자 하나의 세로 밀도가 높아 그 값이면 답답하다. 본문만 <code>--lh-base</code> 1.55로 넓히고, 제목·수치는 애플 비율(<code>--lh-title</code> 1.21, <code>--lh-head</code> 1.29)을 그대로 쓴다. (→ <a href="#diverge">L-17.2</a>)</div></div></div>
+      <div class="r"><span class="r__n">L-7.3</span><div><div class="r__t">큰 글자일수록 자간을 좁힌다</div><div class="r__s">34px에 <code>-.024em</code>, 13px에 <code>-.008em</code>. 이 하나가 "고요한 정밀이 나오는가"를 가장 크게 좌우한다. 시스템 폰트는 실제로 크기마다 자간을 자동 조정하는데, 웹에서는 우리가 대신해줘야 한다.</div></div></div>
+      <div class="r"><span class="r__n">L-7.4</span><div><div class="r__t">한글 본문 행간은 1.55, 영문·숫자 제목은 1.21</div><div class="r__s">애플 실측은 본문 17/22 = 1.29다. 한글은 받침 때문에 글자 하나의 세로 밀도가 높아 그 값이면 답답하다. 본문만 <code>--lh-base</code> 1.55로 넓히고, 제목·수치는 HIG 비율(<code>--lh-title</code> 1.21, <code>--lh-head</code> 1.29)을 그대로 쓴다. (→ <a href="#diverge">L-17.2</a>)</div></div></div>
       <div class="r"><span class="r__n">L-7.5</span><div><div class="r__t">서체는 한 벌</div><div class="r__s"><code>-apple-system</code> → Pretendard → Apple SD Gothic Neo. 숫자만 <code>--font-num</code>(등폭). 표에서 자릿수가 흔들리면 비교가 안 된다.</div></div></div>
       <div class="r"><span class="r__n">L-7.6</span><div><div class="r__t">잘라내기보다 접는다</div><div class="r__s">말줄임은 마지막 수단이다. 줄 수를 늘리거나, 레이아웃을 세로로 쌓거나, 열을 줄인다.</div></div></div>
       <div class="r"><span class="r__n">L-7.7</span><div><div class="r__t">읽으라고 쓴 글자는 선택 가능하게</div><div class="r__s">값·ID·코드는 복사할 수 있어야 한다. <code>user-select:none</code>은 컨트롤에만.</div></div></div>
@@ -234,7 +234,7 @@
   <!-- 9 -->
   <section class="imt-section" id="icon">
     <h2 class="imt-section__title">9. 아이콘</h2>
-    <p class="lede">우리 아이콘 324개(<a href="/icons/catalog.html?v=20260903-0625">design.imaketoo.com/icons</a>)가 지키는 규칙이자, 새 아이콘을 추가할 때의 기준이다.</p>
+    <p class="lede">우리 아이콘 324개(<a href="/icons/catalog.html?v=20260903-0641">design.imaketoo.com/icons</a>)가 지키는 규칙이자, 새 아이콘을 추가할 때의 기준이다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-9.1</span><div><div class="r__t">한 세트 안에서 크기·획·시점·디테일이 같아야 한다</div><div class="r__s">24×24 격자, 시각 면적 17.6×15.6(가로로 넓고 낮게), 획 1.6 균일, 라운드 캡·조인, 경로 2~3개. 이 다섯 개가 우리 세트의 정체성이다.</div></div></div>
       <div class="r"><span class="r__n">L-9.2</span><div><div class="r__t">아이콘 굵기는 옆 글자 굵기에 맞춘다 — 축이 있다</div><div class="r__s">애플 심볼은 굵기 9단을 만들려고 <b>9벌을 그린다.</b> 우리 아이콘은 획이라 경로 하나에 <code>stroke-width</code>만 바꾸면 된다 — 334개 전부가 공짜로 9단을 갖는다. 같은 규격을 더 싸게 만든 지점이다.<br><code>.imt-i--regular</code>(400) · <code>--medium</code>(500) · <code>--semibold</code>(600). 본문 옆 아이콘이 혼자 굵으면 그것만 튄다. 강조하고 싶을 때만 어긋나게 한다.</div></div></div>
@@ -337,7 +337,7 @@
   <!-- 15 -->
   <section class="imt-section" id="words">
     <h2 class="imt-section__title">15. 문안</h2>
-    <p class="lede">UI 텍스트는 디자인이다. 애플 문서에서 가장 분량이 많은 주제 중 하나이기도 하다.</p>
+    <p class="lede">UI 텍스트는 디자인이다. HIG 에서 가장 분량이 많은 주제 중 하나이기도 하다.</p>
     <div class="imt-card">
       <div class="r"><span class="r__n">L-15.1</span><div><div class="r__t">동작 중심으로 쓴다</div><div class="r__s">"저장이 필요합니다"가 아니라 "저장". 버튼은 동사, 라벨은 명사.</div></div></div>
       <div class="r"><span class="r__n">L-15.2</span><div><div class="r__t">같은 것을 항상 같은 말로 부른다</div><div class="r__s">한 화면에서 '종목', 다른 화면에서 '자산', 코드에서 'ticker'라고 부르면 세 개가 된다. 용어를 한 번 정하고 끝까지 쓴다.</div></div></div>
@@ -374,12 +374,12 @@
 
   <!-- 17 -->
   <section class="imt-section" id="diverge">
-    <h2 class="imt-section__title">17. 애플과의 관계</h2>
-    <p class="lede">이 시스템의 전제는 하나다. <b>애플의 디자인 가이드는 100% 승계한다.</b> 버튼·글자·위치·색·라운드에 대해 애플이 정해둔 것을 우리가 다시 고민하지 않는다. 대신 <b>애플의 산출물</b>(심볼 아트워크·폰트 파일·템플릿)은 쓸 수 없으므로, 그 규격을 읽고 <b>우리 방식으로 다시 만든다.</b><br><br>그래서 아래 목록에 "애플과 생각이 다르다"는 항목은 <b>하나도 없다.</b> 겉보기에 달라 보이는 것들은 전부 셋 중 하나다.</p>
+    <h2 class="imt-section__title">17. 원전과의 관계</h2>
+    <p class="lede">이 시스템의 전제는 하나다. <b>검증된 수치는 다시 고민하지 않는다.</b> 버튼·글자·위치·색·라운드처럼 이미 실측으로 답이 나온 것은 HIG 에서 그대로 받는다. 대신 <b>남의 산출물</b>(심볼 아트워크·폰트 파일·템플릿)은 쓸 수 없으므로, 규격만 읽고 <b>우리 방식으로 다시 만든다.</b><br><br>그래서 아래 목록에 "원전과 생각이 다르다"는 항목은 <b>하나도 없다.</b> 겉보기에 달라 보이는 것들은 전부 셋 중 하나다.</p>
 
     <div class="imt-card">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-1)">가 · 애플 가이드 그대로인데 오해하기 쉬운 것</h3>
-      <p style="color:var(--sub);font-size:var(--fs-md);margin:0 0 var(--sp-2)">애플 문서를 직접 읽지 않으면 "우리가 튄다"고 착각하게 되는 자리들이다. 전부 애플이 명시한 대로다.</p>
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-1)">가 · HIG 그대로인데 오해하기 쉬운 것</h3>
+      <p style="color:var(--sub);font-size:var(--fs-md);margin:0 0 var(--sp-2)">HIG 를 직접 읽지 않으면 "우리가 튄다"고 착각하게 되는 자리들이다. 전부 원전이 명시한 대로다.</p>
 <div class="r "><span class="r__n">L-17.1</span><div><div class="r__t">등락색 반전 — 상승 빨강</div><div class="r__s">애플 Color 문서가 <b>주식 앱 스크린샷 두 장</b>으로 직접 예시한다 — 영어권은 초록이 상승, 중국어권은 빨강이 상승. 색의 뜻은 문화가 정한다는 것이 애플의 규정이다. 한국 관례를 따르는 쪽이 <b>가이드에 맞는다.</b></div></div></div>
       <div class="r "><span class="r__n">L-17.2</span><div><div class="r__t">버튼은 캡슐이 아니라 둥근 사각형</div><div class="r__s">애플 Buttons 문서가 주는 모양은 셋이다 — 캡슐(텍스트), 캡슐(텍스트+아이콘), <b>둥근 사각형</b>. 우리는 셋 중 하나를 고른 것이지 벗어난 것이 아니다. 표와 지표가 빽빽한 화면에서는 캡슐의 좌우 여백이 밀도를 깎는다. 캡슐이 필요한 칩·필터에는 <code>--r-cap</code>이 있다.</div></div></div>
       <div class="r "><span class="r__n">L-17.3</span><div><div class="r__t">Liquid Glass 를 아껴 쓴다</div><div class="r__s">애플 문장 그대로다 — <i>"Use Liquid Glass effects sparingly."</i> 글래스는 시선을 아래 콘텐츠로 보내려는 재질이라, 여러 개 쓰면 목적이 뒤집힌다. 화면당 하나에서 둘.</div></div></div>
@@ -387,9 +387,9 @@
     </div>
 
     <div class="imt-card" style="margin-top:var(--sp-4)">
-      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-1)">나 · 애플이 규정하지 않은 영역</h3>
-      <p style="color:var(--sub);font-size:var(--fs-md);margin:0 0 var(--sp-2)">애플 수치는 라틴 문자와 애플 플랫폼 기준이다. 그 밖의 자리는 우리가 채우되, <b>채웠다는 사실을 표시한다</b> — 나중에 애플이 답을 주면 그쪽으로 옮기기 위해서다.</p>
-<div class="r r--a"><span class="r__n">L-17.5</span><div><div class="r__t">한글 본문 행간 1.55</div><div class="r__s">애플 실측은 본문 17/22 = 1.29다. 한글은 받침 때문에 글자당 세로 밀도가 높아 같은 비율이면 답답하다. <b>본문만</b> 넓히고 제목·수치는 애플 비율(<code>--lh-title</code> 1.21, <code>--lh-head</code> 1.29)을 그대로 쓴다.</div></div></div>
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-1)">나 · 원전이 규정하지 않은 영역</h3>
+      <p style="color:var(--sub);font-size:var(--fs-md);margin:0 0 var(--sp-2)">HIG 수치는 라틴 문자와 그 플랫폼 기준이다. 그 밖의 자리는 우리가 채우되, <b>채웠다는 사실을 표시한다</b> — 나중에 원전이 답을 주면 그쪽으로 옮기기 위해서다.</p>
+<div class="r r--a"><span class="r__n">L-17.5</span><div><div class="r__t">한글 본문 행간 1.55</div><div class="r__s">애플 실측은 본문 17/22 = 1.29다. 한글은 받침 때문에 글자당 세로 밀도가 높아 같은 비율이면 답답하다. <b>본문만</b> 넓히고 제목·수치는 HIG 비율(<code>--lh-title</code> 1.21, <code>--lh-head</code> 1.29)을 그대로 쓴다.</div></div></div>
       <div class="r r--a"><span class="r__n">L-17.6</span><div><div class="r__t">한글 UI 문안 규칙</div><div class="r__s">애플 Writing 문서는 영문 대문자 규칙·관사 생략을 다룬다. 한글에는 해당이 없다. 대신 우리 규칙을 <a href="#words">15장</a>에 따로 뒀다 — 조사를 생략하지 않는다, 용어를 한 번 정하면 끝까지 쓴다.</div></div></div>
     </div>
 

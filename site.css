@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════
    IMT Design — 사이트 뼈대
-   구조는 애플 개발자 사이트의 2단 내비게이션을 승계한다.
+   구조는 HIG 문서 사이트의 2단 내비게이션을 승계한다.
      ① 글로벌 바   제품 전체 (48px, 어둡게)
      ② 로컬 내비   지금 섹션 + 그 안의 갈래 (48px, 붙박이)
    값은 우리 토큰이다.
@@ -50,7 +50,7 @@
 .hero p{margin:0 auto;max-width:46ch;font-size:var(--fs-xl);line-height:1.45;
   letter-spacing:var(--tr-base);color:var(--ink2)}
 
-/* ── 카테고리 행 (애플의 플랫폼 아이콘 줄) ───────────────────── */
+/* ── 카테고리 행 (HIG 의 플랫폼 아이콘 줄) ───────────────────── */
 .cats{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--sp-6) var(--sp-10);
   padding:var(--sp-6) var(--sp-5) var(--sp-12)}
 .cats a{display:flex;flex-direction:column;align-items:center;gap:var(--sp-3);
@@ -147,7 +147,7 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   ④ 리소스(다운로드) — 애플 다운로드 페이지의 카드 구성을 승계
+   ④ 리소스(다운로드) — HIG 배포 페이지의 카드 구성을 승계
    아트는 받아온 것이 아니라 토큰으로 우리가 그린다.
    ══════════════════════════════════════════════════════════════ */
 .res{display:grid;gap:var(--sp-6);grid-template-columns:repeat(auto-fill,minmax(320px,1fr));

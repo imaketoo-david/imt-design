@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""도해 어휘 — 애플 문서의 그림 유형을 함수로 고정한다.
+"""도해 어휘 — HIG 문서의 그림 유형을 함수로 고정한다.
 
 도해는 그림 파일이 아니라 살아 있는 컴포넌트다. tokens.css 가 바뀌면
 도해도 같이 바뀐다 — 문서와 코드가 어긋날 수 없다는 것이 이 시스템의 전제고,
@@ -19,7 +19,7 @@ def fig(body, cap="", plain=False):
 
 def cmp2(items, cap=""):
     """비교 — 잘된 예 / 잘못된 예. items = [(kind, stage_html, label)]
-    kind: 'do' | 'no'. 애플 문서에서 가장 많이 쓰이는 형태다."""
+    kind: 'do' | 'no'. HIG 문서에서 가장 많이 쓰이는 형태다."""
     out = []
     LABEL = {"do": "이렇게", "no": "이렇게 하지 않는다"}
     for it in items:

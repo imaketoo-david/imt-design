@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """가이드 문서 생성 — src/pages/*.py 를 읽어 guide/*.html 을 만든다.
 
-한 페이지가 한 파일이다. 애플처럼 '주제 하나 = 문서 하나' 구조라야
+한 페이지가 한 파일이다. HIG 처럼 '주제 하나 = 문서 하나' 구조라야
 찾아 읽을 수 있고, 고칠 때 그 파일만 열면 된다.
 """
 import os, sys, importlib.util, json, re

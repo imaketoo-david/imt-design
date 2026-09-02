@@ -2,11 +2,11 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>접근성 — IMT Design Guide</title>
-<link rel="stylesheet" href="../tokens.css?v=20260903-0625">
-<link rel="stylesheet" href="../components.css?v=20260903-0625">
-<link rel="stylesheet" href="../patterns.css?v=20260903-0625">
-<link rel="stylesheet" href="../site.css?v=20260903-0625">
-<link rel="stylesheet" href="../guide.css?v=20260903-0625">
+<link rel="stylesheet" href="../tokens.css?v=20260903-0641">
+<link rel="stylesheet" href="../components.css?v=20260903-0641">
+<link rel="stylesheet" href="../patterns.css?v=20260903-0641">
+<link rel="stylesheet" href="../site.css?v=20260903-0641">
+<link rel="stylesheet" href="../guide.css?v=20260903-0641">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -27,7 +27,7 @@
 <nav class="gnav">
   <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html?v=20260903-0625">아이콘 334</a>
+  <a href="/icons/catalog.html?v=20260903-0641">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -38,7 +38,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0625">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-0641">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
 </nav>
@@ -54,7 +54,7 @@
     <main>
       <nav class="g-toc"><b>이 문서</b><a href="#contrast">대비</a><a href="#size">컨트롤 크기</a><a href="#fontsize">글자 최소 크기</a><a href="#keyboard">키보드</a><a href="#color">색만으로 뜻을 전하지 않는다</a><a href="#prefs">시스템 설정을 존중한다</a><a href="#check">배포 전에 확인하는 다섯</a></nav>
       <h2 class="g-h2" id="contrast">대비</h2>
-<div class="g-rule"><b>기본값이 못 맞추면 최소한 고대비 모드에서는 맞춘다</b><span>애플이 명시한 방식이고, 애플 자신도 시스템 색에 별도 accessible 변형을 둔다. 우리 <code>@media (prefers-contrast: more)</code> 블록이 그 역할이다.</span></div>
+<div class="g-rule"><b>기본값이 못 맞추면 최소한 고대비 모드에서는 맞춘다</b><span>HIG 가 명시한 방식이고, 원전 자신도 시스템 색에 별도 accessible 변형을 둔다. 우리 <code>@media (prefers-contrast: more)</code> 블록이 그 역할이다.</span></div>
 <figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>글자 크기</th><th>굵기</th><th>최소 대비</th></tr></thead><tbody><tr><td>17pt 이하</td><td>전부</td><td><b>4.5 : 1</b></td></tr><tr><td>18pt 이상</td><td>전부</td><td><b>3 : 1</b></td></tr><tr><td>전부</td><td>Bold</td><td><b>3 : 1</b></td></tr><tr><td>비텍스트 (차트 마크·아이콘·경계)</td><td>—</td><td><b>3 : 1</b></td></tr></tbody></table></div></figure>
 <figure class="g-fig"><div class="g-fig__body"><div class="g-cmp"><div class="g-cmp__i g-cmp__i--do"><div class="g-cmp__stage"><div style="width:100%;background:var(--card);border-radius:var(--r-in);padding:var(--sp-4);box-shadow:var(--edge)"><div style="color:var(--sub);font-size:var(--fs-md);line-height:1.6">최근 3개월 수익률은 12.4% 입니다</div><div style="margin-top:6px;font:var(--fw-r) var(--fs-tag) var(--font-num);color:var(--sub)">--sub #6e6e74 · 5.07:1</div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-check-circle"/></svg>라벨색이 기준을 넘는다</div></div><div class="g-cmp__i g-cmp__i--no"><div class="g-cmp__stage"><div style="width:100%;background:var(--card);border-radius:var(--r-in);padding:var(--sp-4);box-shadow:var(--edge)"><div style="color:#a4a4aa;font-size:var(--fs-md);line-height:1.6">최근 3개월 수익률은 12.4% 입니다</div><div style="margin-top:6px;font:var(--fw-r) var(--fs-tag) var(--font-num);color:var(--sub)">#a4a4aa · 2.48:1</div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-x-circle"/></svg>흐린 회색 — 밝은 곳에서 사라진다</div></div></div></div><p class="g-cap">오른쪽은 실내 모니터에서는 읽히지만 햇빛 아래 아이폰에서는 사라진다. 그래서 눈이 아니라 계산이 판정한다.</p></figure>
 <div class="g-rule"><b>라이트·다크 양쪽에서 검사한다</b><span>한쪽만 통과하는 색은 통과가 아니다. <code>python3 check_contrast.py</code> 가 라이트·다크·고대비 세 벌을 한 번에 검사한다.</span></div>

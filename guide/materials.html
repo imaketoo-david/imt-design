@@ -2,11 +2,11 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>머티리얼 — IMT Design Guide</title>
-<link rel="stylesheet" href="../tokens.css?v=20260903-0625">
-<link rel="stylesheet" href="../components.css?v=20260903-0625">
-<link rel="stylesheet" href="../patterns.css?v=20260903-0625">
-<link rel="stylesheet" href="../site.css?v=20260903-0625">
-<link rel="stylesheet" href="../guide.css?v=20260903-0625">
+<link rel="stylesheet" href="../tokens.css?v=20260903-0641">
+<link rel="stylesheet" href="../components.css?v=20260903-0641">
+<link rel="stylesheet" href="../patterns.css?v=20260903-0641">
+<link rel="stylesheet" href="../site.css?v=20260903-0641">
+<link rel="stylesheet" href="../guide.css?v=20260903-0641">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -27,7 +27,7 @@
 <nav class="gnav">
   <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html?v=20260903-0625">아이콘 334</a>
+  <a href="/icons/catalog.html?v=20260903-0641">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -38,7 +38,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0625">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-0641">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
 </nav>
@@ -62,9 +62,9 @@
 <figure class="g-fig"><div class="g-fig__body"><div style="display:flex;gap:var(--sp-3);flex-wrap:wrap;padding:var(--sp-5);border-radius:var(--r);background:radial-gradient(circle at 20% 30%,#ffd60a 0 14%,transparent 14.5%),radial-gradient(circle at 74% 66%,#ff2d55 0 18%,transparent 18.5%),linear-gradient(140deg,#1d1d1f,#0071e3 55%,#5856d6)"><div style="flex:1 1 110px;min-height:74px;border-radius:var(--r-in);padding:var(--sp-3);display:flex;flex-direction:column;justify-content:center;background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);box-shadow:var(--glass-sh);border-radius:var(--r-cap)"><b style="font:var(--fw-sb) var(--fs-base) var(--font);letter-spacing:var(--tr-base)">regular</b></div><div style="flex:1 1 110px;min-height:74px;border-radius:var(--r-in);padding:var(--sp-3);display:flex;flex-direction:column;justify-content:center;background:var(--glass-clear);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:var(--r-cap);color:#fff"><b style="font:var(--fw-sb) var(--fs-base) var(--font);letter-spacing:var(--tr-base)">clear</b></div></div></div><p class="g-cap">regular 은 배경 휘도를 조정해 가독성을 확보한다. clear 는 사진·영상 위에서만 쓴다.</p></figure>
 <div class="g-rule"><b>콘텐츠 층에 유리를 쓰지 않는다</b><span>유리는 시선을 <b>아래 콘텐츠로</b> 보내려는 재질이다. 콘텐츠 자체에 씌우면 목적이 뒤집혀서, 읽어야 할 것이 배경과 뒤섞인다.</span></div>
 <figure class="g-fig"><div class="g-fig__body"><div class="g-cmp"><div class="g-cmp__i g-cmp__i--do"><div class="g-cmp__stage"><div style="width:100%;background:radial-gradient(circle at 20% 30%,#ffd60a 0 14%,transparent 14.5%),radial-gradient(circle at 74% 66%,#ff2d55 0 18%,transparent 18.5%),linear-gradient(140deg,#1d1d1f,#0071e3 55%,#5856d6);padding:var(--sp-4);border-radius:var(--r-in)"><div style="width:100%;padding:var(--sp-4);border-radius:var(--r-in);background:var(--card);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur);box-shadow:var(--edge)"><div style="font:var(--fw-sb) var(--fs-base) var(--font);color:var(--ink)">보유 종목</div><div style="font-size:var(--fs-sm);color:var(--sub);margin-top:3px">12개 · 평가 4,820만원</div></div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-check-circle"/></svg>콘텐츠는 불투명한 <code>--card</code></div></div><div class="g-cmp__i g-cmp__i--no"><div class="g-cmp__stage"><div style="width:100%;background:radial-gradient(circle at 20% 30%,#ffd60a 0 14%,transparent 14.5%),radial-gradient(circle at 74% 66%,#ff2d55 0 18%,transparent 18.5%),linear-gradient(140deg,#1d1d1f,#0071e3 55%,#5856d6);padding:var(--sp-4);border-radius:var(--r-in)"><div style="width:100%;padding:var(--sp-4);border-radius:var(--r-in);background:var(--glass-clear);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);box-shadow:var(--edge)"><div style="font:var(--fw-sb) var(--fs-base) var(--font);color:var(--ink)">보유 종목</div><div style="font-size:var(--fs-sm);color:var(--sub);margin-top:3px">12개 · 평가 4,820만원</div></div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-x-circle"/></svg>콘텐츠에 유리 — 글자가 배경과 싸운다</div></div></div></div></figure>
-<div class="g-rule"><b>아껴 쓴다</b><span>애플 문서의 표현 그대로다. 커스텀 컨트롤마다 유리를 얹으면 화면이 통째로 흐릿해지고, 정작 강조하려던 것이 묻힌다.</span></div>
+<div class="g-rule"><b>아껴 쓴다</b><span>HIG 의 표현 그대로다. 커스텀 컨트롤마다 유리를 얹으면 화면이 통째로 흐릿해지고, 정작 강조하려던 것이 묻힌다.</span></div>
 <h2 class="g-h2" id="dim">clear 를 밝은 콘텐츠 위에 얹을 때</h2>
-<div class="g-rule"><b>35% 어두운 층을 먼저 깐다</b><span>애플이 수치까지 명시한 몇 안 되는 항목이다. 아래가 충분히 어두우면 생략한다.</span></div>
+<div class="g-rule"><b>35% 어두운 층을 먼저 깐다</b><span>HIG 가 수치까지 명시한 몇 안 되는 항목이다. 아래가 충분히 어두우면 생략한다.</span></div>
 <figure class="g-fig"><div class="g-fig__body"><div class="g-cmp"><div class="g-cmp__i g-cmp__i--do"><div class="g-cmp__stage"><div style="width:100%;height:96px;border-radius:var(--r-in);position:relative;background:linear-gradient(120deg,#ffe08a,#fff3c4)"><div style="position:absolute;inset:14px;border-radius:12px;background:var(--glass-dim);display:grid;place-items:center;color:#fff;font:var(--fw-sb) var(--fs-base) var(--font)">재생</div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-check-circle"/></svg><code>--glass-dim</code> 35% 를 깐다</div></div><div class="g-cmp__i g-cmp__i--no"><div class="g-cmp__stage"><div style="width:100%;height:96px;border-radius:var(--r-in);position:relative;background:linear-gradient(120deg,#ffe08a,#fff3c4)"><div style="position:absolute;inset:14px;border-radius:12px;background:var(--glass-clear);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);display:grid;place-items:center;color:#fff;font:var(--fw-sb) var(--fs-base) var(--font)">재생</div></div></div><div class="g-cmp__tag"><svg class="imt-i" aria-hidden="true"><use href="#i-x-circle"/></svg>밝은 배경 위 clear — 글자가 사라진다</div></div></div></div></figure>
 <h2 class="g-h2" id="edge">경계는 선이 아니라 스크롤 엣지로</h2>
 <p class="g-p">컨트롤 층 아래로 콘텐츠가 지나갈 때, 1px 선을 긋는 대신 콘텐츠가 흐릿하게 사라지게 한다. <code>--scroll-edge</code>. 뷰당 하나만 쓴다.</p>

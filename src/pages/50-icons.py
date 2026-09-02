@@ -8,7 +8,7 @@ wfig = fig('<div style="display:flex;flex-direction:column;gap:9px">' + "".join(
   f'letter-spacing:var(--tr-xl);color:var(--ink)">'
   f'<span style="width:104px;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub)">--{n}</span>'
   f'{ic("bell","imt-i--"+n)} 알림 Notification</div>' for n, fw in W) + '</div>',
-  "그림은 한 벌이다. <code>stroke-width</code> 만 바뀐다 — 애플은 같은 것을 9벌 그려서 만든다.")
+  "그림은 한 벌이다. <code>stroke-width</code> 만 바뀐다 — 원전은 같은 것을 9벌 그려서 만든다.")
 
 sfig = fig('<div style="display:flex;gap:var(--sp-6);align-items:center;flex-wrap:wrap">' + "".join(
   f'<span style="font-size:var(--fs-xl);color:var(--ink);display:inline-flex;align-items:center;gap:8px">'
@@ -37,7 +37,7 @@ def emoji_row(t):
 PAGE = {
  "slug": "icons", "group": "기초", "kicker": "기초",
  "title": "아이콘",
- "abstract": "334개를 좌표로 직접 그렸다. 애플 심볼의 그림은 쓸 수 없지만 규격은 전부 승계했고, 몇 가지는 더 싼 방법으로 만들었다.",
+ "abstract": "334개를 좌표로 직접 그렸다. 심볼 아트워크는 쓸 수 없지만 규격은 전부 승계했고, 몇 가지는 더 싼 방법으로 만들었다.",
  "blocks": [
 
   ("h2", "한 세트는 다섯 가지가 같아야 한다", "consistency"),

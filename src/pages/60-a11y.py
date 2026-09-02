@@ -26,7 +26,7 @@ PAGE = {
 
   ("h2", "대비", "contrast"),
   ("rule", "기본값이 못 맞추면 최소한 고대비 모드에서는 맞춘다",
-   "애플이 명시한 방식이고, 애플 자신도 시스템 색에 별도 accessible 변형을 둔다. 우리 <code>@media (prefers-contrast: more)</code> 블록이 그 역할이다."),
+   "HIG 가 명시한 방식이고, 원전 자신도 시스템 색에 별도 accessible 변형을 둔다. 우리 <code>@media (prefers-contrast: more)</code> 블록이 그 역할이다."),
   ("raw", spec(["글자 크기", "굵기", "최소 대비"], [
      ["17pt 이하", "전부", "<b>4.5 : 1</b>"],
      ["18pt 이상", "전부", "<b>3 : 1</b>"],

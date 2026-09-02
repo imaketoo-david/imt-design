@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════════
    IMT Design Guide — 도해 어휘
-   애플 문서를 지탱하는 건 글이 아니라 그림이다. 그리고 그 그림은
+   HIG 문서를 지탱하는 건 글이 아니라 그림이다. 그리고 그 그림은
    몇 가지 유형의 반복이다. 여기 그 유형을 규격으로 고정한다.
 
    원칙: 도해는 '그림 파일' 이 아니라 '살아 있는 컴포넌트' 다.
@@ -25,7 +25,7 @@
 .g-p code,.g-li code,.g-cap code{font:var(--fw-r) var(--fs-sm) var(--font-num);
   background:var(--fill4);padding:1px var(--sp-1);border-radius:var(--r-xs);color:var(--ink2)}
 
-/* ── 지침 한 줄 — 애플의 굵은 머리문장 ────────────────────────── */
+/* ── 지침 한 줄 — HIG 의 굵은 머리문장 ────────────────────────── */
 .g-rule{margin:0 0 var(--sp-5);max-width:66ch}
 .g-rule b{display:block;font:var(--fw-sb) var(--fs-lg)/var(--lh-head) var(--font);
   letter-spacing:var(--tr-xl);color:var(--ink);margin-bottom:var(--sp-1)}
@@ -39,7 +39,7 @@
 .g-cap b{color:var(--ink2);font-weight:var(--fw-m)}
 
 /* ── ① 비교 — 잘된 예 / 잘못된 예 ─────────────────────────────
-   애플 문서에서 가장 많이 쓰이는 형태. 두 장을 나란히 놓고
+   HIG 문서에서 가장 많이 쓰이는 형태. 두 장을 나란히 놓고
    무엇이 다른지 눈으로 즉시 알게 한다. */
 .g-cmp{display:grid;gap:var(--sp-3);grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .g-cmp__i{background:var(--card);border-radius:var(--r-in);overflow:hidden;

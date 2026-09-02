@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""사이트 표지(index.html) 생성 — 애플 개발자 사이트의 2단 내비 구조를 승계한다.
+"""사이트 표지(index.html) 생성 — HIG 문서 사이트의 2단 내비 구조를 승계한다.
 
 가이드 쪽수·제목·요약은 src/pages/*.py 에서 읽어온다.
 문서를 추가하면 표지가 저절로 따라온다 — 손으로 목록을 고칠 일이 없다.
@@ -200,12 +200,56 @@ def build():
 
     body = f"""
 <header class="hero">
-  <h1>애플 스타일을,<br>값으로 고정한다</h1>
+  <h1>고요한 정밀을,<br>값으로 고정한다</h1>
   <p>말로 전하던 기준을 토큰·규칙·도해로 바꿨다. 이 사이트의 모든 색과 크기는
      <code>tokens.css</code> 를 실제로 읽어 그린 것이라, 문서와 코드가 어긋날 수 없다.</p>
 </header>
 
 <nav class="cats">{cats}</nav>
+
+<!-- 표지에서 **먼저** 말해야 하는 것 (2026-09-03).
+     전에는 원칙이 랭귀지 문서 안쪽에, 우리가 다시 만든 것이 17절에 묻혀 있었다.
+     그러면 읽는 사람에게 이 시스템은 '따라 만든 것' 으로 읽힌다 — 실제로는
+     자기 원칙과 자기 산출물이 있는데도. 순서를 바꾼다. -->
+<section class="band" id="what">
+  <div class="wrap">
+    <h2>고요한 정밀</h2>
+    <p class="lead">조용하되 흐리지 않은 화면. 눈에 띄려고 애쓰는 요소가 없고,
+       그 대신 모든 자리가 정확한 값 위에 있다. 말로 하면 사람마다 달라지므로
+       다섯 문장으로 못박아 둔다.</p>
+    <div class="links">
+      <a href="language.html"><b>말이 아니라 값으로</b>
+        <span>"이게 더 나아 보인다" 대신 토큰 이름으로 말한다</span></a>
+      <a href="index-full.html"><b>문서와 코드가 어긋나지 않는다</b>
+        <span>이 사이트가 그리는 색·크기는 전부 실제 토큰을 읽은 값이다</span></a>
+      <a href="language.html"><b>판정은 눈이 아니라 표로</b>
+        <span>규칙마다 번호가 있고, 대비는 배포마다 수치로 검증한다</span></a>
+      <a href="language.html#diverge"><b>받은 것과 정한 것을 구분해 적는다</b>
+        <span>HIG 에서 온 수치와 우리가 채운 자리를 나눠 표시한다</span></a>
+      <a href="guide/index.html"><b>없는 것은 그리지 않는다</b>
+        <span>모르는 값을 그럴듯하게 채우지 않는다 — 빈 것은 비어 있다고 말한다</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint" id="ours">
+  <div class="wrap">
+    <h2>우리가 다시 만든 것</h2>
+    <p class="lead">HIG 에서 받은 것은 <b>수치와 방법</b>이고, 아래는 그 위에서
+       우리 조건 — 웹, 한글, 대시보드 — 에 맞춰 <b>다르게 푼</b> 자리다.
+       근거는 전부 랭귀지 17절에 번호로 남아 있다.</p>
+    <div class="links">
+      <a href="/icons/catalog.html"><b>아이콘 334종을 직접 그렸다</b>
+        <span>그림은 받지 않고 규격만 읽었다 — 24 격자 위에 좌표로</span></a>
+      <a href="language.html#icons"><b>굵기 9단을 한 벌로</b>
+        <span>원전이 아홉 벌을 그려 넣는 자리를 획 하나로 푼다</span></a>
+      <a href="language.html#type"><b>한글 본문 행간 1.55</b>
+        <span>라틴 기준 1.29 는 받침이 있는 글에 답답하다</span></a>
+      <a href="language.html#diverge"><b>등락은 상승이 빨강</b>
+        <span>색의 뜻은 문화가 정한다 — 원전도 그렇게 적어 두었다</span></a>
+    </div>
+  </div>
+</section>
 
 <section class="band band--tint" id="guide">
   <div class="wrap">
@@ -222,13 +266,13 @@ def build():
   <div class="wrap">
     <h2>랭귀지</h2>
     <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>이다.
-       19개 절 121개 규칙이 한 문서에 있고, 애플에서 그대로 받은 것과 우리가 정한 것을
+       19개 절 121개 규칙이 한 문서에 있고, HIG 에서 그대로 받은 것과 우리가 정한 것을
        구분해 적어둔다.</p>
     <div class="links">
       <a href="language.html"><b>디자인 랭귀지 전문</b>
         <span>19절 121규칙 — 결정과 근거를 한 곳에</span></a>
       <a href="language.html#legal"><b>무엇을 배우고 무엇을 받지 않는가</b>
-        <span>HIG 문서는 읽고, 애플 에셋은 받지 않는다</span></a>
+        <span>HIG 문서는 읽고, 배포 에셋은 받지 않는다</span></a>
       <a href="language.html#diverge"><b>겉보기에 달라 보이는 것들</b>
         <span>승계 · 미규정 · 구현 제약 — 이견은 0건</span></a>
     </div>
@@ -244,7 +288,7 @@ def build():
       <a class="tile" href="guide/color.html"><div class="tile__art">{art_color()}</div>
         <div class="tile__t">색</div><div class="tile__d">면 3단 · 글자 4단 · 상태 4색 · 차트 8슬롯</div></a>
       <a class="tile" href="guide/typography.html"><div class="tile__art">{art_type()}</div>
-        <div class="tile__t">타이포그래피</div><div class="tile__d">12단계 · 애플 텍스트 스타일 대응</div></a>
+        <div class="tile__t">타이포그래피</div><div class="tile__d">12단계 · HIG 텍스트 스타일 대응</div></a>
       <a class="tile" href="guide/layout.html"><div class="tile__art">{art_space()}</div>
         <div class="tile__t">간격과 라운드</div><div class="tile__d">4의 배수 · 손끝 44pt · 포인터 28pt</div></a>
     </div>
@@ -257,7 +301,7 @@ def build():
   <div class="wrap">
     <h2>아이콘</h2>
     <p class="lead">334개를 좌표로 직접 그렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
-       애플이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
+       원전이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
     <div class="tiles">
       <a class="tile" href="/icons/catalog.html"><div class="tile__art">{art_icons()}</div>
         <div class="tile__t">아이콘 카탈로그</div><div class="tile__d">334개 · 이름으로 검색 · 클릭하면 코드 복사</div></a>
@@ -300,11 +344,11 @@ def build():
 
   <section style="margin-top:var(--sp-16)">
     <h2 class="band-h" style="margin:0 0 var(--sp-4);font:var(--fw-sb) var(--fs-title2)/1.25 var(--font);
-        letter-spacing:var(--tr-xl);color:var(--ink)">애플 에셋은 담지 않는다</h2>
+        letter-spacing:var(--tr-xl);color:var(--ink)">남의 에셋은 담지 않는다</h2>
     <p style="margin:0;max-width:64ch;font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)">
       SF Symbols 아트워크·San Francisco 서체·Sketch/Figma 템플릿은 여기 없다.
       규격만 읽고 우리 좌표로 다시 그렸다. 앱 아이콘 템플릿의 1024 캔버스·3레이어·
-      지름 512 안전 원은 애플이 공개한 <b>수치</b>이고, 그 안에 그려 넣은 것은 우리 것이다.
+      지름 512 안전 원은 HIG 가 공개한 <b>수치</b>이고, 그 안에 그려 넣은 것은 우리 것이다.
       <a class="more" href="language.html#legal">기준 보기 →</a>
     </p>
   </section>

@@ -47,7 +47,7 @@
 .imt-card__sub{ margin:2px 0 0; font-size:var(--fs-sm); color:var(--sub) }
 
 /* ─── 세그먼트 (탭) ──────────────────────────────────────────
-   안쪽 라운드 = 바깥 − 패딩. 동심원이 맞아야 애플처럼 보인다. */
+   안쪽 라운드 = 바깥 − 패딩. 동심원이 맞아야 고요한 정밀이 나온다. */
 .imt-seg{
   display:inline-flex; gap:2px; padding:var(--sp-1);
   background:var(--fill4); border-radius:var(--r);
@@ -161,7 +161,7 @@
 .imt-switch:checked::after{ transform:translateX(20px) }
 
 /* ─── 네비 (상단 바) ─────────────────────────────────────────
-   반투명 + 블러. 스크롤해도 아래 내용이 비쳐야 애플스럽다. */
+   반투명 + 블러. 스크롤해도 아래 내용이 비쳐야 고요한 정밀이다. */
 .imt-nav{
   position:sticky; top:0; z-index:var(--z-nav);
   display:flex; align-items:center; gap:var(--sp-4);
@@ -225,15 +225,15 @@
 
 /* ─── 아이콘 크기 ─── */
 /* ── IMT Icons — 굵기·크기 두 축 ──────────────────────────────
-   애플 심볼은 굵기 9단을 만들려고 9벌을 그린다. 우리 아이콘은 '획' 이라
+   HIG 심볼은 굵기 9단을 만들려고 9벌을 그린다. 우리 아이콘은 '획' 이라
    경로 하나에 stroke-width 만 바꾸면 된다 — 334개 전부가 공짜로 9단을 갖는다.
-   이게 애플 규격을 우리 방식으로 다시 만든 지점이다.
+   이게 HIG 규격을 우리 방식으로 다시 만든 지점이다.
 
      --imt-w  굵기 (24 격자 단위). 옆 글자 굵기에 맞춘다.
-     --imt-s  크기 (em 배수). 애플의 small / medium / large 에 대응.
+     --imt-s  크기 (em 배수). HIG 의 small / medium / large 에 대응.
 
    크기를 키워도 획은 굵어지지 않는다 — stroke-width 를 배율로 나눠
-   화면상 굵기를 고정한다. 애플이 "크기를 바꿔도 글자와의 굵기 짝은
+   화면상 굵기를 고정한다. HIG 가 "크기를 바꿔도 글자와의 굵기 짝은
    유지된다" 고 규정한 동작을 그대로 구현한 것이다. */
 .imt-i{
   --imt-w:1.6; --imt-s:1;
@@ -248,7 +248,7 @@
 .imt-i--ultralight{--imt-w:.7}  .imt-i--thin{--imt-w:.9}   .imt-i--light{--imt-w:1.2}
 .imt-i--regular{--imt-w:1.6}    .imt-i--medium{--imt-w:1.9} .imt-i--semibold{--imt-w:2.2}
 .imt-i--bold{--imt-w:2.6}       .imt-i--heavy{--imt-w:3}    .imt-i--black{--imt-w:3.4}
-/* 크기 3단 — 애플은 cap height 를 기준으로 잡는다 */
+/* 크기 3단 — HIG 는 cap height 를 기준으로 잡는다 */
 .imt-i--scale-s{--imt-s:.87}  .imt-i--scale-m{--imt-s:1}  .imt-i--scale-l{--imt-s:1.13}
 .imt-i--sm{ width:1rem; height:1rem }
 .imt-i--md{ width:1.5rem; height:1.5rem }

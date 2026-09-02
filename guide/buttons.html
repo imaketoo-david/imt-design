@@ -2,11 +2,11 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>버튼 — IMT Design Guide</title>
-<link rel="stylesheet" href="../tokens.css?v=20260903-0625">
-<link rel="stylesheet" href="../components.css?v=20260903-0625">
-<link rel="stylesheet" href="../patterns.css?v=20260903-0625">
-<link rel="stylesheet" href="../site.css?v=20260903-0625">
-<link rel="stylesheet" href="../guide.css?v=20260903-0625">
+<link rel="stylesheet" href="../tokens.css?v=20260903-0641">
+<link rel="stylesheet" href="../components.css?v=20260903-0641">
+<link rel="stylesheet" href="../patterns.css?v=20260903-0641">
+<link rel="stylesheet" href="../site.css?v=20260903-0641">
+<link rel="stylesheet" href="../guide.css?v=20260903-0641">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -27,7 +27,7 @@
 <nav class="gnav">
   <a class="gnav__b" href="../index.html"><svg class="imt-i" aria-hidden="true"><use href="#i-layers"/></svg>IMT Design</a>
   <span class="gnav__sp"></span>
-  <a href="/icons/catalog.html?v=20260903-0625">아이콘 334</a>
+  <a href="/icons/catalog.html?v=20260903-0641">아이콘 334</a>
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a>
   <button class="gnav__t" id="theme">다크</button>
 </nav>
@@ -38,7 +38,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0625">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-0641">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
 </nav>
@@ -71,7 +71,7 @@
 <figure class="g-fig"><div class="g-fig__body"><div class="g-seq"><div class="g-seq__i"><button class="imt-btn imt-btn--primary" style="">저장</button><div class="g-seq__n">기본</div></div><span class="g-seq__arrow"><svg class="imt-i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><div class="g-seq__i"><button class="imt-btn imt-btn--primary" style="background:var(--brand-hover)">저장</button><div class="g-seq__n">hover</div></div><span class="g-seq__arrow"><svg class="imt-i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><div class="g-seq__i"><button class="imt-btn imt-btn--primary" style="transform:scale(.97);opacity:.92">저장</button><div class="g-seq__n">active</div></div><span class="g-seq__arrow"><svg class="imt-i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><div class="g-seq__i"><button class="imt-btn imt-btn--primary" style="box-shadow:var(--ring)">저장</button><div class="g-seq__n">focus-visible</div></div><span class="g-seq__arrow"><svg class="imt-i" aria-hidden="true"><use href="#i-arrow-right"/></svg></span><div class="g-seq__i"><button class="imt-btn imt-btn--primary" style="background:var(--fill2);color:var(--sub2)">저장</button><div class="g-seq__n">비활성</div></div></div></div><p class="g-cap">다섯을 다 만들지 않은 버튼은 미완성이다. 특히 <b>active</b> 가 없으면 눌렸는지 의심해서 한 번 더 누른다.</p></figure>
 <div class="g-rule"><b>비활성 버튼은 이유를 알려준다</b><span>왜 못 누르는지 모르면 사용자는 자기 잘못이라고 생각한다. <code>title</code> 이나 옆의 한 줄로 조건을 말한다 — 또는 아예 감춘다.</span></div>
 <h2 class="g-h2" id="shape">모양</h2>
-<p class="g-p">애플이 주는 모양은 셋이다 — 캡슐(텍스트), 캡슐(텍스트+아이콘), 둥근 사각형. 우리는 <b>둥근 사각형</b>을 기본으로 쓴다. 표와 지표가 빽빽한 화면에서 캡슐은 좌우 여백을 많이 먹어 밀도를 깎기 때문이다.</p>
+<p class="g-p">HIG 가 주는 모양은 셋이다 — 캡슐(텍스트), 캡슐(텍스트+아이콘), 둥근 사각형. 우리는 <b>둥근 사각형</b>을 기본으로 쓴다. 표와 지표가 빽빽한 화면에서 캡슐은 좌우 여백을 많이 먹어 밀도를 깎기 때문이다.</p>
 <figure class="g-fig"><div class="g-fig__body"><div style="display:flex;gap:var(--gap-ctl);align-items:center;flex-wrap:wrap"><button class="imt-btn imt-btn--primary" style="">둥근 사각형</button><button class="imt-btn imt-btn--soft" style="border-radius:var(--r-cap)">캡슐</button><button class="imt-btn imt-btn--icon" style=""><svg class="imt-i" aria-hidden="true"><use href="#i-more"/></svg></button></div></div><p class="g-cap">캡슐(<code>--r-cap</code>)은 칩·필터에 쓴다. 아이콘 전용 버튼은 정사각이다.</p></figure>
 <div class="g-rule"><b>흰 면에 검은 글자 조합은 만들지 않는다</b><span>시스템이 <b>선택된 상태</b>를 나타내는 데 쓰는 조합이다. 일반 버튼에 쓰면 항상 켜져 있는 것처럼 보인다.</span></div>
 <h2 class="g-h2" id="placement">배치</h2>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """기술 절에서 건너온 것 — HIG Technologies 29쪽을 전수로 읽고 남은 것.
 
-애플 프레임워크(HealthKit·CarPlay·Wallet…)를 쓰지 않아도, 그 문서 안에는
+플랫폼 프레임워크(HealthKit·CarPlay·Wallet…)를 쓰지 않아도, 그 문서 안에는
 '화면을 어떻게 만들라'는 지침이 섞여 있다. 그것만 골라낸 쪽이다.
 출처는 HIG-COVERAGE.md 에 쪽 단위로 적어두었다.
 """
@@ -59,7 +59,7 @@ NOTE = ('<div style="width:100%;max-width:300px;background:var(--card);border-ra
 PAGE = {
  "slug": "technologies", "group": "패턴", "kicker": "패턴",
  "title": "기술 절에서 건너온 것",
- "abstract": "애플 기기 기능을 하나도 쓰지 않아도, 그 문서들이 말하는 화면 규칙은 웹에 그대로 선다. 29쪽을 읽고 남은 것만 모았다.",
+ "abstract": "그 플랫폼 기능을 하나도 쓰지 않아도, 그 문서들이 말하는 화면 규칙은 웹에 그대로 선다. 29쪽을 읽고 남은 것만 모았다.",
  "blocks": [
 
   ("h2", "추정값은 숫자로 말하지 않는다", "confidence"),
