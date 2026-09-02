@@ -1,0 +1,221 @@
+/* ══════════════════════════════════════════════════════════════
+   IMT Design System v1 — tokens.css
+   단일 진실. 이 파일 밖에서 색·간격·라운드를 하드코딩하지 않는다.
+
+   출처: stock-sim 의 구조(라운드 규칙·폰트 단계·이징)를 그대로 유지하고,
+         my-speak 의 iOS 시스템색·라벨 위계·채움·다크모드를 흡수했다.
+         기존 이름은 전부 보존 → sim·marketing 은 수정 없이 동작한다.
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+
+  /* ─── 면 ────────────────────────────────────────────────────
+     배경은 회색조, 카드는 순백. 둘 다 흰색이면 경계가 사라진다.
+     애플은 그림자가 아니라 '배경 대비' 로 면을 나눈다. */
+  --bg:        #f2f2f7;   /* systemGroupedBackground */
+  --card:      #ffffff;   /* secondarySystemGroupedBackground */
+  --inset:     #f5f5f8;   /* 카드 안의 강조 면 */
+  --sheet:     #ffffff;   /* 모달·시트 */
+  --mat:       rgba(249,249,249,.82);          /* 반투명 머티리얼 */
+  --mat-blur:  saturate(180%) blur(20px);
+
+  /* ─── 선 ─── */
+  --line:      #dcdce2;
+  --line-soft: #ebebf0;
+  --hairline:  .5px;
+
+  /* ─── 글자 4단계 ─── */
+  --ink:  #1d1d1f;   /* 본문·값 */
+  --ink2: #424245;   /* 부제 */
+  --sub:  #7c7c82;   /* 라벨·설명 */
+  --sub2: #a4a4aa;   /* 비활성·플레이스홀더 */
+
+  /* ─── 채움 4단계 (칩·트랙·스켈레톤) ─── */
+  --fill1: rgba(120,120,128,.20);
+  --fill2: rgba(120,120,128,.16);
+  --fill3: rgba(118,118,128,.12);
+  --fill4: rgba(116,116,128,.08);
+
+  /* ─── 강조 ───────────────────────────────────────────────────
+     --brand 만 사이트가 덮어쓴다. 나머지는 공통. */
+  --blue:       #0071e3;
+  --blue-hover: #0077ed;
+  --blue-soft:  #e8f1fd;
+  --brand:      var(--blue);
+  --brand-hover:var(--blue-hover);
+  --brand-soft: var(--blue-soft);
+
+  /* ─── iOS 시스템색 ─── */
+  --green:  #34c759;  --green-soft:  rgba(52,199,89,.14);
+  --red:    #ff3b30;  --red-soft:    rgba(255,59,48,.12);
+  --orange: #ff9500;  --orange-soft: rgba(255,149,0,.14);
+  --yellow: #ffcc00;
+  --teal:   #30b0c7;
+  --indigo: #5856d6;
+  --pink:   #ff2d55;
+
+  /* ─── 등락 (한국 관례: 상승 빨강 / 하락 파랑) ─── */
+  --up:   #e0392e;  --up-soft:   #fceceb;
+  --down: #0071e3;  --down-soft: #e8f1fd;
+  --flat: #a4a4aa;
+
+  /* ─── 상태 ───────────────────────────────────────────────────
+     의미가 고정된 색. 차트 시리즈로 재사용하지 않는다.
+     반드시 아이콘·라벨과 함께 쓴다 (색만으로 상태를 전달 금지). */
+  --ok:     #1f8a48;
+  --warn:   #b8811f;
+  --danger: #c8322a;
+  --info:   #0f8fc4;
+
+  /* ─── 차트 ───────────────────────────────────────────────────
+     8슬롯 고정 순서. 순환 금지 — 9번째 시리즈는 '기타' 로 접는다.
+     명도대비·색각(CVD)·채도 검사 전 항목 통과. 라이트/다크 동일값. */
+  --c1:#2C6BED; --c2:#D9631F; --c3:#159B90; --c4:#B8811F;
+  --c5:#C43A80; --c6:#0F8FC4; --c7:#7F55D4; --c8:#1F8A48;
+  --grid: rgba(0,0,0,.06);
+  --axis: #a4a4aa;
+
+  /* ─── 라운드 ─────────────────────────────────────────────────
+     박스는 하나의 라운드만 쓴다 — 카드·패널·버튼·드롭다운·탭 전부.
+     예외는 셋뿐이다.
+       --r-in    세그먼트 '안쪽' (바깥 − 패딩 = 동심원이 맞는다)
+       --r-xs    글자만 한 배지·태그 (16px 이면 뭉개진다)
+       --r-sheet 시트·대형 모달
+     원형(50%)은 아이콘 버튼·실시간 점에만. */
+  --r:       16px;
+  --r-in:    13px;
+  --r-xs:    6px;
+  --r-sheet: 22px;
+  --r-xl: var(--r); --r-lg: var(--r); --r-md: var(--r); --r-sm: var(--r);
+
+  /* ─── 간격 ───────────────────────────────────────────────────
+     4의 배수만. 6px·10px·14px 같은 중간값을 허용하면
+     금방 20가지로 불어나고 리듬이 사라진다. */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-12:48px; --sp-16:64px;
+
+  /* ─── 그림자 ─── */
+  --edge:    0 0 0 1px rgba(0,0,0,.045);
+  --sh:      var(--edge), 0 1px 2px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.06);
+  --sh-lift: var(--edge), 0 4px 10px rgba(0,0,0,.06), 0 16px 36px rgba(0,0,0,.1);
+  --ring:    0 0 0 4px rgba(0,113,227,.16);
+
+  /* ─── 타이포 ─────────────────────────────────────────────────
+     정해진 단계만 쓴다. 11.5px 같은 값을 허용하면
+     눈은 그 차이를 위계로 읽지 못한다. */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard",
+          "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-num: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
+
+  --fs-tag:10px;   /* 배지 */
+  --fs-xs:11px;    /* 보조 설명 */
+  --fs-sm:12px;    /* 라벨 */
+  --fs-md:13px;    /* 본문 */
+  --fs-base:15px;  /* 값 */
+  --fs-lg:17px;    /* 강조 값 */
+  --fs-xl:20px;    /* 섹션 제목 */
+  --fs-2xl:26px;   /* 요약 숫자 */
+  --fs-3xl:34px;   /* 히어로 */
+
+  --fw-r:400; --fw-m:500; --fw-sb:600;
+  --lh-tight:1.15; --lh-snug:1.35; --lh-base:1.55;
+  /* 큰 글자일수록 자간을 좁힌다 — 애플 타이포의 핵심 */
+  --tr-3xl:-.024em; --tr-2xl:-.02em; --tr-xl:-.016em;
+  --tr-base:-.008em; --tr-sm:-.003em;
+
+  /* ─── 모션 ─── */
+  --ease:   cubic-bezier(.4,0,.2,1);
+  --spring: cubic-bezier(.34,1.4,.5,1);
+  --dur-1:.12s; --dur-2:.2s; --dur-3:.32s;
+
+  /* ─── 레이어 ─── */
+  --z-nav:100; --z-sticky:200; --z-drop:300; --z-modal:400; --z-toast:500;
+
+  /* ─── 폭 ─── */
+  --w-content:720px; --w-wide:1120px; --w-full:1440px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   다크 — 자동 반전이 아니라 별도로 고른 값.
+   면은 올리고(#000 아님), 글자는 내리고, 그림자 대신 테두리로 면을 나눈다.
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+  :root:not([data-theme="light"]) {
+    --bg:#000000; --card:#1c1c1e; --inset:#2c2c2e; --sheet:#1c1c1e;
+    --mat:rgba(30,30,32,.82);
+
+    --line:#38383a; --line-soft:#2c2c2e;
+
+    --ink:#f5f5f7; --ink2:#d1d1d6; --sub:#98989f; --sub2:#6c6c72;
+
+    --fill1:rgba(120,120,128,.36); --fill2:rgba(120,120,128,.30);
+    --fill3:rgba(118,118,128,.24); --fill4:rgba(116,116,128,.18);
+
+    --blue:#0a84ff; --blue-hover:#3b9bff; --blue-soft:rgba(10,132,255,.18);
+    --green:#30d158; --red:#ff453a; --orange:#ff9f0a;
+    --yellow:#ffd60a; --teal:#40cbe0; --indigo:#5e5ce6; --pink:#ff375f;
+
+    --up:#ff5f52; --up-soft:rgba(255,95,82,.16);
+    --down:#0a84ff; --down-soft:rgba(10,132,255,.16);
+
+    --ok:#30d158; --warn:#ffd60a; --danger:#ff453a; --info:#40cbe0;
+
+    --grid:rgba(255,255,255,.08); --axis:#6c6c72;
+
+    --edge:0 0 0 1px rgba(255,255,255,.07);
+    --sh:var(--edge), 0 1px 2px rgba(0,0,0,.5);
+    --sh-lift:var(--edge), 0 8px 28px rgba(0,0,0,.6);
+    --ring:0 0 0 4px rgba(10,132,255,.28);
+  }
+}
+
+/* 사용자 토글이 OS 설정을 이긴다 */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#000000; --card:#1c1c1e; --inset:#2c2c2e; --sheet:#1c1c1e;
+  --mat:rgba(30,30,32,.82);
+  --line:#38383a; --line-soft:#2c2c2e;
+  --ink:#f5f5f7; --ink2:#d1d1d6; --sub:#98989f; --sub2:#6c6c72;
+  --fill1:rgba(120,120,128,.36); --fill2:rgba(120,120,128,.30);
+  --fill3:rgba(118,118,128,.24); --fill4:rgba(116,116,128,.18);
+  --blue:#0a84ff; --blue-hover:#3b9bff; --blue-soft:rgba(10,132,255,.18);
+  --green:#30d158; --red:#ff453a; --orange:#ff9f0a;
+  --yellow:#ffd60a; --teal:#40cbe0; --indigo:#5e5ce6; --pink:#ff375f;
+  --up:#ff5f52; --up-soft:rgba(255,95,82,.16);
+  --down:#0a84ff; --down-soft:rgba(10,132,255,.16);
+  --ok:#30d158; --warn:#ffd60a; --danger:#ff453a; --info:#40cbe0;
+  --grid:rgba(255,255,255,.08); --axis:#6c6c72;
+  --edge:0 0 0 1px rgba(255,255,255,.07);
+  --sh:var(--edge), 0 1px 2px rgba(0,0,0,.5);
+  --sh-lift:var(--edge), 0 8px 28px rgba(0,0,0,.6);
+  --ring:0 0 0 4px rgba(10,132,255,.28);
+}
+
+/* ─── 기존 사이트 이름 별칭 (plan·speak 무수정 이관용) ─── */
+:root{
+  --fg:var(--ink); --muted:var(--sub); --accent:var(--brand);
+  --border:var(--line); --shadow:var(--sh);
+  --label:var(--ink); --label2:var(--sub); --label3:var(--sub2);
+  --sep:var(--line); --bg-elev:var(--card);
+}
+
+/* ─── 기본 리셋 ─── */
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:var(--fw-r) var(--fs-md)/var(--lh-base) var(--font);
+  letter-spacing:var(--tr-base);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+img,svg{ max-width:100%; display:block }
+:focus-visible{ outline:none; box-shadow:var(--ring); border-radius:var(--r-xs) }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important; animation-iteration-count:1 !important;
+    transition-duration:.01ms !important; scroll-behavior:auto !important;
+  }
+}

@@ -1,0 +1,126 @@
+/* ══════════════════════════════════════════════════════════════
+   IMT Design System v1 — patterns.css
+   컴포넌트보다 큰 단위. 페이지·대시보드·차트·카드뉴스의 뼈대.
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─── 페이지 셸 ─── */
+.imt-page{ max-width:var(--w-wide); margin:0 auto; padding:var(--sp-6) var(--sp-5) var(--sp-16) }
+.imt-page--content{ max-width:var(--w-content) }
+.imt-page--full{ max-width:var(--w-full) }
+.imt-page__head{ margin:0 0 var(--sp-6) }
+.imt-page__title{
+  margin:0; font:var(--fw-sb) var(--fs-3xl)/var(--lh-tight) var(--font);
+  letter-spacing:var(--tr-3xl); color:var(--ink);
+}
+.imt-page__lede{ margin:var(--sp-2) 0 0; color:var(--sub); font-size:var(--fs-lg); letter-spacing:var(--tr-base) }
+
+/* 섹션 사이 간격은 하나로 고정 — 리듬이 무너지는 가장 흔한 원인 */
+.imt-section{ margin-top:var(--sp-8) }
+.imt-section__title{
+  margin:0 0 var(--sp-4); font:var(--fw-sb) var(--fs-xl)/1.3 var(--font);
+  letter-spacing:var(--tr-xl); color:var(--ink);
+}
+
+/* ─── 대시보드 그리드 ────────────────────────────────────────
+   12칼럼을 쓰지 않는다. auto-fill + minmax 로 카드가 스스로 접힌다.
+   미디어쿼리를 안 쓰니 중간 폭에서 깨질 일이 없다. */
+.imt-grid{ display:grid; gap:var(--sp-4); grid-template-columns:repeat(auto-fill,minmax(280px,1fr)) }
+.imt-grid--sm{ grid-template-columns:repeat(auto-fill,minmax(200px,1fr)) }
+.imt-grid--lg{ grid-template-columns:repeat(auto-fill,minmax(400px,1fr)) }
+.imt-span-2{ grid-column:span 2 }
+@media (max-width:640px){ .imt-span-2{ grid-column:span 1 } }
+
+/* ─── 통계 타일 ──────────────────────────────────────────────
+   숫자가 주인공. 라벨은 위, 변화량은 아래. 셋 다 크기가 다르다.
+   차트가 필요 없는 값은 차트로 만들지 않는다. */
+.imt-stat{ background:var(--card); border-radius:var(--r); box-shadow:var(--sh); padding:var(--sp-4) var(--sp-5) }
+.imt-stat__label{
+  display:flex; align-items:center; gap:6px;
+  font:var(--fw-m) var(--fs-sm)/1.4 var(--font); color:var(--sub);
+}
+.imt-stat__label svg{ width:14px; height:14px }
+.imt-stat__value{
+  margin:var(--sp-2) 0 0; font:var(--fw-sb) var(--fs-2xl)/1.1 var(--font);
+  letter-spacing:var(--tr-2xl); color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+.imt-stat__delta{
+  display:inline-flex; align-items:center; gap:3px; margin-top:var(--sp-2);
+  font:var(--fw-m) var(--fs-sm)/1 var(--font); font-variant-numeric:tabular-nums;
+}
+.imt-stat__delta svg{ width:13px; height:13px }
+.imt-stat__delta--up{ color:var(--up) }
+.imt-stat__delta--down{ color:var(--down) }
+.imt-stat__delta--flat{ color:var(--flat) }
+.imt-stat__spark{ margin-top:var(--sp-3); height:34px }
+
+/* KPI 한 줄 — 4개까지. 5개가 넘으면 위계가 사라진다 */
+.imt-kpi{ display:grid; gap:var(--sp-3); grid-template-columns:repeat(auto-fit,minmax(160px,1fr)) }
+
+/* ─── 차트 프레임 ────────────────────────────────────────────
+   제목 → 범례 → 그림 → (표) 순서.
+   축·그리드는 뒤로 물리고 데이터가 앞에 온다. */
+.imt-chart{ background:var(--card); border-radius:var(--r); box-shadow:var(--sh); padding:var(--sp-5) }
+.imt-chart__head{ display:flex; align-items:baseline; justify-content:space-between; gap:var(--sp-3); margin-bottom:var(--sp-2) }
+.imt-chart__title{ margin:0; font:var(--fw-sb) var(--fs-lg)/1.3 var(--font); letter-spacing:var(--tr-xl) }
+.imt-chart__unit{ font-size:var(--fs-sm); color:var(--sub) }
+.imt-chart__body{ position:relative; width:100%; height:300px }
+.imt-chart__foot{ margin-top:var(--sp-3); font-size:var(--fs-xs); color:var(--sub) }
+
+/* 범례 — 시리즈 2개 이상이면 항상 넣는다. 색만으로 구분 금지 */
+.imt-legend{ display:flex; flex-wrap:wrap; gap:var(--sp-3); margin-bottom:var(--sp-4) }
+.imt-legend__item{ display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm); color:var(--sub) }
+.imt-legend__dot{ width:9px; height:9px; border-radius:3px; flex:none }
+
+/* 축·그리드 — 데이터보다 앞에 나오면 안 된다 */
+.imt-chart .grid line, .imt-chart .imt-gridline{ stroke:var(--grid); stroke-width:1 }
+.imt-chart .axis text, .imt-chart .imt-axis{ fill:var(--sub); font-size:var(--fs-xs) }
+.imt-chart .domain{ stroke:var(--line) }
+
+/* 마크 규격 — 선 2px, 마커 8px 이상, 막대 끝만 4px 라운드 */
+.imt-chart .imt-line{ fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round }
+.imt-chart .imt-dot{ r:4; stroke:var(--card); stroke-width:2 }
+.imt-chart .imt-bar{ rx:4; ry:4 }
+.imt-chart .imt-area{ opacity:.12 }
+
+/* 툴팁 — HTML·SVG 차트는 기본으로 호버를 붙인다 */
+.imt-tip{
+  position:absolute; pointer-events:none; z-index:var(--z-drop);
+  background:var(--ink); color:var(--bg);
+  padding:var(--sp-2) var(--sp-3); border-radius:var(--r-in);
+  font:var(--fw-m) var(--fs-sm)/1.5 var(--font); font-variant-numeric:tabular-nums;
+  box-shadow:var(--sh-lift); white-space:nowrap;
+}
+
+/* 시리즈 색 — 고정 순서. 9번째는 '기타' 로 접는다 */
+.imt-s1{ color:var(--c1) } .imt-s2{ color:var(--c2) }
+.imt-s3{ color:var(--c3) } .imt-s4{ color:var(--c4) }
+.imt-s5{ color:var(--c5) } .imt-s6{ color:var(--c6) }
+.imt-s7{ color:var(--c7) } .imt-s8{ color:var(--c8) }
+
+/* ─── 필터 바 ─── 차트 위 한 줄에 모은다 */
+.imt-filters{
+  display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-2);
+  margin-bottom:var(--sp-4);
+}
+.imt-filters__spacer{ margin-left:auto }
+
+/* ─── 카드뉴스 캔버스 ────────────────────────────────────────
+   인스타 4:5(1080×1350). 안전 여백 안에만 글을 넣는다. */
+.imt-canvas{
+  width:1080px; height:1350px; position:relative; overflow:hidden;
+  background:var(--card); color:var(--ink);
+  font-family:var(--font); letter-spacing:var(--tr-2xl);
+}
+.imt-canvas__safe{ position:absolute; inset:90px 80px 110px }
+.imt-canvas__kicker{ font:var(--fw-sb) 30px/1.3 var(--font); color:var(--brand); letter-spacing:.02em; text-transform:uppercase }
+.imt-canvas__title{ margin:18px 0 0; font:var(--fw-sb) 76px/1.18 var(--font); letter-spacing:-.028em }
+.imt-canvas__lede{ margin:26px 0 0; font:var(--fw-r) 34px/1.5 var(--font); color:var(--sub); letter-spacing:-.012em }
+.imt-canvas__foot{ position:absolute; left:80px; right:80px; bottom:64px; display:flex; align-items:center; gap:14px; color:var(--sub2); font-size:26px }
+
+/* ─── 유틸 (남용 금지 — 반복될 때만) ─── */
+.imt-stack{ display:flex; flex-direction:column; gap:var(--sp-3) }
+.imt-cluster{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-2) }
+.imt-between{ display:flex; align-items:center; justify-content:space-between; gap:var(--sp-3) }
+.imt-num{ font-variant-numeric:tabular-nums }
+.imt-sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
