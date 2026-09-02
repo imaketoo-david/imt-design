@@ -23,12 +23,12 @@
 .g-p{font-size:var(--fs-base);line-height:var(--lh-base);color:var(--ink2);
   margin:0 0 var(--sp-4);max-width:66ch}
 .g-p code,.g-li code,.g-cap code{font:var(--fw-r) var(--fs-sm) var(--font-num);
-  background:var(--fill4);padding:1px 5px;border-radius:var(--r-xs);color:var(--ink2)}
+  background:var(--fill4);padding:1px var(--sp-1);border-radius:var(--r-xs);color:var(--ink2)}
 
 /* ── 지침 한 줄 — 애플의 굵은 머리문장 ────────────────────────── */
 .g-rule{margin:0 0 var(--sp-5);max-width:66ch}
 .g-rule b{display:block;font:var(--fw-sb) var(--fs-lg)/var(--lh-head) var(--font);
-  letter-spacing:var(--tr-xl);color:var(--ink);margin-bottom:5px}
+  letter-spacing:var(--tr-xl);color:var(--ink);margin-bottom:var(--sp-1)}
 .g-rule span{display:block;font-size:var(--fs-base);line-height:var(--lh-base);color:var(--sub)}
 
 /* ── 도해 공통 ───────────────────────────────────────────────── */
@@ -77,8 +77,8 @@
 /* ── ④ 사양표 ────────────────────────────────────────────────── */
 .g-spec{width:100%;border-collapse:collapse;font-size:var(--fs-md)}
 .g-spec th{text-align:left;font-weight:var(--fw-sb);color:var(--ink);
-  padding:10px var(--sp-3);border-bottom:1px solid var(--line);white-space:nowrap}
-.g-spec td{padding:10px var(--sp-3);border-bottom:var(--hairline) solid var(--line-soft);
+  padding:var(--sp-3);border-bottom:1px solid var(--line);white-space:nowrap}
+.g-spec td{padding:var(--sp-3);border-bottom:var(--hairline) solid var(--line-soft);
   color:var(--ink2);vertical-align:top}
 .g-spec tr:last-child td{border-bottom:0}
 .g-spec td:first-child{font-weight:var(--fw-m);color:var(--ink);white-space:nowrap}

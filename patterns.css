@@ -35,7 +35,7 @@
    차트가 필요 없는 값은 차트로 만들지 않는다. */
 .imt-stat{ background:var(--card); border-radius:var(--r); box-shadow:var(--sh); padding:var(--sp-4) var(--sp-5) }
 .imt-stat__label{
-  display:flex; align-items:center; gap:6px;
+  display:flex; align-items:center; gap:var(--sp-2);
   font:var(--fw-m) var(--fs-sm)/1.4 var(--font); color:var(--sub);
 }
 .imt-stat__label svg{ width:14px; height:14px }
@@ -45,7 +45,7 @@
   font-variant-numeric:tabular-nums;
 }
 .imt-stat__delta{
-  display:inline-flex; align-items:center; gap:3px; margin-top:var(--sp-2);
+  display:inline-flex; align-items:center; gap:var(--sp-1); margin-top:var(--sp-2);
   font:var(--fw-m) var(--fs-sm)/1 var(--font); font-variant-numeric:tabular-nums;
 }
 .imt-stat__delta svg{ width:13px; height:13px }
@@ -69,8 +69,8 @@
 
 /* 범례 — 시리즈 2개 이상이면 항상 넣는다. 색만으로 구분 금지 */
 .imt-legend{ display:flex; flex-wrap:wrap; gap:var(--sp-3); margin-bottom:var(--sp-4) }
-.imt-legend__item{ display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm); color:var(--sub) }
-.imt-legend__dot{ width:9px; height:9px; border-radius:3px; flex:none }
+.imt-legend__item{ display:inline-flex; align-items:center; gap:var(--sp-2); font-size:var(--fs-sm); color:var(--sub) }
+.imt-legend__dot{ width:8px; height:8px; border-radius:var(--r-cap); flex:none }
 
 /* 축·그리드 — 데이터보다 앞에 나오면 안 된다 */
 .imt-chart .grid line, .imt-chart .imt-gridline{ stroke:var(--grid); stroke-width:1 }

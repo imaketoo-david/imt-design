@@ -13,6 +13,7 @@ echo "▸ 1. 대비 검증"
 python3 check_contrast.py | tail -2
 
 python3 check_tokens.py || exit 1
+python3 check_rules.py  || exit 1
 
 echo "▸ 2. 가이드 빌드 · CSS 버전 스탬프"
 # sed 를 안 쓴다: macOS 의 -i 는 빈 인자를 요구하고 GNU 는 그걸 파일명으로 읽는다.

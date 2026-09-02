@@ -72,7 +72,7 @@ T.onclick=()=>{{d=!d;ap(d);try{{localStorage.setItem("imt-theme",d?"dark":"light
 
 # ── 표지 본문 ────────────────────────────────────────────────────
 def art_color():
-    return ('<div style="display:flex;gap:6px">' + "".join(
+    return ('<div style="display:flex;gap:8px">' + "".join(
         f'<div style="width:26px;height:64px;border-radius:7px;background:var(--c{i})"></div>'
         for i in range(1, 7)) + '</div>')
 
@@ -93,7 +93,7 @@ def art_layers():
       'background:var(--card);box-shadow:var(--sh-lift)"></div></div>')
 
 def art_icons():
-    return ('<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;color:var(--ink2)">'
+    return ('<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;color:var(--ink2)">'
       + "".join(ic(n, "imt-i--scale-l") for n in
         ["bell","star","search","doc","lock","camera","trend-up","check-circle"])
       + '</div>')
@@ -104,7 +104,7 @@ def art_grid():
       for h, o in [(28,.35),(44,.5),(36,.65),(58,.8),(70,1),(52,.8)]) + '</div>')
 
 def art_btn():
-    return ('<div style="display:flex;flex-direction:column;gap:9px;align-items:center">'
+    return ('<div style="display:flex;flex-direction:column;gap:8px;align-items:center">'
       '<button class="imt-btn imt-btn--primary">기본 동작</button>'
       '<button class="imt-btn imt-btn--soft">보조</button>'
       '<span class="imt-badge" style="color:var(--ok);background:var(--green-soft)">정상</span></div>')
@@ -112,18 +112,18 @@ def art_btn():
 ART = {"기초": art_layers, "패턴": art_grid, "컴포넌트": art_btn}
 
 def art_space():
-    return ('<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">'
+    return ('<div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">'
       + "".join(f'<div style="height:10px;width:{w}px;border-radius:3px;'
                 f'background:var(--c1);opacity:{o}"></div>'
                 for w, o in [(20,.30),(32,.45),(52,.6),(84,.78),(132,1)])
-      + '<div style="margin-top:6px;font:var(--fw-r) var(--fs-xs) var(--font-num);'
+      + '<div style="margin-top:8px;font:var(--fw-r) var(--fs-xs) var(--font-num);'
         'color:var(--flat)">4 · 8 · 12 · 20 · 32</div></div>')
 
 def art_lang():
-    return ('<div style="width:150px;display:flex;flex-direction:column;gap:7px">'
+    return ('<div style="width:150px;display:flex;flex-direction:column;gap:8px">'
       + "".join(f'<div style="height:7px;width:{w}%;border-radius:4px;background:var(--fill2)"></div>'
                 for w in (100, 92, 74))
-      + '<div style="margin-top:6px;height:7px;width:46%;border-radius:4px;background:var(--c1)"></div>'
+      + '<div style="margin-top:8px;height:7px;width:46%;border-radius:4px;background:var(--c1)"></div>'
       '</div>')
 
 ART = {"기초": art_layers, "패턴": art_grid, "컴포넌트": art_btn}
@@ -214,8 +214,7 @@ def build():
        모든 지침에 도해가 붙는다 — 잘된 예와 잘못된 예를 나란히 놓는 방식이다.</p>
     <div class="tiles">{tiles}</div>
     <p class="lead" style="margin:var(--sp-6) 0 0">
-      <a href="guide/index.html" style="color:var(--brand);text-decoration:none">
-        가이드 {len(pages)-1}쪽 전체 보기 →</a></p>
+      <a class="more" href="guide/index.html">가이드 {len(pages)-1}쪽 전체 보기 →</a></p>
   </div>
 </section>
 
@@ -250,8 +249,7 @@ def build():
         <div class="tile__t">간격과 라운드</div><div class="tile__d">4의 배수 · 손끝 44pt · 포인터 28pt</div></a>
     </div>
     <p class="lead" style="margin:var(--sp-6) 0 0">
-      <a href="index-full.html" style="color:var(--brand);text-decoration:none">
-        토큰 값 전체와 컴포넌트 보기 →</a></p>
+      <a class="more" href="index-full.html">토큰 값 전체와 컴포넌트 보기 →</a></p>
   </div>
 </section>
 
@@ -276,8 +274,7 @@ def build():
        빌드할 때 같은 파일을 담기 때문이다.</p>
     <div class="res">{res_cards()}</div>
     <p class="lead" style="margin:var(--sp-8) 0 0">
-      <a href="resources.html" style="color:var(--brand);text-decoration:none">
-        리소스 전체 보기 →</a></p>
+      <a class="more" href="resources.html">리소스 전체 보기 →</a></p>
   </div>
 </section>
 
@@ -308,7 +305,7 @@ def build():
       SF Symbols 아트워크·San Francisco 서체·Sketch/Figma 템플릿은 여기 없다.
       규격만 읽고 우리 좌표로 다시 그렸다. 앱 아이콘 템플릿의 1024 캔버스·3레이어·
       지름 512 안전 원은 애플이 공개한 <b>수치</b>이고, 그 안에 그려 넣은 것은 우리 것이다.
-      <a href="language.html#legal" style="color:var(--brand);text-decoration:none">기준 보기 →</a>
+      <a class="more" href="language.html#legal">기준 보기 →</a>
     </p>
   </section>
 </div>
