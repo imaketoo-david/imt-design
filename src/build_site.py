@@ -389,8 +389,7 @@ def build():
   <div class="wrap wrap--center">
     <p class="band__k band__k--c">차이</p>
     <h2>규격은 받고, 그림은 그렸다</h2>
-    <p class="lead">받은 것은 <b>수치와 방법</b>이다. 아래 넷은 웹·한글·대시보드라는
-       우리 조건에 맞춰 <b>다르게 푼</b> 자리다.</p>
+    <p class="lead">받은 것은 <b>수치와 방법</b>이다. 아래 넷은 웹·한글·대시보드라는 우리 조건에 맞춰 <b>다르게 푼</b> 자리다.</p>
   </div>
   <div class="wrap">
     <div class="figs">
@@ -443,8 +442,7 @@ def build():
   <div class="wrap wrap--center">
     <p class="band__k band__k--c"><span class="n">02</span>랭귀지</p>
     <h2>고요한 정밀</h2>
-    <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>다.
-       받은 것과 정한 것을 한 문서 안에서 구분해 적어둔다.</p>
+    <p class="lead">가이드가 <b>무엇을 하라</b>면, 랭귀지는 <b>왜 그렇게 정했나</b>다. 받은 것과 정한 것을 한 문서 안에서 구분해 적어둔다.</p>
     <ul class="nums">
       <li><b>19</b><span>절</span></li>
       <li><b>121</b><span>번호 붙은 규칙</span></li>
@@ -478,8 +476,7 @@ def build():
   <div class="wrap wrap--center">
     <p class="band__k band__k--c"><span class="n">04</span>아이콘</p>
     <h2>좌표로 그린 334종</h2>
-    <p class="lead">24 격자 위에 하나씩 올렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 —
-       원전이 아홉 벌을 그려 넣는 자리를, 우리는 한 벌로 해결한다.</p>
+    <p class="lead">24 격자 위에 하나씩 올렸다. 굵기 9단·크기 3단이 CSS 변수 두 개로 움직인다 — 원전이 아홉 벌을 그려 넣는 자리를 한 벌로 해결한다.</p>
   </div>
   <div class="wall wall--full" aria-hidden="true"><div class="wall__g">{wall2}</div></div>
   <div class="wrap wrap--center">

@@ -135,7 +135,12 @@ body{word-break:keep-all;overflow-wrap:break-word}
    섹션이 여덟 개인데 전부 왼쪽 정렬·같은 폭이면 한 장으로 읽힌다.
    가운데 정렬, 검은 면, 화면 폭 도판을 번갈아 넣어 넘길 때마다
    다른 화면이 오게 한다. 값은 그대로, 짜임만 바꾼다. */
+/* 가운데 정렬 — 글자만 가운데로 놓아서는 안 되고 **문단 상자 자체**가
+   가운데로 와야 한다. .band p.lead 의 `margin:0 0` 이 특이도에서 이겨
+   상자가 왼쪽에 붙어 있었다(글자는 그 상자 안에서만 가운데였다). */
 .wrap--center{text-align:center}
+.band .wrap--center .lead{margin-left:auto;margin-right:auto;max-width:54ch}
+.band .wrap--center h2{margin-left:auto;margin-right:auto}
 .wrap--center h2,.wrap--center .lead,.cover h1,.cover__p,.dev figcaption{text-wrap:balance}
 .wrap--center .lead{margin-left:auto;margin-right:auto}
 
