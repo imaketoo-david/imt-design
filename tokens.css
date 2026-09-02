@@ -1,10 +1,19 @@
 /* ══════════════════════════════════════════════════════════════
-   IMT Design System v1 — tokens.css
+   IMT Design System v2 — tokens.css
    단일 진실. 이 파일 밖에서 색·간격·라운드를 하드코딩하지 않는다.
 
    출처: stock-sim 의 구조(라운드 규칙·폰트 단계·이징)를 그대로 유지하고,
          my-speak 의 iOS 시스템색·라벨 위계·채움·다크모드를 흡수했다.
          기존 이름은 전부 보존 → sim·marketing 은 수정 없이 동작한다.
+
+   v2 (2026-09) — Apple HIG 실측 대조 반영.
+     · Materials: 표준 4단(ultraThin/thin/regular/thick) + Liquid Glass 분리
+     · Color: placeholderText·link·opaqueSeparator·system 배경셋 추가
+     · Typography: Apple 텍스트 스타일 누락 단계(16/22/28) + 실측 leading
+     · Accessibility: 컨트롤 크기·히트영역 토큰, prefers-contrast/transparency 블록
+   근거: HIG Materials·Color·Typography·Accessibility·Buttons·Layout (2026-09-02 열람)
+   주의: Apple 은 "시스템 색 값을 하드코딩하지 말라" 고 명시한다. 아래 값은
+         웹에서 시스템 API 를 쓸 수 없어 고정한 것이며, '의미' 가 진실이지 값이 아니다.
    ══════════════════════════════════════════════════════════════ */
 
 :root {
@@ -17,19 +26,52 @@
   --card:      #ffffff;   /* secondarySystemGroupedBackground */
   --inset:     #f5f5f8;   /* 카드 안의 강조 면 */
   --sheet:     #ffffff;   /* 모달·시트 */
-  --mat:       rgba(249,249,249,.82);          /* 반투명 머티리얼 */
-  --mat-blur:  saturate(180%) blur(20px);
+
+  /* system 배경셋 — HIG 는 grouped 와 system 두 벌을 정의한다.
+     grouped(위 --bg/--card/--inset) = 그룹 테이블뷰용,
+     system(아래) = 그 외 일반 화면용. 의미를 바꿔 쓰지 않는다. */
+  --bg-sys:    #ffffff;   /* systemBackground */
+  --bg-sys-2:  #f2f2f7;   /* secondarySystemBackground */
+  --bg-sys-3:  #ffffff;   /* tertiarySystemBackground */
+
+  /* ─── 표준 머티리얼 (콘텐츠 레이어) ───────────────────────────
+     두께가 얇을수록 뒤가 비치고, 두꺼울수록 대비가 확보된다.
+     HIG: 얇은 재질 위에 quaternary 단계 글자를 올리지 않는다. */
+  --mat-ultrathin: rgba(255,255,255,.55);
+  --mat-thin:      rgba(255,255,255,.70);
+  --mat:           rgba(249,249,249,.82);   /* regular = 기본 */
+  --mat-thick:     rgba(249,249,249,.93);
+  --mat-blur:      saturate(180%) blur(20px);
+
+  /* ─── Liquid Glass (컨트롤·내비게이션 레이어 전용) ─────────────
+     HIG: 콘텐츠 레이어에는 쓰지 않는다. 커스텀 컨트롤에는 아껴 쓴다.
+     regular = 배경 휘도를 조정해 가독성 확보 (기본)
+     clear   = 사진·영상 위에서만. 밝은 콘텐츠 위라면 --glass-dim 을 깐다. */
+  --glass:       rgba(255,255,255,.60);
+  --glass-clear: rgba(255,255,255,.16);
+  --glass-blur:  saturate(180%) blur(24px);
+  --glass-line:  rgba(255,255,255,.55);
+  --glass-sh:    0 1px 1px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.10);
+  --glass-dim:   rgba(0,0,0,.35);   /* HIG 명시값: 35% */
+  /* 스크롤 엣지 이펙트 — 컨트롤 아래로 콘텐츠가 지나갈 때의 전환 */
+  --scroll-edge: linear-gradient(to bottom, rgba(255,255,255,.92), rgba(255,255,255,0));
 
   /* ─── 선 ─── */
-  --line:      #dcdce2;
-  --line-soft: #ebebf0;
-  --hairline:  .5px;
+  --line:        #dcdce2;   /* separator — 뒤가 비치는 구분선 */
+  --line-soft:   #ebebf0;
+  --line-opaque: #c6c6c8;   /* opaqueSeparator — 뒤가 비치지 않는 구분선 */
+  --hairline:    .5px;
 
   /* ─── 글자 4단계 ─── */
-  --ink:  #1d1d1f;   /* 본문·값 */
-  --ink2: #424245;   /* 부제 */
-  --sub:  #7c7c82;   /* 라벨·설명 */
-  --sub2: #a4a4aa;   /* 비활성·플레이스홀더 */
+  --ink:  #1d1d1f;   /* label */
+  --ink2: #424245;   /* secondaryLabel */
+  --sub:  #6e6e74;   /* tertiaryLabel — v1 #7c7c82 은 --bg 위에서 3.72:1 로 미달 */
+  --sub2: #a4a4aa;   /* quaternaryLabel — 비활성 전용. 대비 기준 면제 대상 */
+
+  /* HIG 는 placeholderText 와 link 를 별도 의미색으로 정의한다.
+     v1 은 이 둘을 --sub2 / --brand 로 겸용했다 → 의미 혼용을 끊는다. */
+  --placeholder: #6e6e78;   /* 입력 힌트 — 실제 글자이므로 4.5:1 확보 */
+  --link:        #006cda;   /* 본문 링크 — --brand(버튼 면색)와 용도가 다르다 */
 
   /* ─── 채움 4단계 (칩·트랙·스켈레톤) ─── */
   --fill1: rgba(120,120,128,.20);
@@ -58,7 +100,7 @@
   /* ─── 등락 (한국 관례: 상승 빨강 / 하락 파랑) ─── */
   --up:   #e0392e;  --up-soft:   #fceceb;
   --down: #0071e3;  --down-soft: #e8f1fd;
-  --flat: #a4a4aa;
+  --flat: #86868b;   /* 비텍스트 그래픽 3:1 기준 (v1 #a4a4aa 은 2.48) */
 
   /* ─── 상태 ───────────────────────────────────────────────────
      의미가 고정된 색. 차트 시리즈로 재사용하지 않는다.
@@ -74,7 +116,7 @@
   --c1:#2C6BED; --c2:#D9631F; --c3:#159B90; --c4:#B8811F;
   --c5:#C43A80; --c6:#0F8FC4; --c7:#7F55D4; --c8:#1F8A48;
   --grid: rgba(0,0,0,.06);
-  --axis: #a4a4aa;
+  --axis: #86868b;
 
   /* ─── 라운드 ─────────────────────────────────────────────────
      박스는 하나의 라운드만 쓴다 — 카드·패널·버튼·드롭다운·탭 전부.
@@ -87,7 +129,19 @@
   --r-in:    13px;
   --r-xs:    6px;
   --r-sheet: 22px;
+  --r-cap:   999px;  /* 캡슐 — 애플 현행 버튼 기본형(텍스트/텍스트+아이콘) */
   --r-xl: var(--r); --r-lg: var(--r); --r-md: var(--r); --r-sm: var(--r);
+
+  /* ─── 컨트롤 크기 ────────────────────────────────────────────
+     HIG 실측표. '보이는 크기' 가 아니라 '히트영역' 이 기준이다 —
+     38px 버튼이라도 패딩으로 44px 를 확보하면 규격을 만족한다. */
+  --tap:       44px;  /* iOS·iPadOS·watchOS 기본 컨트롤 크기 */
+  --tap-min:   28px;  /* iOS 최소 */
+  --tap-vision:60px;  /* visionOS 기본 */
+  --ctl:       28px;  /* macOS 기본 */
+  --ctl-min:   20px;  /* macOS 최소 */
+  --gap-ctl:      12px;  /* 베젤 있는 요소 주위 여백 */
+  --gap-ctl-plain:24px;  /* 베젤 없는 요소 주위 여백 */
 
   /* ─── 간격 ───────────────────────────────────────────────────
      4의 배수만. 6px·10px·14px 같은 중간값을 허용하면
@@ -108,18 +162,30 @@
           "Apple SD Gothic Neo", system-ui, sans-serif;
   --font-num: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
 
-  --fs-tag:10px;   /* 배지 */
-  --fs-xs:11px;    /* 보조 설명 */
-  --fs-sm:12px;    /* 라벨 */
-  --fs-md:13px;    /* 본문 */
-  --fs-base:15px;  /* 값 */
-  --fs-lg:17px;    /* 강조 값 */
-  --fs-xl:20px;    /* 섹션 제목 */
-  --fs-2xl:26px;   /* 요약 숫자 */
-  --fs-3xl:34px;   /* 히어로 */
+  /* 괄호 안은 대응하는 Apple 텍스트 스타일(iOS Large 기준). */
+  --fs-tag:10px;   /* 배지 — macOS Caption 최소치. iOS 최소(11pt)보다 작다 */
+  --fs-xs:11px;    /* 보조 설명 (Caption 2, iOS 최소치) */
+  --fs-sm:12px;    /* 라벨 (Caption 1) */
+  --fs-md:13px;    /* 본문 (Footnote / macOS Body) */
+  --fs-base:15px;  /* 값 (Subhead) */
+  --fs-callout:16px; /* (Callout) — v1 누락분 */
+  --fs-lg:17px;    /* 강조 값 (Body·Headline, iOS 기본 크기) */
+  --fs-xl:20px;    /* 섹션 제목 (Title 3) */
+  --fs-title2:22px;  /* (Title 2) — v1 누락분 */
+  --fs-2xl:26px;   /* 요약 숫자 (macOS Large Title) */
+  --fs-title1:28px;  /* (Title 1) — v1 누락분 */
+  --fs-3xl:34px;   /* 히어로 (Large Title) */
 
+  /* HIG: Ultralight·Thin·Light 는 쓰지 않는다. Regular 이상만 둔다. */
   --fw-r:400; --fw-m:500; --fw-sb:600;
+
   --lh-tight:1.15; --lh-snug:1.35; --lh-base:1.55;
+  /* Apple 실측 leading ÷ size. 한글 본문은 --lh-base 를 그대로 쓰고,
+     영문·숫자 위주의 제목·수치에는 아래 값을 쓴다. */
+  --lh-title:1.21;  /* 34/41 · 28/34 */
+  --lh-head:1.29;   /* 17/22 */
+  --lh-body:1.33;   /* 15/20 · 12/16 */
+  --lh-cap:1.18;    /* 11/13 */
   /* 큰 글자일수록 자간을 좁힌다 — 애플 타이포의 핵심 */
   --tr-3xl:-.024em; --tr-2xl:-.02em; --tr-xl:-.016em;
   --tr-base:-.008em; --tr-sm:-.003em;
@@ -145,6 +211,17 @@
   :root:not([data-theme="light"]) {
     --bg:#000000; --card:#1c1c1e; --inset:#2c2c2e; --sheet:#1c1c1e;
     --mat:rgba(30,30,32,.82);
+    --bg-sys:#000000; --bg-sys-2:#1c1c1e; --bg-sys-3:#2c2c2e;
+    --mat-ultrathin:rgba(30,30,32,.55); --mat-thin:rgba(30,30,32,.70);
+    --mat-thick:rgba(28,28,30,.94);
+    --glass:rgba(58,58,60,.55); --glass-clear:rgba(255,255,255,.10);
+    --glass-line:rgba(255,255,255,.14);
+    --glass-sh:0 1px 1px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.55);
+    --glass-dim:rgba(0,0,0,.35);
+    --scroll-edge:linear-gradient(to bottom, rgba(28,28,30,.92), rgba(28,28,30,0));
+    --line-opaque:#48484a;
+    --placeholder:#8e8e93; --link:#0a84ff;
+    --flat:#8e8e93;
 
     --line:#38383a; --line-soft:#2c2c2e;
 
@@ -176,6 +253,17 @@
   color-scheme: dark;
   --bg:#000000; --card:#1c1c1e; --inset:#2c2c2e; --sheet:#1c1c1e;
   --mat:rgba(30,30,32,.82);
+  --bg-sys:#000000; --bg-sys-2:#1c1c1e; --bg-sys-3:#2c2c2e;
+  --mat-ultrathin:rgba(30,30,32,.55); --mat-thin:rgba(30,30,32,.70);
+  --mat-thick:rgba(28,28,30,.94);
+  --glass:rgba(58,58,60,.55); --glass-clear:rgba(255,255,255,.10);
+  --glass-line:rgba(255,255,255,.14);
+  --glass-sh:0 1px 1px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.55);
+  --glass-dim:rgba(0,0,0,.35);
+  --scroll-edge:linear-gradient(to bottom, rgba(28,28,30,.92), rgba(28,28,30,0));
+  --line-opaque:#48484a;
+  --placeholder:#8e8e93; --link:#0a84ff;
+  --flat:#8e8e93;
   --line:#38383a; --line-soft:#2c2c2e;
   --ink:#f5f5f7; --ink2:#d1d1d6; --sub:#98989f; --sub2:#6c6c72;
   --fill1:rgba(120,120,128,.36); --fill2:rgba(120,120,128,.30);
@@ -191,6 +279,52 @@
   --sh:var(--edge), 0 1px 2px rgba(0,0,0,.5);
   --sh-lift:var(--edge), 0 8px 28px rgba(0,0,0,.6);
   --ring:0 0 0 4px rgba(10,132,255,.28);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   대비 강화 — 시스템 설정 'Increase Contrast' 대응.
+   HIG: "기본값이 최소 대비를 만족하지 못한다면, 최소한 Increase Contrast
+   가 켜졌을 때 더 높은 대비의 색 구성을 제공하라."
+   Apple 자신도 systemRed 에 별도 accessible 변형을 둔다.
+   아래 값은 흰 배경 및 각자의 -soft 배경 위에서 4.5:1 을 통과한다.
+   ══════════════════════════════════════════════════════════════ */
+@media (prefers-contrast: more) {
+  :root:not([data-theme="dark"]) {
+    --sub:#5a5a60; --sub2:#76767a; --placeholder:#5f5f65;
+    --line:#8e8e93; --line-soft:#c6c6c8; --line-opaque:#8e8e93;
+    --link:#0057b0;
+    --up:#ca3329; --down:#006bd8;
+    --ok:#1c7e42; --warn:#916618; --danger:#b02a23; --info:#0c75a1;
+    --flat:#6e6e74; --axis:#6e6e74; --grid:rgba(0,0,0,.14);
+    --fill1:rgba(120,120,128,.34); --fill2:rgba(120,120,128,.28);
+    --fill3:rgba(118,118,128,.22); --fill4:rgba(116,116,128,.16);
+  }
+  :root[data-theme="dark"] {
+    --sub:#adadb4; --sub2:#83838a; --placeholder:#a4a4aa;
+    --line:#5a5a5e; --line-soft:#48484a; --line-opaque:#6c6c72;
+    --indigo:#7572ff; --link:#4aa8ff;
+    --axis:#83838a; --grid:rgba(255,255,255,.18);
+  }
+}
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sub:#adadb4; --sub2:#83838a; --placeholder:#a4a4aa;
+    --line:#5a5a5e; --line-soft:#48484a; --line-opaque:#6c6c72;
+    --indigo:#7572ff; --link:#4aa8ff;
+    --axis:#83838a; --grid:rgba(255,255,255,.18);
+  }
+}
+
+/* 투명도 축소 — 머티리얼·글래스를 불투명 면으로 대체한다.
+   HIG: 재질의 외형은 시스템 설정에 따라 달라진다는 전제를 지킨다. */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --mat:var(--card); --mat-ultrathin:var(--card);
+    --mat-thin:var(--card); --mat-thick:var(--card);
+    --glass:var(--card); --glass-clear:var(--card);
+    --mat-blur:none; --glass-blur:none;
+    --glass-line:var(--line);
+  }
 }
 
 /* ─── 기존 사이트 이름 별칭 (plan·speak 무수정 이관용) ─── */

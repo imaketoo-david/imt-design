@@ -137,7 +137,7 @@
 .imt-input:focus, .imt-select:focus, .imt-textarea:focus{
   outline:none; border-color:var(--brand); box-shadow:var(--ring);
 }
-.imt-input::placeholder{ color:var(--sub2) }
+.imt-input::placeholder{ color:var(--placeholder) }
 
 .imt-search{
   display:flex; align-items:center; gap:var(--sp-2);
@@ -228,3 +228,15 @@
 .imt-i--md{ width:1.5rem; height:1.5rem }
 .imt-i--lg{ width:2rem; height:2rem }
 .imt-i--xl{ width:2.75rem; height:2.75rem }
+
+/* ── 히트영역 ────────────────────────────────────────────────
+   HIG: 버튼은 최소 44x44pt 의 '히트영역' 이 필요하다. 보이는 크기가
+   아니라 눌리는 범위가 기준이므로, 포인터가 굵은(터치) 환경에서만
+   투명 영역을 넓힌다. 마우스 환경은 macOS 기준(28px)이면 충분하다. */
+@media (pointer: coarse){
+  .imt-btn, .imt-btn--sm, .imt-chip, .imt-seg__i, .imt-input, .imt-search{
+    min-height:var(--tap);
+  }
+  .imt-btn--icon{ min-width:var(--tap); min-height:var(--tap) }
+  .imt-nav__links a{ min-height:var(--tap); display:inline-flex; align-items:center }
+}

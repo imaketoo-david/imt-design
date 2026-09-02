@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+
+# v1 백업본 (로컬 보관용)
+*.bak_v1_*

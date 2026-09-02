@@ -30,6 +30,16 @@
   pre{margin:var(--sp-2) 0 0;padding:var(--sp-3) var(--sp-4);background:var(--inset);color:var(--ink2);box-shadow:var(--edge);border-radius:var(--r-in);overflow-x:auto;font:var(--fw-r) var(--fs-sm)/1.65 var(--font-num);letter-spacing:0}
   .copy{align-self:flex-start;margin-top:var(--sp-2)}
 
+  .matstage{display:flex;gap:var(--sp-3);flex-wrap:wrap;padding:var(--sp-5);border-radius:var(--r);
+    background:linear-gradient(120deg,#0071e3 0%,#30b0c7 38%,#ff9500 70%,#ff2d55 100%)}
+  .matstage--rich{background:
+    radial-gradient(circle at 18% 30%,#ffd60a 0 12%,transparent 12.5%),
+    radial-gradient(circle at 72% 68%,#ff2d55 0 16%,transparent 16.5%),
+    linear-gradient(140deg,#1d1d1f,#0071e3 55%,#5856d6)}
+  .matchip{flex:1 1 130px;min-height:76px;border-radius:var(--r-in);padding:var(--sp-3);
+    display:flex;flex-direction:column;justify-content:center;gap:2px}
+  .matchip b{font-size:var(--fs-base);font-weight:var(--fw-sb);letter-spacing:var(--tr-base)}
+  .matchip span{font-size:var(--fs-xs);opacity:.72}
   .tscale{display:flex;flex-direction:column;gap:var(--sp-2)}
   .tscale div{display:flex;align-items:baseline;gap:var(--sp-4);border-bottom:var(--hairline) solid var(--line-soft);padding-bottom:var(--sp-2)}
   .tscale code{flex:none;width:96px;font:var(--fw-r) var(--fs-xs) var(--font-num);color:var(--sub)}
@@ -65,7 +75,7 @@
   <aside class="ds__nav">
     <b>기초</b>
     <a href="#principles">원칙</a><a href="#color">색</a><a href="#type">타이포</a>
-    <a href="#space">간격</a><a href="#radius">라운드</a><a href="#shadow">그림자</a><a href="#motion">모션</a>
+    <a href="#space">간격</a><a href="#radius">라운드</a><a href="#material">머티리얼</a><a href="#shadow">그림자</a><a href="#motion">모션</a><a href="#a11y">접근성 규격</a>
     <b>컴포넌트</b>
     <a href="#button">버튼</a><a href="#card">카드</a><a href="#seg">세그먼트·칩</a>
     <a href="#badge">배지</a><a href="#list">목록·표</a><a href="#form">입력</a><a href="#overlay">모달·토스트</a>
@@ -114,6 +124,41 @@
     <div class="imt-card"><div class="rx" id="rx"></div></div>
   </section>
 
+  <!-- ─── 머티리얼 ─── -->
+  <section class="imt-section" id="material">
+    <h2 class="imt-section__title">머티리얼 · Liquid Glass</h2>
+    <p style="color:var(--sub);margin:0 0 var(--sp-4)">애플은 재질을 <b>두 벌</b>로 나눈다. 표준 머티리얼은 <b>콘텐츠 레이어</b>의 구조를 만들고, Liquid Glass 는 그 위에 뜨는 <b>컨트롤·내비게이션 레이어</b> 전용이다. 콘텐츠 레이어에 글래스를 쓰면 위계가 무너진다.</p>
+
+    <div class="imt-card">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">표준 머티리얼 4단 — 콘텐츠 레이어</h3>
+      <div class="matstage">
+        <div class="matchip" style="background:var(--mat-ultrathin);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>ultraThin</b><span>가장 얇음</span></div>
+        <div class="matchip" style="background:var(--mat-thin);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>thin</b><span>맥락 유지</span></div>
+        <div class="matchip" style="background:var(--mat);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>regular</b><span>기본</span></div>
+        <div class="matchip" style="background:var(--mat-thick);backdrop-filter:var(--mat-blur);-webkit-backdrop-filter:var(--mat-blur)"><b>thick</b><span>대비 확보</span></div>
+      </div>
+      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">두꺼울수록 대비가 좋고, 얇을수록 뒤 맥락이 남는다. 얇은 재질 위에 <code>--sub2</code>(quaternary) 단계 글자를 올리지 않는다.</p>
+    </div>
+
+    <div class="imt-card" style="margin-top:var(--sp-4)">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">Liquid Glass 2종 — 컨트롤 레이어</h3>
+      <div class="matstage matstage--rich">
+        <div class="matchip" style="background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);box-shadow:var(--glass-sh);border:1px solid var(--glass-line);border-radius:var(--r-cap)"><b>regular</b><span>기본 · 휘도 보정</span></div>
+        <div class="matchip" style="background:var(--glass-clear);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-line);border-radius:var(--r-cap);color:#fff"><b>clear</b><span>사진·영상 위에서만</span></div>
+      </div>
+      <div class="rule" style="margin-top:var(--sp-4)"><span class="rule__n">!</span><div><div class="rule__t">clear 를 밝은 콘텐츠 위에 얹을 때는 <code>--glass-dim</code>(35%) 을 먼저 깐다</div><div class="rule__s">HIG 명시값이다. 콘텐츠가 충분히 어두우면 생략한다. 커스텀 컨트롤에 글래스를 여러 개 쓰지 않는다 — 콘텐츠로 향해야 할 주의를 뺏는다.</div></div></div>
+    </div>
+
+    <div class="imt-card" style="margin-top:var(--sp-4)">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">시스템 설정을 이긴다고 생각하지 않는다</h3>
+      <table class="imt-table"><tbody>
+        <tr><td><code>prefers-reduced-transparency</code></td><td style="color:var(--sub)">머티리얼·글래스가 전부 <code>--card</code> 불투명 면으로 바뀐다</td></tr>
+        <tr><td><code>prefers-contrast: more</code></td><td style="color:var(--sub)">글자·선·상태색이 고대비 변형으로 교체된다</td></tr>
+        <tr><td><code>prefers-reduced-motion</code></td><td style="color:var(--sub)">모든 전환이 0.01ms 로 눌린다</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
   <!-- ─── 그림자 ─── -->
   <section class="imt-section" id="shadow">
     <h2 class="imt-section__title">그림자</h2>
@@ -138,6 +183,52 @@
     <pre>--ease:   cubic-bezier(.4,0,.2,1)    /* 이동·페이드 — 기본 */
 --spring: cubic-bezier(.34,1.4,.5,1) /* 등장·토글 — 살짝 튄다 */
 --dur-1:.12s  --dur-2:.2s  --dur-3:.32s</pre>
+  </section>
+
+  <!-- ─── 접근성 규격 ─── -->
+  <section class="imt-section" id="a11y">
+    <h2 class="imt-section__title">접근성 규격</h2>
+    <p style="color:var(--sub);margin:0 0 var(--sp-4)">아래 수치는 애플 HIG 의 실측 표를 그대로 옮긴 것이다. 디자인이 "애플스러운가" 를 눈으로 다투는 대신 이 표로 판정한다.</p>
+
+    <div class="imt-card">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">최소 명도대비</h3>
+      <table class="imt-table">
+        <thead><tr><th>글자 크기</th><th>굵기</th><th>최소 대비</th></tr></thead>
+        <tbody>
+          <tr><td>17pt 이하</td><td>전부</td><td><b>4.5:1</b></td></tr>
+          <tr><td>18pt</td><td>전부</td><td><b>3:1</b></td></tr>
+          <tr><td>전부</td><td>Bold</td><td><b>3:1</b></td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">기본값이 이를 못 맞추면 <b>최소한 Increase Contrast 가 켜졌을 때</b> 더 높은 대비를 제공해야 한다 — 애플 자신도 systemRed 에 별도 accessible 변형을 둔다. 이 시스템의 고대비 변형은 <code>@media (prefers-contrast: more)</code> 에 있다. 전 항목 통과 여부는 <code>python3 check_contrast.py</code> 로 확인한다.</p>
+    </div>
+
+    <div class="imt-card" style="margin-top:var(--sp-4)">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">컨트롤 크기</h3>
+      <table class="imt-table">
+        <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th><th>토큰</th></tr></thead>
+        <tbody>
+          <tr><td>iOS · iPadOS · watchOS</td><td>44 × 44 pt</td><td>28 × 28 pt</td><td><code>--tap</code> / <code>--tap-min</code></td></tr>
+          <tr><td>macOS</td><td>28 × 28 pt</td><td>20 × 20 pt</td><td><code>--ctl</code> / <code>--ctl-min</code></td></tr>
+          <tr><td>visionOS</td><td>60 × 60 pt</td><td>28 × 28 pt</td><td><code>--tap-vision</code></td></tr>
+        </tbody>
+      </table>
+      <div class="rule" style="margin-top:var(--sp-4)"><span class="rule__n">!</span><div><div class="rule__t">기준은 '보이는 크기' 가 아니라 '히트영역' 이다</div><div class="rule__s">38px 버튼이라도 눌리는 범위가 44px 면 규격을 만족한다. 이 시스템은 <code>@media (pointer: coarse)</code> 에서만 <code>min-height:var(--tap)</code> 를 걸어, 마우스 환경의 밀도를 해치지 않는다.</div></div></div>
+      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">간격도 크기만큼 중요하다 — 베젤 있는 요소 주위 <code>--gap-ctl</code>(12px), 베젤 없는 요소 주위 <code>--gap-ctl-plain</code>(24px).</p>
+    </div>
+
+    <div class="imt-card" style="margin-top:var(--sp-4)">
+      <h3 class="imt-card__title" style="font-size:var(--fs-base);margin:0 0 var(--sp-3)">글자 최소 크기</h3>
+      <table class="imt-table">
+        <thead><tr><th>플랫폼</th><th>기본</th><th>최소</th></tr></thead>
+        <tbody>
+          <tr><td>iOS · iPadOS</td><td>17 pt</td><td>11 pt</td></tr>
+          <tr><td>macOS</td><td>13 pt</td><td>10 pt</td></tr>
+          <tr><td>visionOS</td><td>17 pt</td><td>12 pt</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--sub);font-size:var(--fs-sm);margin:var(--sp-3) 0 0">Ultralight · Thin · Light 는 쓰지 않는다 — 토큰에 아예 없다(<code>--fw-r</code> 400 / <code>--fw-m</code> 500 / <code>--fw-sb</code> 600). <code>--fs-tag</code>(10px)는 macOS 최소치에는 맞지만 iOS 최소치보다 작다. 모바일에서 뜻이 있는 글자에는 <code>--fs-xs</code>(11px) 이상을 쓴다.</p>
+    </div>
   </section>
 
   <!-- ─── 버튼 ─── -->
@@ -362,9 +453,11 @@ const cs = () => getComputedStyle(document.documentElement);
 const V  = n => cs().getPropertyValue(n).trim();
 
 const GROUPS = [
-  ["면",      ["--bg","--card","--inset","--sheet"]],
-  ["선",      ["--line","--line-soft"]],
+  ["면 · grouped",["--bg","--card","--inset","--sheet"]],
+  ["면 · system", ["--bg-sys","--bg-sys-2","--bg-sys-3"]],
+  ["선",      ["--line","--line-soft","--line-opaque"]],
   ["글자",    ["--ink","--ink2","--sub","--sub2"]],
+  ["글자 · 의미",["--placeholder","--link"]],
   ["채움",    ["--fill1","--fill2","--fill3","--fill4"]],
   ["강조",    ["--brand","--brand-hover","--brand-soft"]],
   ["시스템",  ["--green","--red","--orange","--yellow","--teal","--indigo","--pink"]],
@@ -379,14 +472,16 @@ function paintColors(){
     ["--c1","--c2","--c3","--c4","--c5","--c6","--c7","--c8"]
     .map((k,i)=>`<button data-copy="var(${k})"><i style="background:var(${k})"></i><b>슬롯 ${i+1}</b><code>${V(k)}</code></button>`).join("");
 }
-const TS=[["--fs-3xl","히어로"],["--fs-2xl","요약 숫자"],["--fs-xl","섹션 제목"],["--fs-lg","강조 값"],
-          ["--fs-base","값"],["--fs-md","본문"],["--fs-sm","라벨"],["--fs-xs","보조"],["--fs-tag","배지"]];
+const TS=[["--fs-3xl","히어로 · Large Title"],["--fs-title1","Title 1"],["--fs-2xl","요약 숫자 · macOS Large Title"],
+          ["--fs-title2","Title 2"],["--fs-xl","섹션 제목 · Title 3"],["--fs-lg","강조 값 · Body/Headline"],
+          ["--fs-callout","Callout"],["--fs-base","값 · Subhead"],["--fs-md","본문 · Footnote"],
+          ["--fs-sm","라벨 · Caption 1"],["--fs-xs","보조 · Caption 2"],["--fs-tag","배지"]];
 document.getElementById("tscale").innerHTML = TS.map(([k,d])=>
   `<div><code>${k}</code><span style="font-size:var(${k});font-weight:var(--fw-sb);letter-spacing:var(--tr-xl)">애플 스타일 Apple 2026</span><span style="margin-left:auto;color:var(--sub);font-size:var(--fs-xs)">${d}</span></div>`).join("");
 const SP=["--sp-1","--sp-2","--sp-3","--sp-4","--sp-5","--sp-6","--sp-8","--sp-10","--sp-12","--sp-16"];
 document.getElementById("spx").innerHTML = SP.map(k=>
   `<div><code>${k}</code><i style="width:var(${k})"></i><span style="color:var(--sub);font-size:var(--fs-xs)">${V(k)}</span></div>`).join("");
-const RX=[["--r","카드·버튼·탭 전부"],["--r-in","세그먼트 안쪽"],["--r-xs","배지"],["--r-sheet","시트·모달"]];
+const RX=[["--r","카드·버튼·탭 전부"],["--r-in","세그먼트 안쪽"],["--r-xs","배지"],["--r-sheet","시트·모달"],["--r-cap","캡슐 — 애플 현행 버튼"]];
 document.getElementById("rx").innerHTML = RX.map(([k,d])=>
   `<div><i style="border-radius:var(${k})"></i><code>${k} · ${V(k)}</code><code style="color:var(--sub2)">${d}</code></div>`).join("");
 
