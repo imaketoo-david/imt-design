@@ -179,16 +179,43 @@ def type_wall():
 # ── 기기 목업 ───────────────────────────────────────────────────
 # 남의 제품 사진을 빌려오지 않는다. 프레임도 화면 속 UI도 전부 우리 토큰으로
 # 그린다 — 그래서 이 그림은 예시가 아니라 시스템이 실제로 만드는 결과다.
+# Apple 공식 베젤(img/iphone-bezel.png)이 있으면 그것을 쓰고, 없으면 직접 그린
+# 프레임으로 되돌아간다. 베젤을 쓸 때는 Apple 마케팅 지침을 따른다 —
+# 이미지에 그림자·하이라이트·반사를 더하지 않고, 자르거나 기울이지 않으며,
+# 화면에는 앱이 실제로 도는 모습과 상태바를 넣는다. 카피는 이미지 옆·아래에만 둔다.
+BEZEL = os.path.join(ROOT, "img", "iphone-bezel.png")
+
 def phone(screen, cap):
+    if os.path.exists(BEZEL):
+        return (f'<figure class="dev dev--shot">'
+                f'<div class="shot">'
+                f'<img class="shot__b" src="img/iphone-bezel.png?v={VER}" alt="iPhone" '
+                f'width="1000" height="2040" loading="lazy">'
+                f'<div class="shot__s">{screen}</div></div>'
+                f'<figcaption>{cap}</figcaption></figure>')
     return (f'<figure class="dev"><div class="dev__f"><span class="dev__n"></span>'
             f'<div class="dev__s">{screen}</div></div>'
             f'<figcaption>{cap}</figcaption></figure>')
+
+def statusbar():
+    """상태바 — Apple 지침: 신호·Wi-Fi·배터리를 가득 찬 상태로 넣는다."""
+    return ('<div class="ux__bar"><b>9:41</b><span>'
+      '<svg viewBox="0 0 18 12" aria-hidden="true"><rect x="0" y="8" width="3" height="4" rx="1"/>'
+      '<rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/>'
+      '<rect x="15" y="0" width="3" height="12" rx="1"/></svg>'
+      '<svg viewBox="0 0 16 12" aria-hidden="true"><path d="M8 10.6 5.4 8a3.7 3.7 0 0 1 5.2 0z"/>'
+      '<path d="M8 6.1a6.4 6.4 0 0 0-4.5 1.9L1.9 6.4a8.6 8.6 0 0 1 12.2 0l-1.6 1.6A6.4 6.4 0 0 0 8 6.1z"/></svg>'
+      '<svg viewBox="0 0 26 12" aria-hidden="true"><rect x=".6" y=".6" width="21" height="10.8" rx="3" '
+      'fill="none" stroke="currentColor" stroke-width="1.1" opacity=".45"/>'
+      '<rect x="2.2" y="2.2" width="17.8" height="7.6" rx="1.8"/>'
+      '<path d="M23.4 4.2v3.6a2 2 0 0 0 0-3.6z" opacity=".45"/></svg>'
+      '</span></div>')
 
 def scr_dash():
     bars = "".join(
         f'<i style="height:{h}%;background:var(--c1);opacity:{o}"></i>'
         for h, o in [(34,.35),(52,.5),(44,.65),(70,.8),(88,1),(62,.8),(76,.9)])
-    return ('<div class="ux ux--dash">'
+    return ('<div class="ux ux--dash">' + statusbar() +
       '<div class="ux__t">오늘</div>'
       '<div class="ux__card"><span class="ux__lab">평가금액</span>'
       '<b class="ux__big">12,480,900</b>'
@@ -200,12 +227,12 @@ def scr_dash():
 
 def scr_list():
     rows = [("알림", "켜짐"), ("다크 모드", "자동"), ("글자 크기", "기본"), ("데이터", "Wi-Fi")]
-    return ('<div class="ux"><div class="ux__t">설정</div>'
+    return ('<div class="ux">' + statusbar() + '<div class="ux__t">설정</div>'
       + "".join(f'<div class="ux__row"><span>{a}</span><em>{b}</em></div>' for a, b in rows)
       + '<div class="ux__seg"><i class="on">전체</i><i>즐겨찾기</i></div></div>')
 
 def scr_form():
-    return ('<div class="ux"><div class="ux__t">주문</div>'
+    return ('<div class="ux">' + statusbar() + '<div class="ux__t">주문</div>'
       '<div class="ux__fld"><span>수량</span><b>10</b></div>'
       '<div class="ux__fld"><span>단가</span><b>72,400</b></div>'
       '<div class="ux__note">체결가는 호가에 따라 달라진다.</div>'
@@ -282,6 +309,15 @@ def build():
     wall = icon_wall()
     wall2 = icon_wall(96)
     field, tywall = color_field(), type_wall()
+    tm = ('<p class="foot__tm">iPhone 은 미국 및 기타 국가에서 등록된 Apple Inc. 의 상표입니다. '
+          'IMT Design 은 Apple Inc. 와 제휴·후원 관계가 없습니다.</p>'
+          if os.path.exists(BEZEL) else "")
+    devlead = ("화면 안은 전부 이 시스템의 토큰과 컴포넌트로 조립했다. 기기 이미지는 Apple 이 "
+               "개발자에게 공개한 공식 베젤을 <b>수정 없이</b> 쓴다 — 우리 것과 받은 것을 "
+               "여기서도 나눠 적는다."
+               if os.path.exists(BEZEL) else
+               "아래 세 화면은 그려 넣은 그림이 아니라 이 시스템의 토큰과 컴포넌트로 실제로 "
+               "조립한 것이다. 기기 테두리까지 우리가 그렸다 — 남의 사진은 한 장도 없다.")
     dev1 = phone(scr_dash(), "대시보드 — 카드·차트 8슬롯·등락 배지")
     dev2 = phone(scr_list(), "목록과 설정 — 행 높이 44 · 세그먼트")
     dev3 = phone(scr_form(), "입력과 동작 — 기본/보조 버튼")
@@ -372,8 +408,7 @@ def build():
   <div class="wrap wrap--center">
     <p class="band__k band__k--c">화면</p>
     <h2>규칙이 화면이 되면<br>이렇게 생겼다</h2>
-    <p class="lead">아래 세 화면은 그려 넣은 그림이 아니라 이 시스템의 토큰과 컴포넌트로
-       실제로 조립한 것이다. 기기 테두리까지 우리가 그렸다 — 남의 사진은 한 장도 없다.</p>
+    <p class="lead">{devlead}</p>
   </div>
   <div class="wrap">
     <div class="devs">
@@ -446,6 +481,7 @@ def build():
 </section>
 
 <footer class="foot"><div class="wrap">
+  {tm}
   IMT Design System · 가이드 {len(pages)-1}쪽 · 아이콘 334 ·
   <a href="https://github.com/imaketoo-david/imt-design">GitHub</a> ·
   <a href="/icons/catalog.html">design.imaketoo.com/icons</a>
