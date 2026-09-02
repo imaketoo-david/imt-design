@@ -152,9 +152,13 @@ GLYPHS = ["bell","star","search","chart-bar","lock","camera","trend-up","check-c
           "arrow-down","arrow-left"]
 
 def icon_wall(n=132):
+    # 40개를 순서대로 돌리면 열 수(10~13)와 주기가 맞아떨어져 몇 행마다
+    # 같은 줄이 그대로 되풀이된다. 글리프 수와 서로소인 보폭으로 건너뛰어
+    # 어느 열 수에서도 같은 행이 다시 나오지 않게 한다.
+    m = len(GLYPHS)
     out = []
     for k in range(n):
-        g = GLYPHS[k % len(GLYPHS)]
+        g = GLYPHS[(k * 17 + k // m * 3) % m]
         c = (k * 3 + k // 7) % 8 + 1
         out.append(f'<span style="color:var(--c{c})">{ic(g)}</span>')
     return "".join(out)
