@@ -83,10 +83,12 @@ def check(paths, color=False):
                         bad.append(f"{name}:{i}  L-5.1 간격 {v}px — 4의 배수가 아니다"); break
             for m in re.finditer(r'border-radius:\s*([^;{}]+)', ln):
                 for v in PX.findall(m.group(1)):
-                    if int(float(v)) not in R:
+                    if float(v) not in R:
                         bad.append(f"{name}:{i}  L-6.1 라운드 {v}px — 토큰에 없는 값")
             for m in re.finditer(r'font-size:\s*(\d+(?:\.\d+)?)px', ln):
-                if int(float(m.group(1))) not in FS:
+                # 13.5px 처럼 반 단계를 끼워 넣는 것이 가장 흔한 이탈이다.
+                # 내림해서 보면 13 으로 통과해 버리므로 값 그대로 비교한다.
+                if float(m.group(1)) not in FS:
                     bad.append(f"{name}:{i}  L-7.1 글자 {m.group(1)}px — 단계에 없다")
             for m in re.finditer(r'font-weight:\s*(\d{3})', ln):
                 if int(m.group(1)) < 400:
