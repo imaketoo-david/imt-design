@@ -2,15 +2,15 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>피드백 — IMT Design Guide</title>
-<link rel="icon" href="../favicon.svg?v=20260903-0432" type="image/svg+xml">
-<link rel="icon" href="../favicon-32.png?v=20260903-0432" sizes="32x32">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-0432">
+<link rel="icon" href="../favicon.svg?v=20260903-2122" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png?v=20260903-2122" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-2122">
 <meta name="theme-color" content="#1d1d1f">
-<link rel="stylesheet" href="../tokens.css?v=20260903-0432">
-<link rel="stylesheet" href="../components.css?v=20260903-0432">
-<link rel="stylesheet" href="../patterns.css?v=20260903-0432">
-<link rel="stylesheet" href="../site.css?v=20260903-0432">
-<link rel="stylesheet" href="../guide.css?v=20260903-0432">
+<link rel="stylesheet" href="../tokens.css?v=20260903-2122">
+<link rel="stylesheet" href="../components.css?v=20260903-2122">
+<link rel="stylesheet" href="../patterns.css?v=20260903-2122">
+<link rel="stylesheet" href="../site.css?v=20260903-2122">
+<link rel="stylesheet" href="../guide.css?v=20260903-2122">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -35,7 +35,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0432">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-2122">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
   <span class="gnav__sp"></span>
@@ -51,7 +51,7 @@
     
   </header>
   <div class="cols">
-    <aside class="side"><b>시작</b><a href="index.html">가이드</a><b>기초</b><a href="layout.html">레이아웃</a><a href="color.html">색</a><a href="typography.html">타이포그래피</a><a href="materials.html">머티리얼</a><a href="icons.html">아이콘</a><a href="accessibility.html">접근성</a><a href="dark-mode.html">다크 모드</a><a href="motion.html">모션</a><b>패턴</b><a href="data.html">데이터 표현</a><a href="feedback.html" class="on">피드백</a><a href="input.html">입력 받기</a><a href="overlay.html">겹침</a><a href="search.html">검색</a><a href="words.html">문안</a><a href="technologies.html">기술 절에서 건너온 것</a><b>컴포넌트</b><a href="buttons.html">버튼</a><a href="cards.html">카드</a><a href="lists.html">목록과 표</a><a href="selection.html">세그먼트 · 칩 · 배지</a><a href="navigation.html">내비게이션</a><a href="fields.html">입력 필드</a><a href="overlays.html">모달 · 시트 · 토스트</a></aside>
+    <aside class="side"><b>시작</b><a href="index.html">가이드</a><b>기초</b><a href="layout.html">레이아웃</a><a href="color.html">색</a><a href="typography.html">타이포그래피</a><a href="materials.html">머티리얼</a><a href="icons.html">아이콘</a><a href="accessibility.html">접근성</a><a href="dark-mode.html">다크 모드</a><a href="motion.html">모션</a><b>패턴</b><a href="data.html">데이터 표현</a><a href="chart-labels.html">차트 이름표</a><a href="feedback.html" class="on">피드백</a><a href="input.html">입력 받기</a><a href="overlay.html">겹침</a><a href="search.html">검색</a><a href="words.html">문안</a><a href="technologies.html">기술 절에서 건너온 것</a><b>컴포넌트</b><a href="buttons.html">버튼</a><a href="cards.html">카드</a><a href="lists.html">목록과 표</a><a href="selection.html">세그먼트 · 칩 · 배지</a><a href="navigation.html">내비게이션</a><a href="fields.html">입력 필드</a><a href="overlays.html">모달 · 시트 · 토스트</a></aside>
     <main>
       <nav class="g-toc"><b>이 문서</b><a href="#loading">기다리게 하는 법</a><a href="#done">끝났다고 말한다</a><a href="#error">안 되는 이유를 말한다</a><a href="#empty">빈 화면은 실패가 아니라 시작점이다</a><a href="#levels">네 단계</a><a href="#channel">무엇으로 알릴 것인가</a></nav>
       <h2 class="g-h2" id="loading">기다리게 하는 법</h2>
@@ -74,7 +74,7 @@
 <figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>단계</th><th>색</th><th>아이콘</th><th>쓸 때</th></tr></thead><tbody><tr><td>오류</td><td><code>--danger</code></td><td><code>x-circle</code></td><td>사용자가 하려던 일이 실패했다</td></tr><tr><td>확인</td><td><code>--warn</code></td><td><code>warning</code></td><td>됐지만 봐야 할 것이 있다</td></tr><tr><td>참고</td><td><code>--info</code></td><td><code>info</code></td><td>알아두면 좋은 것</td></tr><tr><td>정상</td><td><code>--ok</code></td><td><code>check-circle</code></td><td>이상 없음</td></tr></tbody></table></div><p class="g-cap">네 단계 모두 <b>색과 아이콘을 같이</b> 쓴다. 색만으로는 흑백과 색각 이상에서 구분되지 않는다.</p></figure>
 <h2 class="g-h2" id="channel">무엇으로 알릴 것인가</h2>
 <figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>상황</th><th>수단</th><th>이유</th></tr></thead><tbody><tr><td>그 자리에서 알 수 있는 것</td><td>인라인</td><td>중단하지 않는다</td></tr><tr><td>짧은 결과 알림</td><td>토스트 3~5초</td><td>조작을 막지 않는다</td></tr><tr><td>되돌릴 수 없는 파괴적 동작</td><td>경고(alert)</td><td>여기서만 멈춰 세운다</td></tr><tr><td>의도한 동작의 선택지</td><td>액션시트 · 메뉴</td><td>중단이 아니라 이어짐이다</td></tr></tbody></table></div><p class="g-cap">경고는 아껴 쓴다. 앱을 켜자마자 뜨는 경고, 정보 전달용 경고는 만들지 않는다.</p></figure>
-      <div class="g-next"><a href="data.html"><span>이전</span><b>데이터 표현</b></a><a href="input.html"><span>다음</span><b>입력 받기</b></a></div>
+      <div class="g-next"><a href="chart-labels.html"><span>이전</span><b>차트 이름표</b></a><a href="input.html"><span>다음</span><b>입력 받기</b></a></div>
     </main>
   </div>
 </div>

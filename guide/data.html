@@ -2,15 +2,15 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데이터 표현 — IMT Design Guide</title>
-<link rel="icon" href="../favicon.svg?v=20260903-0432" type="image/svg+xml">
-<link rel="icon" href="../favicon-32.png?v=20260903-0432" sizes="32x32">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-0432">
+<link rel="icon" href="../favicon.svg?v=20260903-2122" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png?v=20260903-2122" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-2122">
 <meta name="theme-color" content="#1d1d1f">
-<link rel="stylesheet" href="../tokens.css?v=20260903-0432">
-<link rel="stylesheet" href="../components.css?v=20260903-0432">
-<link rel="stylesheet" href="../patterns.css?v=20260903-0432">
-<link rel="stylesheet" href="../site.css?v=20260903-0432">
-<link rel="stylesheet" href="../guide.css?v=20260903-0432">
+<link rel="stylesheet" href="../tokens.css?v=20260903-2122">
+<link rel="stylesheet" href="../components.css?v=20260903-2122">
+<link rel="stylesheet" href="../patterns.css?v=20260903-2122">
+<link rel="stylesheet" href="../site.css?v=20260903-2122">
+<link rel="stylesheet" href="../guide.css?v=20260903-2122">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -35,7 +35,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0432">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-2122">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
   <span class="gnav__sp"></span>
@@ -51,7 +51,7 @@
     
   </header>
   <div class="cols">
-    <aside class="side"><b>시작</b><a href="index.html">가이드</a><b>기초</b><a href="layout.html">레이아웃</a><a href="color.html">색</a><a href="typography.html">타이포그래피</a><a href="materials.html">머티리얼</a><a href="icons.html">아이콘</a><a href="accessibility.html">접근성</a><a href="dark-mode.html">다크 모드</a><a href="motion.html">모션</a><b>패턴</b><a href="data.html" class="on">데이터 표현</a><a href="feedback.html">피드백</a><a href="input.html">입력 받기</a><a href="overlay.html">겹침</a><a href="search.html">검색</a><a href="words.html">문안</a><a href="technologies.html">기술 절에서 건너온 것</a><b>컴포넌트</b><a href="buttons.html">버튼</a><a href="cards.html">카드</a><a href="lists.html">목록과 표</a><a href="selection.html">세그먼트 · 칩 · 배지</a><a href="navigation.html">내비게이션</a><a href="fields.html">입력 필드</a><a href="overlays.html">모달 · 시트 · 토스트</a></aside>
+    <aside class="side"><b>시작</b><a href="index.html">가이드</a><b>기초</b><a href="layout.html">레이아웃</a><a href="color.html">색</a><a href="typography.html">타이포그래피</a><a href="materials.html">머티리얼</a><a href="icons.html">아이콘</a><a href="accessibility.html">접근성</a><a href="dark-mode.html">다크 모드</a><a href="motion.html">모션</a><b>패턴</b><a href="data.html" class="on">데이터 표현</a><a href="chart-labels.html">차트 이름표</a><a href="feedback.html">피드백</a><a href="input.html">입력 받기</a><a href="overlay.html">겹침</a><a href="search.html">검색</a><a href="words.html">문안</a><a href="technologies.html">기술 절에서 건너온 것</a><b>컴포넌트</b><a href="buttons.html">버튼</a><a href="cards.html">카드</a><a href="lists.html">목록과 표</a><a href="selection.html">세그먼트 · 칩 · 배지</a><a href="navigation.html">내비게이션</a><a href="fields.html">입력 필드</a><a href="overlays.html">모달 · 시트 · 토스트</a></aside>
     <main>
       <nav class="g-toc"><b>이 문서</b><a href="#which">차트를 그릴지 표로 둘지</a><a href="#kind">무엇을 말하려는지가 차트를 정한다</a><a href="#dual">이중 y축 — 금지가 아니라 조건부</a><a href="#axis">축의 하한은 유형이 정한다</a><a href="#series">색만으로 시리즈를 구분하지 않는다</a><a href="#marks">마크 규격</a><a href="#direction">등락 색은 문화가 정한다 — 그리고 고정한다</a><a href="#grid">격자와 눈금</a><a href="#empty">없는 값은 없다고 그린다</a><a href="#live">실시간 갱신</a><a href="#responsive">모바일에서는 버릴 것을 정해 둔다</a><a href="#caption">차트에 한 문장을 붙인다</a><a href="#table">표</a><a href="#interaction">상호작용은 덤이다</a></nav>
       <h2 class="g-h2" id="which">차트를 그릴지 표로 둘지</h2>
@@ -98,7 +98,7 @@
 <figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>규칙</th><th>이유</th></tr></thead><tbody><tr><td>열 제목을 축약하지 않는다</td><td>'전일比' 보다 '전일 대비' 가 한 번에 읽힌다</td></tr><tr><td>행이 20개를 넘으면 검색이나 필터를 붙인다</td><td>스크롤로 찾게 하지 않는다</td></tr><tr><td>정렬 가능한 열은 눌러서 정렬되게</td><td>머리를 누르는 것은 이미 학습된 동작이다</td></tr><tr><td>빈 칸은 <code>—</code> 로 채운다</td><td>빈칸이 '0' 인지 '없음' 인지 구분되지 않는다</td></tr></tbody></table></div></figure>
 <h2 class="g-h2" id="interaction">상호작용은 덤이다</h2>
 <div class="g-rule"><b>호버해야만 보이는 정보에 핵심을 두지 않는다</b><span>모바일에는 호버가 없고 키보드 사용자에게도 없다. 툴팁은 <b>더 자세한 값</b>을 위한 것이지 <b>유일한 값</b>을 위한 것이 아니다.</span></div>
-      <div class="g-next"><a href="motion.html"><span>이전</span><b>모션</b></a><a href="feedback.html"><span>다음</span><b>피드백</b></a></div>
+      <div class="g-next"><a href="motion.html"><span>이전</span><b>모션</b></a><a href="chart-labels.html"><span>다음</span><b>차트 이름표</b></a></div>
     </main>
   </div>
 </div>

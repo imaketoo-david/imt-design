@@ -57,7 +57,13 @@ git push -q origin main 2>/dev/null || echo "  (푸시 건너뜀 — 인증 없�
 echo "  $(git log --oneline -1)"
 
 echo "▸ 4. 맥미니 전송 (${HOST})"
-rsync -a --delete \
+# --delete 를 쓰는 이유: 목적지는 «빌드 결과만» 있는 발행 폴더다.
+# 서버에만 사는 파일(DB·.venv·logs)이 있는 앱에는 절대 쓰지 않는다 —
+# 2026-09-03 chess 에서 --delete 로 chess.db 와 .venv 를 날렸다.
+# 그래도 사람은 실수하므로, 지우기 전에 옛 판을 _backups/deploy/ 로 밀어 둔다.
+STAMP="$(date +%Y%m%d-%H%M%S)"
+rsync -a --delete --backup --backup-dir="_backups/deploy/$STAMP" \
+  --exclude '_backups' \
   --exclude '.git' --exclude '*.bak_v1_*' --exclude '__pycache__' --exclude 'deploy.sh' \
   ./ "${HOST}:${DEST}"
 
