@@ -6,10 +6,10 @@
 <link rel="icon" href="favicon-32.png?v=20260903-0641" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260903-0641">
 <meta name="theme-color" content="#1d1d1f">
-<link rel="stylesheet" href="tokens.css?v=20260903-0931">
-<link rel="stylesheet" href="components.css?v=20260903-0931">
-<link rel="stylesheet" href="site.css?v=20260903-0931">
-<link rel="stylesheet" href="patterns.css?v=20260903-0931">
+<link rel="stylesheet" href="tokens.css?v=20260903-1304">
+<link rel="stylesheet" href="components.css?v=20260903-1304">
+<link rel="stylesheet" href="site.css?v=20260903-1304">
+<link rel="stylesheet" href="patterns.css?v=20260903-1304">
 <style>
   pre{max-width:100%}
 
@@ -62,7 +62,7 @@
     <a href="guide/index.html">가이드</a>
     <a href="language.html">랭귀지</a>
     <a href="index-full.html" class="on">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-0931">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-1304">아이콘</a>
     <a href="resources.html">리소스</a>
   </div>
   <span class="gnav__sp"></span>
@@ -400,10 +400,15 @@
       <div class="imt-chart__foot">축·그리드는 뒤로 물리고 데이터가 앞에 온다. 선 2px, 마커 8px 이상, 막대 끝만 4px 라운드.</div>
     </div>
     <pre>/* 하지 말 것 */
-이중 y축 금지        →  두 개 차트로 나누거나 공통 기준으로 지수화
 색 순환 금지         →  9번째는 '기타'
 순위로 색 배정 금지  →  색은 항목에 붙는다 (필터로 개수가 변해도 색은 그대로)
-무지개 그라디언트    →  연속형은 한 색 밝기 변화, 발산형은 두 색 + 회색 중립</pre>
+무지개 그라디언트    →  연속형은 한 색 밝기 변화, 발산형은 두 색 + 회색 중립
+빈 값을 0 으로 채움  →  선을 끊거나 점선. 없음은 0이 아니다
+
+/* 조건부로 되는 것 (2026-09-03 개정) */
+이중 y축             →  오른쪽은 보조 계열 하나만 · 오른쪽 격자 없음 · 선 모양 다르게
+                        · 0 을 억지로 맞추지 않는다.  못 지키면 판을 나누거나 지수화
+                        자세한 조건은 가이드 「데이터 표현 · 이중 y축」</pre>
   </section>
 
   <!-- ─── 카드뉴스 ─── -->
