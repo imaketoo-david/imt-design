@@ -39,15 +39,28 @@ SKIP  = re.compile(r'/(node_modules|\.git|_archive|_backups?|_bak\w*|vendor|dist
 DEFLINE = re.compile(r'^\s*--[a-z0-9-]+\s*:')
 
 
+def _ignore(root):
+    """<경로>/.imtignore — 한 줄에 하나씩, 이 경로 기준 부분 문자열.
+    빌드로 «이어 붙인» 파일을 여기 적는다. 조각과 합본을 둘 다 세면
+    같은 위반이 두 번 잡혀서 숫자가 뻥튀기된다."""
+    f = os.path.join(root if os.path.isdir(root) else os.path.dirname(root), ".imtignore")
+    if not os.path.exists(f):
+        return []
+    return [l.strip() for l in open(f, encoding="utf-8")
+            if l.strip() and not l.startswith("#")]
+
+
 def sources(paths):
     """(표시이름, 시작줄, 내용) 목록"""
     out = []
     for p in paths:
+        ign = _ignore(p)
         files = []
         if os.path.isdir(p):
             for ext in ("css", "html"):
                 files += [f for f in glob.glob(os.path.join(p, "**", f"*.{ext}"), recursive=True)
-                          if not SKIP.search(f) and not f.endswith("tokens.css")]
+                          if not SKIP.search(f) and not f.endswith("tokens.css")
+                          and not any(g in f for g in ign)]
         else:
             files = [p]
         for f in sorted(set(files)):
