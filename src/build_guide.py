@@ -85,7 +85,7 @@ SHELL = """<!doctype html>
   .g-next a{{flex:1;padding:var(--sp-4);background:var(--card);border-radius:var(--r);
     box-shadow:var(--edge);text-decoration:none}}
   .g-next span{{display:block;font-size:var(--fs-tag);color:var(--sub2);
-    text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}}
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:var(--sp-1)}}
   .g-next b{{color:var(--ink);font-weight:var(--fw-sb);font-size:var(--fs-base)}}
   @media(max-width:900px){{.gs{{grid-template-columns:1fr}}.gs__nav{{display:none}}}}
 </style></head><body>

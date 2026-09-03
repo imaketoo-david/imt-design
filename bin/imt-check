@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""IMT 디자인 규칙 검사기 — 어느 사이트에서든 돌린다.
+
+  python3 .../imt-design/bin/imt-check [경로 ...] [--warn]
+
+검사 대상은 .css 파일과 .html 안의 <style> 블록이다.
+  L-0.4  토큰 없이 쓴 색 (#hex 직접 지정) — --color 를 줄 때만 센다
+  L-5.1  간격은 4의 배수만
+  L-6.1  라운드는 --r 계열만
+  L-7.1  글자 크기는 --fs-* 단계만
+  L-7.2  가는 굵기(400 미만)를 쓰지 않는다
+  참조   var(--없는이름) — 선언 전체를 죽인다
+
+--warn 을 주면 위반이 있어도 0 으로 끝난다(이관 중인 사이트용).
+--color 를 주면 L-0.4(토큰 없이 쓴 색)까지 센다. 다크 밴드처럼 «일부러
+고정한 색» 이 있는 자리가 있어서 기본 관문에는 넣지 않는다.
+기준은 imt-design/tokens.css 하나다. 사이트마다 복사해 두지 않는다.
+"""
+import re, sys, os, glob
+
+HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TOK  = open(os.path.join(HERE, "tokens.css"), encoding="utf-8").read()
+
+DEFINED = set(re.findall(r'(--[a-z0-9-]+)\s*:', TOK))
+FS = {int(v) for v in re.findall(r'--fs-[a-z0-9]+:\s*(\d+)px', TOK)}
+R  = {int(v) for v in re.findall(r'--r[a-z-]*:\s*(\d+)px', TOK)} | {0, 999}
+# 도해·목업 컨테이너 — 안에서는 실측 치수를 쓴다 (L-6.7)
+FIG = ("tile__art", "rcard__art", "g-fig", "g-cmp", "g-ana", "g-scale", "g-seq",
+       "imt-canvas", "shot", "plate__art", "art__", "board", "sq--")
+
+SPACE = re.compile(r'\b(?:margin|padding|gap|row-gap|column-gap)(?:-[a-z]+)?:\s*([^;{}]+)')
+PX    = re.compile(r'(?<![\w.-])(\d+(?:\.\d+)?)px')
+STYLE = re.compile(r'<style[^>]*>(.*?)</style>', re.S | re.I)
+# 검사하지 않는 곳 — 남의 코드와 지나간 코드
+SKIP  = re.compile(r'/(node_modules|\.git|_archive|_backups?|_bak\w*|vendor|dist|'
+                   r'_old|_tmp|__pycache__)/|\.min\.css$|\.bak')
+# 커스텀 속성을 «정의» 하는 줄은 색 검사에서 뺀다 — 토큰은 여기서 태어난다
+DEFLINE = re.compile(r'^\s*--[a-z0-9-]+\s*:')
+
+
+def sources(paths):
+    """(표시이름, 시작줄, 내용) 목록"""
+    out = []
+    for p in paths:
+        files = []
+        if os.path.isdir(p):
+            for ext in ("css", "html"):
+                files += [f for f in glob.glob(os.path.join(p, "**", f"*.{ext}"), recursive=True)
+                          if not SKIP.search(f) and not f.endswith("tokens.css")]
+        else:
+            files = [p]
+        for f in sorted(set(files)):
+            s = open(f, encoding="utf-8", errors="replace").read()
+            rel = os.path.relpath(f)
+            if f.endswith(".html"):
+                for m in STYLE.finditer(s):
+                    out.append((rel, s[:m.start(1)].count("\n") + 1, m.group(1)))
+            else:
+                out.append((rel, 1, s))
+    return out
+
+
+def check(paths, color=False):
+    bad = []
+    srcs = sources(paths)
+    # 템플릿을 조각내 쓰는 사이트가 있다 — 정의는 한 파일에, 참조는 다른 파일에 있다.
+    # 그래서 한 번의 검사 안에서 정의된 것은 모두 «있는 것» 으로 본다.
+    known = DEFINED | {t for _, _, s in srcs for t in re.findall(r'(--[a-z0-9-]+)\s*:', s)}
+    for name, base, s in srcs:
+        # var(--x, 대체값) 은 사고가 아니다 — 대체값이 있으면 선언이 살아 있다
+        used = set(re.findall(r'var\((--[a-z0-9-]+)\s*\)', s))
+        for miss in sorted(used - known):
+            bad.append(f"{name}  참조 {miss} — 정의된 적이 없다(선언 전체가 죽는다)")
+        for i, ln in enumerate(s.split("\n"), base):
+            t = ln.strip()
+            if t.startswith(("/*", "*", "//")) or any(k in ln for k in FIG):
+                continue
+            for decl in SPACE.findall(ln):
+                for v in PX.findall(decl):
+                    n = float(v)
+                    if n % 4 and 2 < n < 80:
+                        bad.append(f"{name}:{i}  L-5.1 간격 {v}px — 4의 배수가 아니다"); break
+            for m in re.finditer(r'border-radius:\s*([^;{}]+)', ln):
+                for v in PX.findall(m.group(1)):
+                    if int(float(v)) not in R:
+                        bad.append(f"{name}:{i}  L-6.1 라운드 {v}px — 토큰에 없는 값")
+            for m in re.finditer(r'font-size:\s*(\d+(?:\.\d+)?)px', ln):
+                if int(float(m.group(1))) not in FS:
+                    bad.append(f"{name}:{i}  L-7.1 글자 {m.group(1)}px — 단계에 없다")
+            for m in re.finditer(r'font-weight:\s*(\d{3})', ln):
+                if int(m.group(1)) < 400:
+                    bad.append(f"{name}:{i}  L-7.2 굵기 {m.group(1)} — 400 미만은 쓰지 않는다")
+            if not color:
+                continue
+            for m in re.finditer(r':\s*(#[0-9a-fA-F]{3,8})\b', ln):
+                if "var(" not in ln and not DEFLINE.match(ln):
+                    bad.append(f"{name}:{i}  L-0.4 색 {m.group(1)} — 토큰을 쓴다")
+    return bad
+
+
+if __name__ == "__main__":
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    warn = "--warn" in sys.argv
+    bad = check(args or ["."], color="--color" in sys.argv)
+    if not bad:
+        print("✓ 규칙 위반 없음"); sys.exit(0)
+    kinds = {}
+    for b in bad:
+        k = re.search(r'(L-[0-9.]+|참조)', b)
+        kinds[k.group(1) if k else "기타"] = kinds.get(k.group(1) if k else "기타", 0) + 1
+    print(f"{'⚠' if warn else '✗'} 규칙 위반 {len(bad)}건 — "
+          + " · ".join(f"{k} {v}" for k, v in sorted(kinds.items())))
+    for b in bad[:40]:
+        print("   " + b)
+    if len(bad) > 40:
+        print(f"   … 그 밖에 {len(bad)-40}건")
+    sys.exit(0 if warn else 1)

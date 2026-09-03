@@ -3,3 +3,4 @@ node_modules/
 
 # v1 백업본 (로컬 보관용)
 *.bak_v1_*
+bin/__pycache__/
