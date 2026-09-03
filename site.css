@@ -84,14 +84,50 @@ body{word-break:keep-all;overflow-wrap:break-word}
   color:var(--ink);font-variant-numeric:tabular-nums}
 .stat span{font-size:var(--fs-sm);letter-spacing:var(--tr-sm);color:var(--sub2)}
 
-/* 색 필드 — 카드가 아니라 화면을 가로지르는 면. 이름은 면 위에 얹는다. */
-.field{width:100vw;margin:var(--sp-8) 0 var(--sp-10) calc(50% - 50vw);
-  display:grid;grid-template-columns:repeat(8,1fr);height:clamp(180px,20vw,260px)}
-.fld{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-  gap:2px;padding:var(--sp-4)}
-.fld b{font:var(--fw-r) var(--fs-xs)/1 var(--font-num);color:rgba(255,255,255,.72)}
-.fld span{font:var(--fw-sb) var(--fs-base)/1.2 var(--font);letter-spacing:var(--tr-base);
-  color:#fff}
+/* ── 색 아트워크 ─────────────────────────────────────────────
+   실사 사진을 빌려오는 대신 우리 색으로 그린다. 블롭 여덟 개가 각각
+   --c1‥--c8 이고, 그 위를 획 하나가 지나간다. 값이 바뀌면 그림도 바뀐다 —
+   그림이 토큰을 «설명» 하는 게 아니라 토큰이 그림을 «그린다». */
+.art{position:relative;width:100vw;margin-left:calc(50% - 50vw);
+  height:clamp(340px,42vw,600px);overflow:hidden;background:var(--card)}
+.art__f{position:absolute;inset:0}
+.art__f i{--c:var(--c1);--d:30vw;
+  position:absolute;width:var(--d);height:var(--d);
+  transform:translate(-50%,-50%);border-radius:var(--r-cap);
+  background:radial-gradient(circle at 50% 50%, var(--c) 0%,
+    color-mix(in srgb, var(--c) 55%, transparent) 45%, transparent 72%);
+  filter:blur(28px);mix-blend-mode:multiply;opacity:.85}
+.art__f u{--s:12px;position:absolute;width:var(--s);height:var(--s);
+  transform:translate(-50%,-50%);opacity:.9;
+  background:conic-gradient(from 45deg, transparent 0 12%, #fff 25%,
+    transparent 38% 62%, #fff 75%, transparent 88%);
+  -webkit-mask-image:radial-gradient(circle, #000 30%, transparent 72%);
+          mask-image:radial-gradient(circle, #000 30%, transparent 72%)}
+.art__k{position:absolute;left:0;right:0;bottom:0;width:100%;height:72%;
+  filter:blur(.4px);opacity:.92}
+.art__t{position:absolute;left:calc(50% - 512px + var(--sp-5));top:var(--sp-12);
+  margin:0;max-width:14ch;
+  font:var(--fw-sb) var(--fs-hero)/1.04 var(--font);letter-spacing:-.032em;
+  color:var(--c1)}
+
+@media(max-width:1080px){ .art__t{left:var(--sp-5)} }
+@media(max-width:640px){
+  .art{height:clamp(300px,64vw,420px)}
+  .art__t{top:var(--sp-8)}
+  .art__f i{filter:blur(20px)}
+}
+
+/* 8슬롯 스와치 — 아트워크 바로 아래에 정확한 값을 붙인다. */
+.field{display:grid;grid-template-columns:repeat(8,1fr);gap:var(--sp-3);
+  margin:var(--sp-8) 0 var(--sp-10)}
+.fld i{display:block;height:72px;border-radius:var(--r);box-shadow:var(--edge)}
+.fld b{display:block;margin-top:var(--sp-2);
+  font:var(--fw-r) var(--fs-xs)/1.4 var(--font-num);color:var(--sub2)}
+.fld span{display:block;font-size:var(--fs-sm);font-weight:var(--fw-m);color:var(--ink2)}
+@media(max-width:640px){
+  .field{grid-template-columns:repeat(4,1fr)}
+  .fld i{height:52px}
+}
 
 /* 활자 판 — 크기를 말로 적지 않고 같은 문장을 다섯 번 그려 보인다. */
 .tywall{display:flex;flex-direction:column;gap:var(--sp-4);padding:var(--sp-2) 0 0}
@@ -199,154 +235,113 @@ body{word-break:keep-all;overflow-wrap:break-word}
   .fig__n{font-size:var(--fs-3xl);right:var(--sp-5)}
 }
 
-/* ── 기기 목업 ───────────────────────────────────────────────
-   제품 사진을 빌려오는 대신 프레임과 화면을 전부 토큰으로 그린다.
-   그래서 이 그림은 «예시» 가 아니라 시스템의 실제 산출물이다. */
-.devs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-8);
-  margin-top:var(--sp-12);justify-items:center}
-.dev{margin:0;display:flex;flex-direction:column;align-items:center;gap:var(--sp-4)}
-/* 라운드는 --r-app(22.4%) 규격을 쓰되 **폭 기준으로 환산**한다.
-   퍼센트를 그대로 주면 가로 22.4%·세로 22.4% 가 각각 잡혀 모서리가
-   타원이 된다 — 세로로 긴 면에서는 알 모양으로 부푼다. 22.4% 는 정사각
-   앱 아이콘의 규격이므로, 직사각형에는 짧은 변을 기준으로 환산해야 한다.
-   두께는 --sp-2, 화면 라운드는 프레임 라운드에서 두께만큼 뺀 값이다. */
-.dev__f{--dw:236px;position:relative;width:var(--dw);height:480px;padding:var(--sp-2);
-  border-radius:calc(var(--dw) * .224);background:linear-gradient(160deg,#3a3a3c,#1d1d1f 40%,#000);
-  box-shadow:0 24px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.09)}
-.dev__n{position:absolute;top:var(--sp-4);left:50%;transform:translateX(-50%);
-  width:72px;height:var(--sp-5);border-radius:var(--r-cap);background:#000;z-index:2}
-.dev__s{width:100%;height:100%;border-radius:calc(var(--dw) * .224 - var(--sp-2));
-  overflow:hidden;background:var(--bg)}
-.dev figcaption{max-width:24ch;text-align:center;font-size:var(--fs-sm);
-  line-height:1.5;color:var(--sub)}
-.band--dark .dev figcaption{color:#a1a1a6}
+/* ── 진열대 — 왼쪽 목차, 오른쪽 기기 한 대 ──────────────────
+   같은 크기 기기 셋을 나란히 놓는 것은 목업 라이브러리의 문법이지
+   편집 디자인이 아니다. 한 대를 크게 놓고 옆에서 말을 건다. */
+.showcase{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--sp-10);
+  align-items:start;margin-top:var(--sp-12)}
+.showcase__l{display:flex;flex-direction:column;gap:var(--sp-3);max-width:52ch}
+.ch{display:block;width:100%;text-align:left;cursor:pointer;
+  padding:var(--sp-4) var(--sp-5);border:0;border-radius:var(--r);
+  background:rgba(255,255,255,.06);color:inherit;font:inherit;
+  transition:background var(--dur-2) var(--ease)}
+.ch:hover{background:rgba(255,255,255,.11)}
+.ch b{display:block;font:var(--fw-sb) var(--fs-xl)/1.3 var(--font);
+  letter-spacing:var(--tr-xl);color:#f5f5f7}
+.ch span{display:block;margin-top:var(--sp-1);font-size:var(--fs-base);
+  line-height:1.5;color:#8e8e93}
+.ch.on{background:#f5f5f7}
+.ch.on b{color:#1d1d1f}
+.ch.on span{color:#6e6e73}
 
-/* ── 화면 속 UI ──────────────────────────────────────────────
-   전부 토큰으로 짠다. 화면이 비면 «만들다 만 것» 으로 읽히므로
-   실제 앱처럼 위에서 아래까지 채운다 — 내비 제목, 그룹 머리, 44 행,
-   그리고 맨 아래 탭바까지. */
-.ux{width:402px;height:874px;transform:scale(var(--sc,1));transform-origin:0 0;
-  display:flex;flex-direction:column;
-  padding:var(--sp-3) 0 0;background:var(--bg);color:var(--ink);text-align:left;
-  font-size:var(--fs-lg)}
-.ux > *{flex:none}
-.ux__nav{padding:var(--sp-2) var(--sp-5) var(--sp-4);
-  font:var(--fw-sb) var(--fs-3xl)/1.15 var(--font);letter-spacing:var(--tr-3xl)}
-.ux__sec{padding:var(--sp-5) var(--sp-5) var(--sp-2);
-  font:var(--fw-m) var(--fs-md)/1 var(--font);letter-spacing:.04em;color:var(--sub2)}
-
-.ux__card{margin:0 var(--sp-5) var(--sp-4);padding:var(--sp-5);
-  background:var(--card);border-radius:var(--r-in);box-shadow:var(--edge);
-  display:flex;flex-direction:column;gap:var(--sp-1)}
-.ux__card--tight{padding:var(--sp-3) var(--sp-4) var(--sp-4)}
-.ux__lab{font-size:var(--fs-base);color:var(--sub2)}
-.ux__big{font:var(--fw-sb) var(--fs-3xl)/1.1 var(--font);letter-spacing:-.02em;
-  font-variant-numeric:tabular-nums}
-.ux__chip{align-self:flex-start;margin-top:var(--sp-1);padding:0 var(--sp-2);
-  border-radius:var(--r-xs);font:var(--fw-m) var(--fs-base)/1.9 var(--font);
-  color:var(--danger);background:rgba(200,50,42,.10)}
-.ux__chart{display:flex;align-items:flex-end;gap:var(--sp-2);height:96px;margin-top:var(--sp-2)}
-.ux__chart i{flex:1;border-radius:var(--r-xs) var(--r-xs) 0 0}
-
-.ux__row{display:flex;align-items:center;gap:var(--sp-2);
-  min-height:44px;margin:0 var(--sp-5);
-  border-bottom:var(--hairline) solid var(--line-soft)}
-.ux__row:last-of-type{border-bottom:0}
-.ux__row > span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ux__row em{font-style:normal;color:var(--sub);font-size:var(--fs-base);
-  font-variant-numeric:tabular-nums}
-.ux__row b{min-width:72px;text-align:right;font-size:var(--fs-base);
-  font-variant-numeric:tabular-nums}
-.ux__row b.up{color:var(--danger)}
-.ux__row b.dn{color:var(--brand)}
-.ux__go{width:8px;height:8px;border-right:2px solid var(--sub2);
-  border-bottom:2px solid var(--sub2);transform:rotate(-45deg);opacity:.7}
-
-.ux__seg{display:flex;gap:2px;margin:0 var(--sp-5) var(--sp-5);padding:2px;
-  border-radius:var(--r-in);background:var(--fill4)}
-.ux__seg i{flex:1;text-align:center;font-style:normal;padding:var(--sp-2) 0;
-  font:var(--fw-m) var(--fs-base)/1.3 var(--font);color:var(--sub);border-radius:var(--r-xs)}
-.ux__seg i.on{background:var(--card);color:var(--ink);box-shadow:var(--edge)}
-
-.ux__fld{display:flex;justify-content:space-between;align-items:center;
-  margin:0 var(--sp-5) var(--sp-3);padding:var(--sp-4) var(--sp-5);
-  background:var(--card);border-radius:var(--r-in);box-shadow:var(--edge)}
-.ux__fld span{color:var(--sub)}
-.ux__fld b{font-variant-numeric:tabular-nums}
-.ux__sum{display:flex;justify-content:space-between;align-items:baseline;
-  margin:var(--sp-4) var(--sp-5) 0;padding-top:var(--sp-4);
-  border-top:var(--hairline) solid var(--line)}
-.ux__sum span{color:var(--sub);font-size:var(--fs-base)}
-.ux__sum b{font:var(--fw-sb) var(--fs-2xl)/1 var(--font);font-variant-numeric:tabular-nums}
-.ux__note{margin:var(--sp-4) var(--sp-5) 0;font-size:var(--fs-base);
-  line-height:1.6;color:var(--sub2)}
-.ux__btn{margin:var(--sp-5) var(--sp-5) 0;text-align:center;padding:var(--sp-4);
-  border-radius:var(--r-in);background:var(--brand);color:#fff;
-  font:var(--fw-sb) var(--fs-lg)/1.2 var(--font)}
-.ux__btn--soft{margin-top:var(--sp-2);background:var(--fill4);color:var(--brand)}
-
-.ux__tab{margin-top:auto;display:flex;justify-content:space-around;align-items:center;
-  padding:var(--sp-4) 0 var(--sp-3);
-  border-top:var(--hairline) solid var(--line);background:var(--card)}
-.ux__tab i{display:grid;place-items:center;color:var(--sub2)}
-.ux__tab i.on{color:var(--brand)}
-.ux__tab svg{width:26px;height:26px;stroke-width:1.6}
 
 @media(max-width:900px){
-  .devs{grid-template-columns:1fr;gap:var(--sp-10)}
+  .showcase{grid-template-columns:1fr;gap:var(--sp-8);justify-items:center}
+  .showcase__l{max-width:none;width:100%}
+
 }
 
-/* ── 공식 베젤 위에 얹는 화면 ────────────────────────────────
-   Apple 마케팅 지침: 제품 이미지는 수정하지 않는다 — 그림자·반사·
-   하이라이트를 더하지 않고, 자르거나 기울이거나 가리지 않는다.
-   비율 그대로 축소만 했다.
-   화면은 베젤 **뒤**에 깐다. 베젤의 화면 자리가 투명하고 모서리가 이미
-   둥글게 뚫려 있어서, 우리가 라운드를 따로 맞출 필요가 없다 —
-   기기가 곧 마스크다. 좌표는 원본 1350×2760 에서 잰 값이다.
-     화면 x 72‥1277 · y 69‥2690 → 5.333% / 2.5% / 89.333% / 95%
-   ══════════════════════════════════════════════════════════ */
-/* 기기 폭. 세 대가 1024 안에 들어가는 최대치.
-   --dwn 은 단위 없는 숫자다 — scale() 에 넣을 배율을 calc 으로 뽑으려면
-   길이(px)로는 안 된다. calc(268px / 402) 은 길이지 배율이 아니다. */
-/* line-height:0 — img 와 화면 div 사이의 공백 문자가 줄상자를 만들어
-   기기 아래에 18px 빈틈이 생긴다. */
-.shot{--dwn:300;--dw:calc(var(--dwn) * 1px);position:relative;width:var(--dw);
-  isolation:isolate;line-height:0;font-size:0}
-.shot__s{line-height:var(--lh-base);font-size:var(--fs-lg)}
-.shot__b{position:relative;z-index:1;display:block;width:100%;height:auto;
-  aspect-ratio:1350 / 2760;pointer-events:none}
-/* 화면 구멍의 곡률: 원본에서 잰 값 ≈ 240px / 화면폭 1206px = 19.9%.
-   이걸 안 주면 사각형 네 귀퉁이가 기기 실루엣 바깥(투명 영역)으로
-   삐져나와 모서리마다 회색 덩어리가 보인다. */
-.shot__s{position:absolute;z-index:0;
-  left:5.333%;top:2.5%;
-  width:calc(var(--dw) * .89333);
-  height:calc(var(--dw) * 2.044444 * .95);
-  border-radius:calc(var(--dw) * .178);
-  overflow:hidden;background:var(--bg);
-  /* 화면 안은 iPhone 의 실제 논리 크기(402×874)로 짜고 통째로 축소한다.
-     이렇게 해야 17px 본문이 정말 17px 이다 — 작게 그린 흉내가 아니라
-     실물을 줄여 놓은 것이 된다. 화면 상자의 비율 0.460 과 402/874 가 같다. */
-  --sc:calc(var(--dwn) * .89333 / 402)}
+/* ── 명세 도판 ───────────────────────────────────────────────
+   기기 목업을 쓰지 않는다. 이 시스템이 스스로 적어 둔 조건은 «웹·한글·
+   대시보드» 이고 원칙은 «다투지 않고 잰다» 이다. 그러면 표지에 놓을 그림은
+   남의 기기가 아니라 치수가 붙은 우리 부품이다. */
+.showcase__r{position:relative}
+.plate{display:grid;grid-template-columns:1fr;gap:var(--sp-8);
+  padding:var(--sp-10) var(--sp-8) var(--sp-8);
+  background:var(--card);border-radius:var(--r);box-shadow:var(--sh-lift)}
+.plate[hidden]{display:none}
+.plate__art{position:relative;display:flex;justify-content:center;
+  /* 왼쪽엔 세로 치수선, 오른쪽엔 콜아웃 자리를 비워 둔다 — 안 그러면 잘린다 */
+  padding:var(--sp-8) calc(var(--sp-16) + var(--sp-10)) var(--sp-16)
+          calc(var(--sp-16) + var(--sp-4))}
+.plate__art--wide{padding:var(--sp-6) var(--sp-4) var(--sp-6)}
+/* 치수선은 판이 아니라 **부품**에 물려야 한다. rig 가 부품의 상자다. */
+.rig{position:relative;width:264px}
 
-/* 상태바 — 신호·Wi-Fi·배터리를 가득 찬 상태로. 시간은 9:41.
-   베젤을 쓸 때는 다이내믹 아일랜드(화면 기준 가로 34.6‥65.3%,
-   세로 1.6‥5.7%)를 피해 좌우로 물러나야 글자가 가려지지 않는다. */
-.ux__bar{display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--sp-1) var(--sp-2);color:var(--ink)}
-.ux__bar b{font:var(--fw-sb) var(--fs-lg)/1 var(--font);letter-spacing:.01em}
-.ux__bar span{display:flex;align-items:center;gap:var(--sp-1)}
-.ux__bar svg{height:12px;width:auto;fill:currentColor}
-.dev--shot .ux{padding-top:var(--sp-5)}
-.dev--shot .ux__bar{padding-left:var(--sp-6);padding-right:var(--sp-6);padding-bottom:var(--sp-5)}
-/* 홈 인디케이터 — 화면 아래 끝 */
-/* 홈 인디케이터는 화면 맨 아래. 탭바가 있는 화면에서는 탭바가 이미
-   바닥을 잡고 있으므로 그 아래에 붙인다(auto 가 둘이면 공간이 반씩 갈린다). */
-.dev--shot .ux::after{content:"";display:block;width:35%;height:5px;
-  margin:auto auto var(--sp-2);
-  border-radius:var(--r-cap);background:var(--ink);opacity:.3}
-.dev--shot .ux:has(.ux__tab)::after{margin-top:var(--sp-2)}
-.ux__tab{padding-bottom:var(--sp-2)}
+.dimv,.dimh,.cal{position:absolute;color:var(--brand);
+  font:var(--fw-m) var(--fs-sm)/1 var(--font-num);pointer-events:none;white-space:nowrap}
+.dimv{--dh:100%;right:calc(100% + var(--sp-8));top:0;height:var(--dh);width:var(--sp-3);
+  border-left:1px solid currentColor;border-top:1px solid currentColor;
+  border-bottom:1px solid currentColor;opacity:.9}
+.dimv b{position:absolute;right:calc(100% + var(--sp-2));top:50%;
+  transform:translateY(-50%);font-weight:var(--fw-m)}
+.dimh{left:0;right:0;top:calc(100% + var(--sp-4));height:var(--sp-3);
+  border-bottom:1px solid currentColor;border-left:1px solid currentColor;
+  border-right:1px solid currentColor;opacity:.9}
+.dimh b{position:absolute;left:50%;top:calc(100% + var(--sp-2));
+  transform:translateX(-50%);font-weight:var(--fw-m)}
+.cal{left:calc(100% + var(--sp-2));top:0;display:flex;align-items:center;gap:var(--sp-2)}
+.cal--low{top:auto;bottom:0}
+.cal i{width:var(--sp-6);height:1px;background:currentColor;opacity:.6}
+
+/* 진열되는 부품 — 전부 실제 토큰으로 그린다 */
+.demo--btn{display:grid;place-items:center;width:264px;height:44px;
+  border-radius:var(--r-in);background:var(--brand);color:#fff;
+  font:var(--fw-sb) var(--fs-lg)/1 var(--font)}
+.demo--card{width:264px;padding:var(--sp-5);border-radius:var(--r);
+  background:var(--card);box-shadow:var(--edge);display:flex;flex-direction:column;gap:var(--sp-1)}
+.demo--card span{font-size:var(--fs-base);color:var(--sub2)}
+.demo--card b{font:var(--fw-sb) var(--fs-3xl)/1.1 var(--font);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;color:var(--ink)}
+.demo--card em{align-self:flex-start;margin-top:var(--sp-1);padding:0 var(--sp-2);
+  font-style:normal;border-radius:var(--r-xs);
+  font:var(--fw-m) var(--fs-base)/1.9 var(--font);
+  color:var(--danger);background:rgba(200,50,42,.10)}
+.demo--rows{width:264px}
+.dr{display:flex;align-items:center;gap:var(--sp-2);height:44px;
+  border-bottom:var(--hairline) solid var(--line-soft);color:var(--ink)}
+.dr:last-child{border-bottom:0}
+.dr > span{flex:1;font-size:var(--fs-lg)}
+.dr em{font-style:normal;font-size:var(--fs-base);color:var(--sub);
+  font-variant-numeric:tabular-nums}
+.dr b{min-width:64px;text-align:right;font-size:var(--fs-base);
+  font-variant-numeric:tabular-nums}
+.dr b.up{color:var(--danger)}
+.dr b.dn{color:var(--brand)}
+.demo--color{width:100%;max-width:380px}
+.demo--color p{margin:0 0 var(--sp-2);font:var(--fw-m) var(--fs-sm)/1 var(--font);
+  color:var(--sub2)}
+.sws{display:grid;grid-template-columns:repeat(8,1fr);gap:var(--sp-2);
+  margin-bottom:var(--sp-6)}
+.sws i{display:block;height:56px;border-radius:var(--r-in);box-shadow:var(--edge)}
+.sws--st{grid-template-columns:repeat(4,1fr);margin-bottom:0}
+
+/* 값 목록 — 형용사가 아니라 이름과 수치 */
+.spec{margin:0;display:grid;gap:0}
+.spec > div{display:grid;grid-template-columns:10ch 1fr;gap:var(--sp-4);
+  padding:var(--sp-3) 0;border-top:var(--hairline) solid var(--line-soft)}
+.spec > div:first-child{border-top:0}
+.spec dt{font-size:var(--fs-base);color:var(--sub2)}
+.spec dd{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 var(--sp-3)}
+.spec dd b{font:var(--fw-sb) var(--fs-lg)/1.3 var(--font);color:var(--ink);
+  font-variant-numeric:tabular-nums}
+.spec dd em{font-style:normal;font-size:var(--fs-md);color:var(--sub);
+  font-family:var(--font-num)}
+
+@media(max-width:900px){
+  .plate{padding:var(--sp-8) var(--sp-5) var(--sp-6)}
+  .plate__art{padding:var(--sp-6) var(--sp-8) var(--sp-8)}
+}
 
 /* ── 카드 격자 (그림 영역 + 라벨) ────────────────────────────── */
 .tiles{display:grid;gap:var(--sp-5);grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}

@@ -164,10 +164,33 @@ def icon_wall(n=132):
     return "".join(out)
 
 def color_field():
+    """8슬롯 스와치 — 아트워크 아래에 정확한 값을 붙인다."""
     names = ["파랑", "주황", "청록", "황토", "자홍", "하늘", "보라", "초록"]
     return "".join(
-        f'<div class="fld" style="background:var(--c{i})">'
+        f'<div class="fld"><i style="background:var(--c{i})"></i>'
         f'<b>--c{i}</b><span>{names[i-1]}</span></div>' for i in range(1, 9))
+
+def artwork():
+    """색이 번지는 판 — 남의 사진 대신 우리 색으로 그린다.
+       블롭 여덟 개가 각각 --c1‥--c8 이고, 획 하나가 그 위를 지나간다."""
+    blobs = [(1, 12, 58, 38), (2, 26, 30, 30), (3, 40, 66, 26), (4, 54, 26, 30),
+             (6, 66, 60, 34), (7, 78, 32, 26), (5, 88, 62, 30), (8, 34, 84, 22)]
+    b = "".join(
+        f'<i style="--c:var(--c{c});left:{x}%;top:{y}%;--d:{d}vw"></i>'
+        for c, x, y, d in blobs)
+    sp = "".join(
+        f'<u style="left:{x}%;top:{y}%;--s:{s}px"></u>'
+        for x, y, s in [(20, 34, 14), (33, 72, 9), (47, 22, 11), (62, 78, 8),
+                        (74, 40, 13), (86, 26, 9)])
+    return (f'<div class="art"><div class="art__f">{b}{sp}'
+            '<svg class="art__k" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true">'
+            '<defs><linearGradient id="ak" x1="0" y1="1" x2="1" y2="0">'
+            '<stop offset="0" stop-color="var(--c1)"/><stop offset=".45" stop-color="var(--c5)"/>'
+            '<stop offset="1" stop-color="var(--c2)"/></linearGradient></defs>'
+            '<path d="M40 380 C 260 300, 300 120, 520 140 S 860 340, 1160 90" '
+            'fill="none" stroke="url(#ak)" stroke-width="26" stroke-linecap="round" opacity=".9"/>'
+            '</svg></div>'
+            '<p class="art__t">여덟 색이<br>여기서 나온다</p></div>')
 
 def type_wall():
     rows = [("34", "히어로"), ("28", "제목"), ("22", "부제"), ("17", "본문"), ("13", "보조")]
@@ -211,56 +234,90 @@ def statusbar():
       '<path d="M23.4 4.2v3.6a2 2 0 0 0 0-3.6z" opacity=".45"/></svg>'
       '</span></div>')
 
-def scr_dash():
-    bars = "".join(
-        f'<i style="height:{h}%;background:var(--c1);opacity:{o}"></i>'
-        for h, o in [(34,.35),(52,.5),(44,.65),(70,.8),(88,1),(62,.8),(76,.9)])
+# ── 명세 도판 ───────────────────────────────────────────────────
+# 기기 목업을 쓰지 않는다. 이 시스템의 조건은 스스로 «웹·한글·대시보드» 라고
+# 적어두었고, 원칙은 «다투지 않고 잰다» 이다. 그렇다면 표지에 놓을 그림은
+# 남의 기기가 아니라 **치수가 붙은 우리 부품**이다.
+PANELS = [
+ ("btn",   "버튼",     "높이 44 · 라운드 13 · 대비 4.6:1"),
+ ("card",  "카드",     "라운드 16 · 안여백 20 · 면은 순백"),
+ ("row",   "목록 행",  "행 44 · 구분선 0.5 · 글자 17·15"),
+ ("color", "색",       "차트 8슬롯 · 상태 4색 · 대비 검증"),
+]
+
+def spec(rows):
+    return ('<dl class="spec">' + "".join(
+        f'<div><dt>{a}</dt><dd><b>{b}</b>{f"<em>{c}</em>" if c else ""}</dd></div>'
+        for a, b, c in rows) + '</dl>')
+
+def pl_btn():
+    return ('<div class="plate__art"><div class="rig">'
+      '<div class="dimv"><b>44</b></div>'
+      '<div class="demo demo--btn">기본 동작</div>'
+      '<div class="dimh"><b>264</b></div>'
+      '<span class="cal"><i></i>라운드 13</span>'
+      '</div></div>'
+      + spec([("높이", "44", "손끝 최소 · --tap-min 28 보다 크게"),
+              ("좌우 여백", "20", "--sp-5"),
+              ("라운드", "13", "--r-in"),
+              ("글자", "17 / 600", "--fs-lg · --fw-sb"),
+              ("대비", "4.6 : 1", "--brand 위 흰 글자 · AA 통과")]))
+
+def pl_card():
+    return ('<div class="plate__art"><div class="rig">'
+      '<div class="demo demo--card"><span>평가금액</span><b>12,480,900</b>'
+      '<em>▲ 152,900 · 1.24%</em></div>'
+      '<div class="dimh"><b>264</b></div>'
+      '<span class="cal"><i></i>라운드 16</span>'
+      '</div></div>'
+      + spec([("라운드", "16", "--r · 예외 없이 하나"),
+              ("안여백", "20", "--sp-5"),
+              ("면", "순백", "--card · 배경 --bg 와 대비로 나눈다"),
+              ("경계", "그림자 아님", "--edge 1px · 뜬 느낌을 주지 않는다"),
+              ("숫자", "34 tabular", "--fs-3xl · 자리가 흔들리지 않는다")]))
+
+def pl_row():
     rows = [("삼성전자", "72,400", "+2.1%", "up"), ("SK하이닉스", "241,000", "−0.8%", "dn"),
             ("네이버", "198,500", "+0.4%", "up")]
-    return ('<div class="ux">' + statusbar() +
-      '<div class="ux__nav">오늘</div>'
-      '<div class="ux__card"><span class="ux__lab">평가금액</span>'
-      '<b class="ux__big">12,480,900</b>'
-      '<span class="ux__chip ux__chip--up">▲ 152,900 · 1.24%</span></div>'
-      '<div class="ux__card ux__card--tight"><span class="ux__lab">최근 7일</span>'
-      f'<div class="ux__chart">{bars}</div></div>'
-      '<div class="ux__sec">보유</div>'
-      + "".join(f'<div class="ux__row"><span>{n}</span>'
-                f'<em>{p}</em><b class="{c}">{d}</b></div>' for n, p, d, c in rows)
-      + tabbar() + '</div>')
+    return ('<div class="plate__art"><div class="rig">'
+      '<div class="dimv" style="--dh:44px"><b>44</b></div>'
+      '<div class="demo demo--rows">'
+      + "".join(f'<div class="dr"><span>{n}</span><em>{v}</em>'
+                f'<b class="{c}">{d}</b></div>' for n, v, d, c in rows)
+      + '</div>'
+      '<span class="cal cal--low"><i></i>구분선 0.5</span>'
+      '</div></div>'
+      + spec([("행 높이", "44", "손끝 최소치"),
+              ("구분선", "0.5", "--hairline · --line-soft"),
+              ("이름 / 값", "17 / 15", "--fs-lg · --fs-base"),
+              ("등락", "빨강이 오른다", "여기서는 문화가 뜻을 정한다"),
+              ("숫자", "tabular", "행이 바뀌어도 자리가 안 흔들린다")]))
 
-def scr_list():
-    g1 = [("알림", "켜짐"), ("다크 모드", "자동"), ("글자 크기", "기본")]
-    g2 = [("데이터", "Wi-Fi"), ("배지", "끔"), ("소리", "기본")]
-    g3 = [("버전", "1.0.0"), ("오픈소스 라이선스", "")]
-    r = lambda a, b: f'<div class="ux__row"><span>{a}</span><em>{b}</em><i class="ux__go"></i></div>'
-    return ('<div class="ux">' + statusbar() +
-      '<div class="ux__nav">설정</div>'
-      '<div class="ux__sec">일반</div>' + "".join(r(a, b) for a, b in g1) +
-      '<div class="ux__sec">알림과 데이터</div>' + "".join(r(a, b) for a, b in g2) +
-      '<div class="ux__sec">정보</div>' + "".join(r(a, b) for a, b in g3) +
-      '<div class="ux__note">값은 기기에만 저장된다. 서버로 보내지 않는다.</div>'
-      '</div>')
+def pl_color():
+    names = ["파랑", "주황", "청록", "황토", "자홍", "하늘", "보라", "초록"]
+    sw = "".join(f'<i style="background:var(--c{k})" title="--c{k}"></i>' for k in range(1, 9))
+    st = "".join(f'<i style="background:var(--{k})"></i>' for k in ("ok", "warn", "danger", "info"))
+    return (f'<div class="plate__art plate__art--wide"><div class="demo demo--color">'
+      f'<p>차트 8슬롯</p><div class="sws">{sw}</div>'
+      f'<p>상태 4색</p><div class="sws sws--st">{st}</div></div></div>'
+      + spec([("차트", "8슬롯 고정", "--c1‥--c8 · 순서가 곧 이름이다"),
+              ("색 순환", "없음", "아홉 번째는 «기타» 로 접는다"),
+              ("상태", "4색", "--ok · --warn · --danger · --info"),
+              ("검증", "배포마다", "명도대비 · 색각 · 채도를 기계가 판정"),
+              ("규칙", "색만으로 뜻을 전하지 않는다", "라벨·아이콘을 함께 둔다")]))
 
-def scr_form():
-    return ('<div class="ux">' + statusbar() +
-      '<div class="ux__nav">주문</div>'
-      '<div class="ux__seg"><i class="on">매수</i><i>매도</i></div>'
-      '<div class="ux__fld"><span>종목</span><b>삼성전자</b></div>'
-      '<div class="ux__fld"><span>수량</span><b>10</b></div>'
-      '<div class="ux__fld"><span>단가</span><b>72,400</b></div>'
-      '<div class="ux__fld"><span>주문 유형</span><b>지정가</b></div>'
-      '<div class="ux__fld"><span>유효 기간</span><b>당일</b></div>'
-      '<div class="ux__sum"><span>주문 금액</span><b>724,000</b></div>'
-      '<div class="ux__note">체결가는 호가에 따라 달라진다.</div>'
-      '<div class="ux__btn">매수 주문</div>'
-      '<div class="ux__btn ux__btn--soft">취소</div>'
-      '</div>')
+PLATES = {"btn": pl_btn, "card": pl_card, "row": pl_row, "color": pl_color}
 
-def tabbar():
-    return ('<div class="ux__tab">' +
-      "".join(f'<i class="{c}">{ic(n)}</i>' for n, c in
-              [("chart-line", "on"), ("layers", ""), ("person", "")]) + '</div>')
+def showcase():
+    chips = "".join(
+        f'<button class="ch{" on" if n == 0 else ""}" data-s="{k}" type="button">'
+        f'<b>{t}</b><span>{d}</span></button>'
+        for n, (k, t, d) in enumerate(PANELS))
+    panes = "".join(
+        f'<div class="plate" data-s="{k}"{"" if n == 0 else " hidden"}>{PLATES[k]()}</div>'
+        for n, (k, t, d) in enumerate(PANELS))
+    return (f'<div class="showcase"><div class="showcase__l">{chips}</div>'
+            f'<div class="showcase__r">{panes}</div></div>')
 
 
 # ── 리소스 카드 ──────────────────────────────────────────────────
@@ -332,17 +389,31 @@ def build():
     wall = icon_wall()
     wall2 = icon_wall(96)
     field, tywall = color_field(), type_wall()
+    art = artwork()
     tm = ('<p class="foot__tm">iPhone 은 미국 및 기타 국가에서 등록된 Apple Inc. 의 상표입니다. '
           'IMT Design 은 Apple Inc. 와 제휴·후원 관계가 없습니다.</p>'
           if os.path.exists(BEZEL) else "")
-    devlead = ("화면 안은 전부 이 시스템의 토큰과 컴포넌트로 조립했다. "
-               "기기는 Apple 이 개발자에게 공개한 공식 베젤을 <b>수정 없이</b> 썼다."
+    devlead = ("왼쪽을 눌러 바꿔 보십시오. 부품은 실제로 도는 것이고, 옆에 적힌 값은 "
+               "<code>tokens.css</code> 에 그대로 있는 이름이다."
                if os.path.exists(BEZEL) else
                "아래 세 화면은 그려 넣은 그림이 아니라 이 시스템의 토큰과 컴포넌트로 실제로 "
                "조립한 것이다. 기기 테두리까지 우리가 그렸다 — 남의 사진은 한 장도 없다.")
-    dev1 = phone(scr_dash(), "대시보드 · 카드와 차트")
-    dev2 = phone(scr_list(), "목록 · 행 높이 44")
-    dev3 = phone(scr_form(), "입력 · 기본과 보조 버튼")
+    showcase_html = showcase()
+    # f-string 안이면 중괄호를 전부 두 번 써야 한다 — 스크립트는 밖에서 만든다.
+    sc = """<script>
+(function(){
+  var box = document.querySelector('.showcase');
+  if (!box) return;
+  box.addEventListener('click', function (e) {
+    var c = e.target.closest('.ch');
+    if (!c) return;
+    box.querySelectorAll('.ch').forEach(function (x) { x.classList.toggle('on', x === c); });
+    box.querySelectorAll('.showcase__r .plate').forEach(function (u) {
+      u.hidden = (u.dataset.s !== c.dataset.s);
+    });
+  });
+})();
+</script>"""
     body = f"""
 <header class="cover">
   <p class="cover__k">IMT Design System · v1</p>
@@ -427,15 +498,11 @@ def build():
 
 <section class="band band--dark" id="screens">
   <div class="wrap wrap--center">
-    <p class="band__k band__k--c">화면</p>
-    <h2>규칙이 화면이 되면<br>이렇게 생겼다</h2>
+    <p class="band__k band__k--c">명세</p>
+    <h2>형용사 대신<br>치수를 적는다</h2>
     <p class="lead">{devlead}</p>
   </div>
-  <div class="wrap">
-    <div class="devs">
-      {dev1}{dev2}{dev3}
-    </div>
-  </div>
+  <div class="wrap">{showcase_html}</div>
 </section>
 
 <section class="band band--dark" id="language">
@@ -464,7 +531,8 @@ def build():
     <p class="lead">값은 이 한 파일 안에만 있다. 코드에서는 <code>--sub</code>·<code>--warn</code>
        같은 <b>의미 이름</b>만 부른다. 값이 바뀌어도 코드는 바뀌지 않는다.</p>
   </div>
-  <div class="field">{field}</div>
+  {art}
+  <div class="wrap"><div class="field">{field}</div></div>
   <div class="wrap">
     <div class="tywall">{tywall}</div>
     <p class="lead" style="margin:var(--sp-8) 0 0">
@@ -499,6 +567,7 @@ def build():
   </div>
 </section>
 
+{sc}
 <footer class="foot"><div class="wrap">
   {tm}
   IMT Design System · 가이드 {len(pages)-1}쪽 · 아이콘 334 ·
