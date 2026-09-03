@@ -31,13 +31,33 @@ grid_stage = ('<svg viewBox="0 0 120 120" style="width:200px;height:200px">'
   'stroke-linecap="round" stroke-linejoin="round">'
   '<use href="#i-bell"/></g></svg>')
 
+AX = [("bell", "원본", "기본 상태. 우리 세트의 기준형이다."),
+      ("bell.fill", ".fill", "선택·활성·강조. 켜져 있다는 뜻이다."),
+      ("bell.circle", ".circle", "원 안에 가둔다. 버튼·아바타 옆에서 쓴다."),
+      ("bell.square", ".square", "둥근 사각 안에 가둔다. 목록 앞머리에서 쓴다."),
+      ("bell.slash", ".slash", "빗금. 꺼짐·차단·없음이다.")]
+axfig = fig('<div style="display:flex;gap:var(--sp-8);flex-wrap:wrap">' + "".join(
+  f'<div style="text-align:center"><div style="font-size:34px;color:var(--ink)">{ic(n)}</div>'
+  f'<div style="margin-top:var(--sp-2);font:var(--fw-r) var(--fs-xs) var(--font-num);'
+  f'color:var(--sub)">{t}</div></div>' for n, t, _ in AX) + '</div>',
+  "다섯 벌 모두 <b>같은 한 벌</b>에서 나온다. 획 굵기가 서로 어긋나지 않는 이유다.")
+
+onoff = fig('<div style="display:flex;gap:var(--sp-6);flex-wrap:wrap">' + "".join(
+  f'<div style="display:flex;align-items:center;gap:8px;background:var(--card);'
+  f'border-radius:var(--r-in);box-shadow:var(--edge);padding:10px 14px;'
+  f'font-size:var(--fs-sm);color:{col}">{ic(n)}{t}</div>'
+  for n, t, col in [("star","저장 안 함","var(--ink2)"), ("star.fill","저장됨","var(--brand)"),
+                    ("heart.fill","좋아요","var(--brand)"), ("bell.slash","알림 끔","var(--sub)")])
+  + '</div>', "채움은 «켜짐» 이다. 색만으로 상태를 말하지 않는다(원칙 6) — 모양도 함께 바뀐다.")
+
+
 def emoji_row(t):
     return f'<div style="font-size:var(--fs-base);color:var(--ink);line-height:1.9">{t}</div>'
 
 PAGE = {
  "slug": "icons", "group": "기초", "kicker": "기초",
  "title": "아이콘",
- "abstract": "334개를 좌표로 직접 그렸다. 심볼 아트워크는 쓸 수 없지만 규격은 전부 승계했고, 몇 가지는 더 싼 방법으로 만들었다.",
+ "abstract": "378개를 좌표로 직접 그렸다. 심볼 아트워크는 쓸 수 없지만 규격은 전부 승계했고, 몇 가지는 더 싼 방법으로 만들었다.",
  "blocks": [
 
   ("h2", "한 세트는 다섯 가지가 같아야 한다", "consistency"),
@@ -72,6 +92,27 @@ PAGE = {
    ], "<code>.imt-i--px16</code> … <code>--px64</code> 를 쓰면 크기와 보정이 함께 걸린다. "
       "작은 쪽은 반대로 살짝 굵혀 획이 사라지지 않게 한다. 기본값 1.6 은 그대로다(L-9.1). "
       "규칙은 랭귀지 L-9.11.")),
+
+  ("h2", "네 축은 그리지 않고 계산으로 만든다", "axes"),
+  ("p", "원본 378개에 <code>.fill</code>·<code>.circle</code>·<code>.square</code>·<code>.slash</code> "
+        "네 축을 얹어 1,733종이 된다. 사람이 다시 그린 것이 하나도 없다 — 원전은 이 자리를 "
+        "파일 수천 벌로 채운다."),
+  ("raw", axfig),
+  ("raw", spec(["축", "만드는 법", "쓸 때"], [
+     ["<code>.fill</code>", "닫힌 길은 면이 되고, 그 면 위를 지나던 열린 길은 파낸다",
+      "선택·활성·강조. <b>켜져 있다</b>는 뜻"],
+     ["<code>.circle</code>", "글리프를 0.58배로 줄여 반지름 9.4 원 안에 넣는다",
+      "버튼·아바타 옆. 원형 자리를 채울 때"],
+     ["<code>.square</code>", "같은 방식으로 둥근 사각 안에 넣는다",
+      "목록 앞머리. 사각 타일 안"],
+     ["<code>.slash</code>", "원본 위에 45° 빗금 하나를 얹는다",
+      "꺼짐·차단·없음"],
+   ], "축을 겹쳐 쓰지 않는다 — <code>bell.circle.fill</code> 같은 이름은 만들지 않는다. "
+      "두 축이 필요해 보이면 대개 그 자리에 아이콘이 하나 더 필요한 것이다.")),
+  ("rule", "채움이 원본보다 못해지면 만들지 않는다",
+   "닫힌 길이 없는 화살표·꺾쇠는 채울 것이 없고, 얇은 획이 촘촘한 그림은 채우면 줄무늬가 된다. "
+   "227종만 채움을 갖는 이유다. 없는 것을 억지로 만들면 세트 전체가 싸 보인다."),
+  ("raw", onoff),
 
   ("h2", "흔한 동작은 흔한 모양을 쓴다", "convention"),
   ("rule", "여기서 창의성을 발휘하면 사용자가 못 알아본다",
