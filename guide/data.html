@@ -2,15 +2,15 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데이터 표현 — IMT Design Guide</title>
-<link rel="icon" href="../favicon.svg?v=20260903-2126" type="image/svg+xml">
-<link rel="icon" href="../favicon-32.png?v=20260903-2126" sizes="32x32">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-2126">
+<link rel="icon" href="../favicon.svg?v=20260903-2131" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png?v=20260903-2131" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png?v=20260903-2131">
 <meta name="theme-color" content="#1d1d1f">
-<link rel="stylesheet" href="../tokens.css?v=20260903-2126">
-<link rel="stylesheet" href="../components.css?v=20260903-2126">
-<link rel="stylesheet" href="../patterns.css?v=20260903-2126">
-<link rel="stylesheet" href="../site.css?v=20260903-2126">
-<link rel="stylesheet" href="../guide.css?v=20260903-2126">
+<link rel="stylesheet" href="../tokens.css?v=20260903-2131">
+<link rel="stylesheet" href="../components.css?v=20260903-2131">
+<link rel="stylesheet" href="../patterns.css?v=20260903-2131">
+<link rel="stylesheet" href="../site.css?v=20260903-2131">
+<link rel="stylesheet" href="../guide.css?v=20260903-2131">
 <style>
   .g-toc{display:flex;flex-wrap:wrap;gap:var(--sp-2);align-items:center;
     padding:var(--sp-4);background:var(--inset);border-radius:var(--r);
@@ -35,7 +35,7 @@
     <a href="index.html" class="on">가이드</a>
     <a href="../language.html">랭귀지</a>
     <a href="../index-full.html">토큰</a>
-    <a href="/icons/catalog.html?v=20260903-2126">아이콘</a>
+    <a href="/icons/catalog.html?v=20260903-2131">아이콘</a>
     <a href="../resources.html">리소스</a>
   </div>
   <span class="gnav__sp"></span>
@@ -74,6 +74,7 @@
 <h2 class="g-h2" id="baselines">한 판에 기준을 겹치지 않는다</h2>
 <div class="g-rule"><b>선이 여섯이면 무엇이 무엇의 약속인지 매번 되짚는다</b><span>같은 그림에 성질이 다른 기준을 겹치면 — 예보(«이 범위일 것 같다»)와 내가 그은 선(«여기 닿으면 알려라») — 둘 다 못 믿게 된다. <b>세그먼트로 가르고 한 번에 하나만</b> 그린다.</span></div>
 <figure class="g-fig"><div class="g-spec__wrap"><table class="g-spec"><thead><tr><th>규칙</th><th>이유</th></tr></thead><tbody><tr><td>기준이 둘 이상이면 세그먼트로 가른다</td><td>겹쳐 그리면 종목당 선이 여섯이 된다</td></tr><tr><td>지운 기준의 <b>이름표도 함께</b> 지운다</td><td>안 그러면 지운 효력이 글자로 되살아난다</td></tr><tr><td>세그먼트는 <b>지난 날짜에도</b> 보여 준다</td><td>안 보이면 되돌릴 방법 없이 한 기준에 갇힌다</td></tr><tr><td>칸 이름은 <b>서로 다른 낱말</b>만 남긴다</td><td>«시장 환경·전일 기준·평균단가 기준» → «시장·전일·평균단가»</td></tr></tbody></table></div><p class="g-cap">«기준» 처럼 세 칸에 다 붙는 낱말은 아무것도 가르지 않는다. 셋을 가르는 것은 앞의 한 낱말뿐이다.</p></figure>
+<div class="g-rule"><b>기준선은 <b>한 얼굴</b>로 통일한다</b><span>기준마다 다른 색·다른 선 모양을 주면 «어느 쪽이 진짜인가» 를 묻게 된다. 어느 기준인지는 세그먼트가 이미 말하고 있다 — 선은 <b>«이건 내가 재는 선이다»</b> 하나만 말하면 된다. 값을 그리는 곡선과는 <b>선의 종류</b>로 가른다(기준선 점선 · 곡선 실선). 색으로 가르면 등락 색과 부딪힌다.</span></div>
 <h2 class="g-h2" id="series">색만으로 시리즈를 구분하지 않는다</h2>
 <div class="g-rule"><b>시리즈가 둘 이상이면 범례를 항상 넣는다</b><span>그리고 색 외에 <b>선 모양</b>이나 <b>마크</b>로도 구분되게 한다. 흑백 인쇄와 색각 이상에서 동시에 해결된다.</span></div>
 <figure class="g-fig"><div class="g-fig__body"><svg viewBox="0 0 250 110" style="width:100%;max-width:250px"><line x1="0" y1="18" x2="250" y2="18" stroke="var(--grid)" stroke-width="1"/><line x1="0" y1="44" x2="250" y2="44" stroke="var(--grid)" stroke-width="1"/><line x1="0" y1="70" x2="250" y2="70" stroke="var(--grid)" stroke-width="1"/><line x1="0" y1="96" x2="250" y2="96" stroke="var(--grid)" stroke-width="1"/><polyline fill="none" stroke="var(--c1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="8,86 48,72 88,76 128,54 168,44 208,30 242,22"/><polyline fill="none" stroke="var(--c2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4" points="8,96 48,90 88,80 128,82 168,68 208,64 242,52"/></svg><div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px"><span style="display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-sm);color:var(--sub)"><span style="width:12px;height:2.5px;border-radius:2px;background:var(--c1)"></span>삼성전자</span><span style="display:inline-flex;align-items:center;gap:5px;font-size:var(--fs-sm);color:var(--sub)"><span style="width:12px;height:2.5px;border-radius:2px;background:var(--c2)"></span>SK하이닉스</span></div></div><p class="g-cap">실선과 파선으로도 나뉜다. 색은 빠르게 찾게 돕는 보조 수단이다.</p></figure>
